@@ -1,0 +1,451 @@
+{
+  "task": "R03-T051",
+  "tool_versions": {
+    "git": "git version 2.55.0",
+    "python": "3.15.2",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O"
+  },
+  "inputs": [
+    "git init -b main",
+    "git config commit.gpgsign false",
+    "git add notes.txt",
+    "git commit -m \"A: create notes.txt\"",
+    "git commit -m \"B: append beta\"",
+    "git add todo.txt",
+    "git commit -m \"C: add todo.txt\"",
+    "git branch topic a5218d517ad100b851097b24672801c879860a20",
+    "git symbolic-ref HEAD",
+    "git rev-parse main",
+    "git rev-parse topic",
+    "git rev-parse 952690a3436a3ad67ae8b9092e0e606f3f206c11^",
+    "git rev-parse a5218d517ad100b851097b24672801c879860a20^",
+    "git rev-list --parents -n1 6f13de95c5f592dbdf312e86f407f186465453e7",
+    "git status --porcelain=v1 --branch",
+    "git log --format=%H",
+    "git log --format=%H topic",
+    "git log --format=%H main..topic",
+    "git log --format=%H topic..main",
+    "git log --format=%an <%ae>",
+    "git log --author=student@example.invalid --format=%H",
+    "git rev-parse --short 952690a3436a3ad67ae8b9092e0e606f3f206c11",
+    "git rev-parse --short a5218d517ad100b851097b24672801c879860a20",
+    "git rev-parse --short 6f13de95c5f592dbdf312e86f407f186465453e7",
+    "git log --oneline",
+    "git log --format=%H main topic ^6f13de95c5f592dbdf312e86f407f186465453e7",
+    "git log -n 2 --format=%H",
+    "git log --format=%H -- notes.txt",
+    "git log --all --format=%H -- todo.txt",
+    "git log --format=%H|%D",
+    "git log -n1 --name-status --format=%H 6f13de95c5f592dbdf312e86f407f186465453e7",
+    "git log -n1 --name-status --format=%H a5218d517ad100b851097b24672801c879860a20",
+    "git log -n1 --name-status --format=%H 952690a3436a3ad67ae8b9092e0e606f3f206c11",
+    "git log -n1 -p --format= a5218d517ad100b851097b24672801c879860a20",
+    "git log",
+    "git log --graph --oneline --all --decorate",
+    "git log --stat",
+    "git log -p",
+    "git log topic",
+    "git log topic..main",
+    "git log --author=student@example.invalid",
+    "git rev-parse :todo.txt",
+    "git rev-parse HEAD:todo.txt",
+    "git rev-parse :notes.txt",
+    "git rev-parse HEAD:notes.txt",
+    "git hash-object notes.txt",
+    "git branch probe"
+  ],
+  "results": [
+    {
+      "check": "HEAD is a symbolic ref to refs/heads/main",
+      "expected": "refs/heads/main",
+      "actual": "refs/heads/main",
+      "ok": true
+    },
+    {
+      "check": "branch main points at C",
+      "expected": "952690a3436a3ad67ae8b9092e0e606f3f206c11",
+      "actual": "952690a3436a3ad67ae8b9092e0e606f3f206c11",
+      "ok": true
+    },
+    {
+      "check": "branch topic points at B",
+      "expected": "a5218d517ad100b851097b24672801c879860a20",
+      "actual": "a5218d517ad100b851097b24672801c879860a20",
+      "ok": true
+    },
+    {
+      "check": "C's parent is B",
+      "expected": "a5218d517ad100b851097b24672801c879860a20",
+      "actual": "a5218d517ad100b851097b24672801c879860a20",
+      "ok": true
+    },
+    {
+      "check": "B's parent is A",
+      "expected": "6f13de95c5f592dbdf312e86f407f186465453e7",
+      "actual": "6f13de95c5f592dbdf312e86f407f186465453e7",
+      "ok": true
+    },
+    {
+      "check": "A is a root commit (no parents)",
+      "expected": [
+        "6f13de95c5f592dbdf312e86f407f186465453e7"
+      ],
+      "actual": [
+        "6f13de95c5f592dbdf312e86f407f186465453e7"
+      ],
+      "ok": true
+    },
+    {
+      "check": "working tree is clean before the first log",
+      "expected": "## main\n",
+      "actual": "## main\n",
+      "ok": true
+    },
+    {
+      "check": "`git log` on main lists C, B, A (newest first)",
+      "expected": [
+        "952690a3436a3ad67ae8b9092e0e606f3f206c11",
+        "a5218d517ad100b851097b24672801c879860a20",
+        "6f13de95c5f592dbdf312e86f407f186465453e7"
+      ],
+      "actual": [
+        "952690a3436a3ad67ae8b9092e0e606f3f206c11",
+        "a5218d517ad100b851097b24672801c879860a20",
+        "6f13de95c5f592dbdf312e86f407f186465453e7"
+      ],
+      "ok": true
+    },
+    {
+      "check": "`git log topic` lists only B, A",
+      "expected": [
+        "a5218d517ad100b851097b24672801c879860a20",
+        "6f13de95c5f592dbdf312e86f407f186465453e7"
+      ],
+      "actual": [
+        "a5218d517ad100b851097b24672801c879860a20",
+        "6f13de95c5f592dbdf312e86f407f186465453e7"
+      ],
+      "ok": true
+    },
+    {
+      "check": "`git log main..topic` is empty (topic has nothing main lacks)",
+      "expected": [],
+      "actual": [],
+      "ok": true
+    },
+    {
+      "check": "`git log topic..main` is exactly C",
+      "expected": [
+        "952690a3436a3ad67ae8b9092e0e606f3f206c11"
+      ],
+      "actual": [
+        "952690a3436a3ad67ae8b9092e0e606f3f206c11"
+      ],
+      "ok": true
+    },
+    {
+      "check": "all three commits carry the course author",
+      "expected": [
+        "Course Student <student@example.invalid>",
+        "Course Student <student@example.invalid>",
+        "Course Student <student@example.invalid>"
+      ],
+      "actual": [
+        "Course Student <student@example.invalid>",
+        "Course Student <student@example.invalid>",
+        "Course Student <student@example.invalid>"
+      ],
+      "ok": true
+    },
+    {
+      "check": "--author filter keeps all three commits",
+      "expected": [
+        "952690a3436a3ad67ae8b9092e0e606f3f206c11",
+        "a5218d517ad100b851097b24672801c879860a20",
+        "6f13de95c5f592dbdf312e86f407f186465453e7"
+      ],
+      "actual": [
+        "952690a3436a3ad67ae8b9092e0e606f3f206c11",
+        "a5218d517ad100b851097b24672801c879860a20",
+        "6f13de95c5f592dbdf312e86f407f186465453e7"
+      ],
+      "ok": true
+    },
+    {
+      "check": "--oneline shows abbreviated ids newest first",
+      "expected": [
+        "952690a",
+        "a5218d5",
+        "6f13de9"
+      ],
+      "actual": [
+        "952690a",
+        "a5218d5",
+        "6f13de9"
+      ],
+      "ok": true
+    },
+    {
+      "check": "`git log main topic ^A` (two refs, one excluded) lists C, B",
+      "expected": [
+        "952690a3436a3ad67ae8b9092e0e606f3f206c11",
+        "a5218d517ad100b851097b24672801c879860a20"
+      ],
+      "actual": [
+        "952690a3436a3ad67ae8b9092e0e606f3f206c11",
+        "a5218d517ad100b851097b24672801c879860a20"
+      ],
+      "ok": true
+    },
+    {
+      "check": "`git log -n 2` limits the output to the newest two commits",
+      "expected": [
+        "952690a3436a3ad67ae8b9092e0e606f3f206c11",
+        "a5218d517ad100b851097b24672801c879860a20"
+      ],
+      "actual": [
+        "952690a3436a3ad67ae8b9092e0e606f3f206c11",
+        "a5218d517ad100b851097b24672801c879860a20"
+      ],
+      "ok": true
+    },
+    {
+      "check": "`git log -- notes.txt` lists only commits that touched notes.txt",
+      "expected": [
+        "a5218d517ad100b851097b24672801c879860a20",
+        "6f13de95c5f592dbdf312e86f407f186465453e7"
+      ],
+      "actual": [
+        "a5218d517ad100b851097b24672801c879860a20",
+        "6f13de95c5f592dbdf312e86f407f186465453e7"
+      ],
+      "ok": true
+    },
+    {
+      "check": "`git log --all -- todo.txt` lists only C (--all = all refs, path after --)",
+      "expected": [
+        "952690a3436a3ad67ae8b9092e0e606f3f206c11"
+      ],
+      "actual": [
+        "952690a3436a3ad67ae8b9092e0e606f3f206c11"
+      ],
+      "ok": true
+    },
+    {
+      "check": "decorations: HEAD -> main on C, topic on B, nothing on A",
+      "expected": {
+        "952690a3436a3ad67ae8b9092e0e606f3f206c11": "HEAD -> main",
+        "a5218d517ad100b851097b24672801c879860a20": "topic",
+        "6f13de95c5f592dbdf312e86f407f186465453e7": ""
+      },
+      "actual": {
+        "952690a3436a3ad67ae8b9092e0e606f3f206c11": "HEAD -> main",
+        "a5218d517ad100b851097b24672801c879860a20": "topic",
+        "6f13de95c5f592dbdf312e86f407f186465453e7": ""
+      },
+      "ok": true
+    },
+    {
+      "check": "A's diff: adds notes.txt",
+      "expected": [
+        "A\tnotes.txt"
+      ],
+      "actual": [
+        "A\tnotes.txt"
+      ],
+      "ok": true
+    },
+    {
+      "check": "B's diff: modifies notes.txt",
+      "expected": [
+        "M\tnotes.txt"
+      ],
+      "actual": [
+        "M\tnotes.txt"
+      ],
+      "ok": true
+    },
+    {
+      "check": "C's diff: adds todo.txt",
+      "expected": [
+        "A\ttodo.txt"
+      ],
+      "actual": [
+        "A\ttodo.txt"
+      ],
+      "ok": true
+    },
+    {
+      "check": "B's patch adds the line 'beta' and removes nothing",
+      "expected": [
+        true,
+        false
+      ],
+      "actual": [
+        true,
+        false
+      ],
+      "ok": true
+    },
+    {
+      "check": "clean tree: all 8 `git log` variants run and print output",
+      "expected": {
+        "log": true,
+        "log --oneline": true,
+        "log --graph --oneline --all --decorate": true,
+        "log --stat": true,
+        "log -p": true,
+        "log topic": true,
+        "log topic..main": true,
+        "log --author=student@example.invalid": true
+      },
+      "actual": {
+        "log": true,
+        "log --oneline": true,
+        "log --graph --oneline --all --decorate": true,
+        "log --stat": true,
+        "log -p": true,
+        "log topic": true,
+        "log topic..main": true,
+        "log --author=student@example.invalid": true
+      },
+      "ok": true
+    },
+    {
+      "check": "clean tree: refs, HEAD, reflog, index, worktree and object store unchanged by git log",
+      "expected": {
+        "head_symref": "refs/heads/main",
+        "head_sha": "952690a3436a3ad67ae8b9092e0e606f3f206c11",
+        "refs": "refs/heads/main 952690a3436a3ad67ae8b9092e0e606f3f206c11\nrefs/heads/topic a5218d517ad100b851097b24672801c879860a20\n",
+        "head_reflog": "952690a HEAD@{0}: commit: C: add todo.txt\na5218d5 HEAD@{1}: commit: B: append beta\n6f13de9 HEAD@{2}: commit (initial): A: create notes.txt\n",
+        "status": "## main\n",
+        "index": "100644 fbbee861521bd5355538b096fa3998541cd33909 0\tnotes.txt\n100644 5626abf0f72e58d7a153368ba57db4c673c0e171 0\ttodo.txt\n",
+        "worktree": {
+          "notes.txt": "alpha\nbeta\n",
+          "todo.txt": "one\n"
+        },
+        "objects": "count: 9\nsize: 36\nin-pack: 0\npacks: 0\nsize-pack: 0\nprune-packable: 0\ngarbage: 0\nsize-garbage: 0\n"
+      },
+      "actual": {
+        "head_symref": "refs/heads/main",
+        "head_sha": "952690a3436a3ad67ae8b9092e0e606f3f206c11",
+        "refs": "refs/heads/main 952690a3436a3ad67ae8b9092e0e606f3f206c11\nrefs/heads/topic a5218d517ad100b851097b24672801c879860a20\n",
+        "head_reflog": "952690a HEAD@{0}: commit: C: add todo.txt\na5218d5 HEAD@{1}: commit: B: append beta\n6f13de9 HEAD@{2}: commit (initial): A: create notes.txt\n",
+        "status": "## main\n",
+        "index": "100644 fbbee861521bd5355538b096fa3998541cd33909 0\tnotes.txt\n100644 5626abf0f72e58d7a153368ba57db4c673c0e171 0\ttodo.txt\n",
+        "worktree": {
+          "notes.txt": "alpha\nbeta\n",
+          "todo.txt": "one\n"
+        },
+        "objects": "count: 9\nsize: 36\nin-pack: 0\npacks: 0\nsize-pack: 0\nprune-packable: 0\ngarbage: 0\nsize-garbage: 0\n"
+      },
+      "ok": true
+    },
+    {
+      "check": "status separates staged (todo.txt) from unstaged (notes.txt)",
+      "expected": [
+        "## main",
+        " M notes.txt",
+        "M  todo.txt"
+      ],
+      "actual": [
+        "## main",
+        " M notes.txt",
+        "M  todo.txt"
+      ],
+      "ok": true
+    },
+    {
+      "check": "index blob of todo.txt differs from HEAD (staged)",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "check": "index blob of notes.txt equals HEAD (not staged)",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "check": "working-tree notes.txt differs from the index",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "check": "dirty tree: all 8 `git log` variants run and print output",
+      "expected": {
+        "log": true,
+        "log --oneline": true,
+        "log --graph --oneline --all --decorate": true,
+        "log --stat": true,
+        "log -p": true,
+        "log topic": true,
+        "log topic..main": true,
+        "log --author=student@example.invalid": true
+      },
+      "actual": {
+        "log": true,
+        "log --oneline": true,
+        "log --graph --oneline --all --decorate": true,
+        "log --stat": true,
+        "log -p": true,
+        "log topic": true,
+        "log topic..main": true,
+        "log --author=student@example.invalid": true
+      },
+      "ok": true
+    },
+    {
+      "check": "`git log` still lists exactly three commits with a dirty tree",
+      "expected": [
+        "952690a3436a3ad67ae8b9092e0e606f3f206c11",
+        "a5218d517ad100b851097b24672801c879860a20",
+        "6f13de95c5f592dbdf312e86f407f186465453e7"
+      ],
+      "actual": [
+        "952690a3436a3ad67ae8b9092e0e606f3f206c11",
+        "a5218d517ad100b851097b24672801c879860a20",
+        "6f13de95c5f592dbdf312e86f407f186465453e7"
+      ],
+      "ok": true
+    },
+    {
+      "check": "dirty tree: staged and unstaged edits and every ref survive git log untouched",
+      "expected": {
+        "head_symref": "refs/heads/main",
+        "head_sha": "952690a3436a3ad67ae8b9092e0e606f3f206c11",
+        "refs": "refs/heads/main 952690a3436a3ad67ae8b9092e0e606f3f206c11\nrefs/heads/topic a5218d517ad100b851097b24672801c879860a20\n",
+        "head_reflog": "952690a HEAD@{0}: commit: C: add todo.txt\na5218d5 HEAD@{1}: commit: B: append beta\n6f13de9 HEAD@{2}: commit (initial): A: create notes.txt\n",
+        "status": "## main\n M notes.txt\nM  todo.txt\n",
+        "index": "100644 fbbee861521bd5355538b096fa3998541cd33909 0\tnotes.txt\n100644 814f4a422927b82f5f8a43f8fab6d3839e3983f2 0\ttodo.txt\n",
+        "worktree": {
+          "notes.txt": "alpha\nbeta\nunstaged\n",
+          "todo.txt": "one\ntwo\n"
+        },
+        "objects": "count: 10\nsize: 40\nin-pack: 0\npacks: 0\nsize-pack: 0\nprune-packable: 0\ngarbage: 0\nsize-garbage: 0\n"
+      },
+      "actual": {
+        "head_symref": "refs/heads/main",
+        "head_sha": "952690a3436a3ad67ae8b9092e0e606f3f206c11",
+        "refs": "refs/heads/main 952690a3436a3ad67ae8b9092e0e606f3f206c11\nrefs/heads/topic a5218d517ad100b851097b24672801c879860a20\n",
+        "head_reflog": "952690a HEAD@{0}: commit: C: add todo.txt\na5218d5 HEAD@{1}: commit: B: append beta\n6f13de9 HEAD@{2}: commit (initial): A: create notes.txt\n",
+        "status": "## main\n M notes.txt\nM  todo.txt\n",
+        "index": "100644 fbbee861521bd5355538b096fa3998541cd33909 0\tnotes.txt\n100644 814f4a422927b82f5f8a43f8fab6d3839e3983f2 0\ttodo.txt\n",
+        "worktree": {
+          "notes.txt": "alpha\nbeta\nunstaged\n",
+          "todo.txt": "one\ntwo\n"
+        },
+        "objects": "count: 10\nsize: 40\nin-pack: 0\npacks: 0\nsize-pack: 0\nprune-packable: 0\ngarbage: 0\nsize-garbage: 0\n"
+      },
+      "ok": true
+    },
+    {
+      "check": "control: creating a branch IS detected by the snapshot comparison",
+      "expected": false,
+      "actual": false,
+      "ok": true
+    }
+  ]
+}
