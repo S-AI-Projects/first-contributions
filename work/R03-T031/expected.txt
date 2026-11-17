@@ -1,0 +1,41 @@
+# Task R03-T031 Expected Outputs and Git States
+
+1. Initial State:
+   - Branch 'main' points to Commit C.
+   - Commit B is an ancestor of Commit C; Commit A is an ancestor of Commit B.
+   - Branch 'topic' points to Commit B and tracks 'origin/topic' (which is at Commit A).
+   - Working tree has clean status on branch 'main'.
+   - Files present: 'notes.txt' (contents: "alpha\nbeta\n"), 'todo.txt' (contents: "one\n").
+
+2. Safe Branch Deletion:
+   Command: git branch --delete topic
+   Expected Exit Code: Non-zero (1)
+   Expected Stderr:
+     warning: not deleting branch 'topic' that is not yet merged to
+              'refs/remotes/origin/topic', even though it is merged to HEAD
+     error: the branch 'topic' is not fully merged
+     hint: If you are sure you want to delete it, run 'git branch -D topic'
+   Expected State:
+     - Branch 'topic' ref STILL EXISTS in refs/heads/topic.
+
+3. Forced Deletion (Variant 1: git branch -D topic):
+   Command: git branch -D topic
+   Expected Exit Code: 0
+   Expected Stdout:
+     Deleted branch topic (was <commit_B_short_sha>).
+   Expected State:
+     - Fact 1a: Branch 'topic' reference is completely deleted.
+     - Fact 1b: Branch 'main' reference remains intact pointing to Commit C.
+     - Fact 2a: Commit B object remains in Git object database (cat-file returns 'commit').
+     - Fact 2b: Symbolic HEAD remains on refs/heads/main.
+     - Fact 3a: Working tree is clean (status --porcelain is empty).
+     - Fact 3b: Working tree files 'notes.txt' and 'todo.txt' remain intact.
+
+4. Forced Deletion (Variant 2: git branch --delete --force topic):
+   Command: git branch --delete --force topic
+   Expected Exit Code: 0
+   Expected Stdout:
+     Deleted branch topic (was <commit_B_short_sha>).
+   Expected State:
+     - Branch 'topic' reference is completely deleted.
+     - Branch 'main' reference remains intact pointing to Commit C.
