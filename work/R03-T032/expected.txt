@@ -1,0 +1,43 @@
+# Task R03-T032 Expected Outputs and Git States
+
+1. Common Initial State:
+   - Branch 'main' points to Commit C (parent is Commit A).
+   - Branch 'topic' points to Commit B (parent is Commit A).
+   - Working tree has clean status.
+   - Commit A: notes.txt ("alpha\n")
+   - Commit B: notes.txt ("alpha\nbeta\n")
+   - Commit C: notes.txt ("alpha\n"), todo.txt ("one\n")
+
+2. Scenario A Expected State (Rebase):
+   - Branch switch: git switch topic / git checkout topic successfully points HEAD to refs/heads/topic.
+   - Command: git rebase main
+   - Exit code: 0
+   - Commit B is replayed onto Commit C to produce new rebased commit B'.
+   - Object ID: rebased commit B' has a different object ID from original Commit B (sha_b_prime != sha_b).
+   - Ancestry: Parent of rebased commit B' is Commit C (HEAD^ == sha_c).
+   - References:
+     * refs/heads/topic points to rebased commit B'.
+     * refs/heads/main remains unchanged at Commit C.
+     * HEAD symbolic ref is refs/heads/topic.
+   - Working Tree & Index:
+     * Working tree is completely clean (git status --porcelain is empty).
+     * notes.txt contains "alpha\nbeta\n".
+     * todo.txt contains "one\n".
+
+3. Scenario B Expected State (Merge):
+   - Branch switch: git checkout main / git switch main successfully points HEAD to refs/heads/main.
+   - Command: git merge topic -m "Merge branch 'topic' into main"
+   - Exit code: 0
+   - Merge Commit: A new merge commit M is created.
+   - Parents: Merge commit M has two parents:
+     * Parent 1 (HEAD^1): Commit C.
+     * Parent 2 (HEAD^2): Original Commit B.
+   - Ancestry: Original Commit B is preserved intact in commit ancestry.
+   - References:
+     * refs/heads/main points to new merge commit M.
+     * refs/heads/topic remains unchanged at original Commit B.
+     * HEAD symbolic ref is refs/heads/main.
+   - Working Tree & Index:
+     * Working tree is completely clean (git status --porcelain is empty).
+     * notes.txt contains "alpha\nbeta\n".
+     * todo.txt contains "one\n".
