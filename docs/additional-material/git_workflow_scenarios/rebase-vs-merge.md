@@ -1,15 +1,16 @@
 # Rebase vs Merge
 
-When contributing to open-source projects, it’s important to understand how to integrate your changes cleanly.  
-Two common ways to bring updates from one branch into another are **merge** and **rebase**.
+When contributing to open-source projects, it is essential to understand how to integrate changes cleanly. Two fundamental ways to bring updates from one branch into another are **merge** and **rebase**.
 
+Both commands integrate changes between branches, but they structure history differently:
+- **`git merge`**: Combines two branches by creating a new **merge commit** with two parents. It preserves the exact chronological history and records when branches diverged and rejoined.
+- **`git rebase`**: Takes the commits from your branch and **replays** them onto the tip of the target branch, producing a strictly linear history without extra merge commits.
 
-## What Is Rebase?
+---
 
-**Rebasing** replays your commits from one branch on top of another — effectively moving your work to start from the tip of another branch.  
-This creates a **linear and clean commit history** without merge commits.
+## Command Syntax: Switching Branches and Rebasing
 
-### Example
+To rebase your feature branch on top of `main`:
 
 ```bash
 # Switch to your feature branch
@@ -19,72 +20,253 @@ git switch feature_branch
 git rebase main
 ```
 
-Alternatively, 
+Alternatively, you can use the older syntax:
+
 ```bash
-git checkout <your-branch> 
+git checkout <your-branch>
 git rebase <branch-you-want-to-copy-changes-from>
 ```
-> `git switch <branch>` and `git checkout <branch>` both switch branches, but `switch` is newer and more user-friendly.
+
+> **Note on `git switch` vs `git checkout`:**
+> `git switch <branch>` and `git checkout <branch>` both switch the current branch. `git switch` was introduced in Git 2.23 as a dedicated, safer command for branch switching, whereas `git checkout` is a multi-purpose command that also restores working-tree files.
 
 ---
-Both merge and rebase are used to integrate changes from one branch into another. 
 
-**Merging** combines the histories of two branches by creating a new **merge commit**. It **preserves the true sequence of events**, showing exactly how and when branches diverged and rejoined. 
+## State Transition Overview: Before and After Diagrams
 
-```bash
-*   b576e33 (HEAD -> main) Merge branch 'feature' into main
-|\
-| * 22c5476 C4
-| * b1a9c33 C3
-* | f2a4d33 C2 (branch - 'feature')
-|/
-* c9f0a10 C1 (main)
+Consider a repository where work diverges after common ancestor Commit A:
+- `main` has Commit C (adds `todo.txt`).
+- `topic` has Commit B (modifies `notes.txt`).
+
+```text
+BEFORE INTEGRATION (Common Initial State)
+History:
+        B (topic) [notes.txt: alpha\nbeta\n]
+       /
+  A ───
+       \
+        C (main)  [todo.txt: one\n]
+
+HEAD:         refs/heads/main -> C (or refs/heads/topic -> B)
+Branch refs:  main -> C, topic -> B
+Index:        Clean
+Worktree:     Clean
 ```
 
-**Rebasing**, on the other hand, **reapplies your commits** on top of another branch’s latest state. This effectively **keeps the commit history linear and clean**, as if all your work happened sequentially after the commits on the target branch. 
+### Scenario A: Rebase (`git switch topic` followed by `git rebase main`)
 
-```bash
-* e4d2b3c (HEAD -> feature) C4
-* 3f68a71 C3 (branch - 'feature')
-* f2a4d33 C2
-* c9f0a10 C1 (main)
+```text
+AFTER REBASE
+History:
+  A ─── C (main) ─── B' (HEAD -> topic)
+
+HEAD:         refs/heads/topic -> B' (Commit ID changed!)
+Branch refs:  main -> C (unchanged), topic -> B' (moved)
+Ancestry:     B' has single parent C (rewritten linear history)
+Index:        Clean (contains merged notes.txt and todo.txt)
+Worktree:     Clean (notes.txt: "alpha\nbeta\n", todo.txt: "one\n")
 ```
 
-``` bash
-# This command will display an ASCII-style commit graph directly in your terminal.
-# It shows commit history in a tree-like structure.
-git log --graph --oneline --all
+### Scenario B: Merge (`git switch main` followed by `git merge topic`)
+
+```text
+AFTER MERGE
+History:
+        B (topic)
+       /         \
+  A ───           M (HEAD -> main) [Merge Commit]
+       \         /
+        C ───────
+
+HEAD:         refs/heads/main -> M (New merge commit)
+Branch refs:  main -> M (moved), topic -> B (unchanged)
+Ancestry:     M has two parents: Parent 1 = C, Parent 2 = B (original B preserved)
+Index:        Clean (contains merged notes.txt and todo.txt)
+Worktree:     Clean (notes.txt: "alpha\nbeta\n", todo.txt: "one\n")
 ```
 
-## Merge vs Rebase
+---
 
-| **Feature**     | **Merge**                                      | **Rebase**                                  |
-|------------------|------------------------------------------------|---------------------------------------------|
-| **History**      | Preserves the true chronological history       | Creates a linear history                    |
-| **Extra Commits**| Adds an extra merge commit                     | No extra commits                            |
-| **Readability**  | Can become cluttered with merge commits        | Easier to read and follow                   |
-| **Use Case**     | Ideal for public branches (e.g., `main`)       | Ideal for personal or feature branches      |
+## Reproducible Step-by-Step Demonstration
 
+The following walkthrough sets up two independent temporary repositories with identical histories to demonstrate each operation.
 
-## Important Rule
-**Never rebase a public/shared branch (like main).**
-Rebasing rewrites commit history, which can cause problems for collaborators who have already based work on those commits.
-Always rebase your personal or feature branch **onto main**, not the other way around.
-
-> If the branch is shared — use merge.
-> If the branch is personal — use rebase.
-
-
-## Git Configuration Options
-You can tell Git whether to merge or rebase when pulling updates:
+### 1. Common Repository Setup
 
 ```bash
-# Always merge (default behavior)
+# Set author identity
+export GIT_AUTHOR_NAME="Course Student"
+export GIT_AUTHOR_EMAIL="student@example.invalid"
+export GIT_COMMITTER_NAME="Course Student"
+export GIT_COMMITTER_EMAIL="student@example.invalid"
+
+# Initialize repository
+git init -b main local-repo
+cd local-repo
+
+# Commit A on main: create notes.txt
+printf "alpha\n" > notes.txt
+git add notes.txt
+git commit -m "Commit A"
+COMMIT_A=$(git rev-parse HEAD)
+
+# Create branch topic at Commit A, switch to it, and create Commit B
+git branch topic
+git switch topic
+printf "beta\n" >> notes.txt
+git add notes.txt
+git commit -m "Commit B"
+COMMIT_B=$(git rev-parse HEAD)
+
+# Switch back to main (demonstrating git checkout) and create Commit C
+git checkout main
+printf "one\n" > todo.txt
+git add todo.txt
+git commit -m "Commit C"
+COMMIT_C=$(git rev-parse HEAD)
+```
+
+At this point:
+- `git rev-parse main` prints Commit C.
+- `git rev-parse topic` prints Commit B.
+- Commit A is the common ancestor of both branches.
+
+---
+
+### 2. Scenario A: Executing `git rebase main`
+
+Switch to `topic` and rebase onto `main`:
+
+```bash
+# Switch to topic branch
+git switch topic
+
+# Rebase topic onto main
+git rebase main
+```
+
+Inspect the results:
+
+```bash
+# 1. View the linear commit log
+$ git log --oneline
+<COMMIT_B_PRIME> (HEAD -> topic) Commit B
+<COMMIT_C> (main) Commit C
+<COMMIT_A> Commit A
+
+# 2. Inspect the rebased commit ID and parent
+$ git rev-parse HEAD
+<COMMIT_B_PRIME>
+
+$ git rev-parse HEAD^
+<COMMIT_C>
+
+# 3. Check reference pointers
+$ git show-ref --heads
+<COMMIT_C> refs/heads/main
+<COMMIT_B_PRIME> refs/heads/topic
+
+# 4. Check status and file contents
+$ git status
+On branch topic
+nothing to commit, working tree clean
+
+$ cat notes.txt
+alpha
+beta
+
+$ cat todo.txt
+one
+```
+
+#### Why Rebased Commits Receive New IDs
+In Git, a commit's SHA-1/SHA-256 hash is computed cryptographically from its tree object, parent hashes, author/committer data, and commit message. Because `git rebase` changes the parent of Commit B from Commit A to Commit C (and updates the committer timestamp), the commit object is recreated with a completely new hash (`B'`). The original commit `B` remains in the object database until pruned by garbage collection.
+
+---
+
+### 3. Scenario B: Executing `git merge topic`
+
+In an independent repository with the identical initial state, switch to `main` and merge `topic`:
+
+```bash
+# Switch to main branch
+git switch main
+
+# Merge topic into main
+git merge topic -m "Merge branch 'topic' into main"
+```
+
+Inspect the results:
+
+```bash
+# 1. View graph log showing preserved branch topology
+$ git log --graph --oneline
+*   <MERGE_COMMIT_M> (HEAD -> main) Merge branch 'topic' into main
+|\  
+| * <COMMIT_B> (topic) Commit B
+* | <COMMIT_C> Commit C
+|/  
+* <COMMIT_A> Commit A
+
+# 2. Inspect the merge commit parents
+$ git rev-parse HEAD^1 HEAD^2
+<COMMIT_C>
+<COMMIT_B>
+
+# 3. Check reference pointers
+$ git show-ref --heads
+<MERGE_COMMIT_M> refs/heads/main
+<COMMIT_B> refs/heads/topic
+
+# 4. Check status and file contents
+$ git status
+On branch main
+nothing to commit, working tree clean
+```
+
+#### Why Merge Preserves History
+Unlike rebase, `git merge` does not modify or replay existing commits. Commit B retains its original hash and parent (Commit A). The merge creates an explicit commit `M` with two parents: `HEAD^1` (Commit C) and `HEAD^2` (Commit B).
+
+---
+
+## Detailed Comparison Table
+
+| Attribute | `git rebase` (Scenario A) | `git merge` (Scenario B) |
+| :--- | :--- | :--- |
+| **Active Branch (`HEAD`)** | `topic` (switched before rebase) | `main` (switched before merge) |
+| **`HEAD` Commit** | Points to new rebased commit `B'` | Points to new merge commit `M` |
+| **Branch Reference `main`** | Unchanged at Commit C | Moves forward to merge commit `M` |
+| **Branch Reference `topic`** | Moves to new commit `B'` | Unchanged at original Commit B |
+| **Commit Object IDs** | Replaced: `B` is replaced by `B'` | Preserved: `B` and `C` keep their hashes |
+| **Commit Ancestry** | Rewritten linear ancestry: `A <- C <- B'` | Preserved branched ancestry with 2 parents |
+| **Staging Area (Index)** | Clean upon successful completion | Clean upon successful completion |
+| **Working Tree** | Clean; contains all combined files | Clean; contains all combined files |
+
+---
+
+## Golden Rules for Rebase vs Merge
+
+1. **Never rebase public, shared branches**: Rebasing rewrites commit hashes. If other developers have based work on those commits, rebasing will force them into complex, messy reconciliations.
+2. **Rebase local feature branches**: Rebasing your personal feature branch onto upstream `main` keeps history linear and simplifies reviews.
+3. **Use merge for integrating features into main**: Merging preserves the full historical context and marks clear integration boundaries.
+
+### Git Pull Configuration
+
+You can configure Git's default integration strategy when running `git pull`:
+
+```bash
+# Default behavior: create a merge commit
 git config pull.rebase false
 
-# Always rebase by default (recommended for linear history)
-git config --global pull.rebase true
+# Rebase local commits on top of incoming upstream commits
+git config pull.rebase true
 ```
 
-**NOTE: Setting the global option ensures your local branches stay clean and linear without unnecessary merge commits.**
+---
 
+## Related Guides
+
+- [Squashing Commits](squashing-commits.md)
+- [Check Commit Log](check-commit-log.md)
+- [Official Git Rebase Documentation](https://git-scm.com/docs/git-rebase)
+- [Official Git Merge Documentation](https://git-scm.com/docs/git-merge)

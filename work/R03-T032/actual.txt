@@ -1,0 +1,30 @@
+================================================================
+Starting automated verification: check.py (R03-T032)
+================================================================
+--- Testing Scenario A: Rebase ---
+PASS: Rebase Init: main points to Commit C
+PASS: Rebase Init: topic points to Commit B
+PASS: Branch switch: git checkout topic switches HEAD to refs/heads/topic
+PASS: Branch switch: git switch topic sets HEAD to refs/heads/topic
+PASS: Rebase State 1: Rebased commit B' has different object ID from original B
+PASS: Rebase State 2: Parent of rebased commit B' is commit C
+PASS: Rebase State 3a: main branch ref remains unchanged at commit C
+PASS: Rebase State 3b: topic branch ref moved to rebased commit B'
+PASS: Rebase State 3c: HEAD symbolic-ref is refs/heads/topic
+PASS: Rebase State 4a: Working tree and index are clean
+PASS: Rebase State 4b: Working tree files contain combined changes (notes.txt + todo.txt)
+--- Testing Scenario B: Merge ---
+PASS: Merge Init: main points to Commit C
+PASS: Merge Init: topic points to Commit B
+PASS: Merge branch switch: git checkout main switches HEAD to refs/heads/main
+PASS: Merge State 1: Merge commit has exactly two parents (Parent 1: C, Parent 2: B)
+PASS: Merge State 2: Original commit B is preserved in commit ancestry
+PASS: Merge State 3a: main branch ref points to merge commit
+PASS: Merge State 3b: topic branch ref remains unchanged at original commit B
+PASS: Merge State 3c: HEAD symbolic-ref is refs/heads/main
+PASS: Merge State 4a: Working tree and index are clean
+PASS: Merge State 4b: Working tree files contain combined changes (notes.txt + todo.txt)
+================================================================
+Summary: 21 passed, 0 failed.
+================================================================
+ALL CHECKS PASSED.
