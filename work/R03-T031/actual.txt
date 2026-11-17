@@ -1,0 +1,26 @@
+================================================================
+Starting automated verification: check.py (R03-T031)
+================================================================
+--- Testing Variant 1: Safe deletion failure & forced deletion with -D ---
+PASS: Commit A exists and is ancestor of B
+PASS: Commit B exists and is ancestor of C
+PASS: Branch 'topic' exists prior to deletion
+PASS: Safe deletion (git branch --delete topic) exits non-zero
+PASS: Safe deletion outputs 'not fully merged' error message
+PASS: Branch 'topic' still exists after safe deletion failure
+PASS: Forced deletion (git branch -D topic) succeeds (code 0)
+PASS: Fact 1a: Branch 'topic' reference is completely deleted
+PASS: Fact 1b: Branch 'main' reference remains intact pointing to commit C
+PASS: Fact 2a: Commit B object remains in Git object database
+PASS: Fact 2b: Symbolic HEAD remains on refs/heads/main
+PASS: Fact 3a: Working tree is clean after branch deletion
+PASS: Fact 3b: Working tree files match commit C state ('notes.txt' and 'todo.txt')
+--- Testing Variant 2: Forced deletion with --delete --force (independent repo) ---
+PASS: Variant 2: Branch 'topic' exists prior to deletion
+PASS: Variant 2: Forced deletion (git branch --delete --force topic) succeeds (code 0)
+PASS: Variant 2 Fact: Branch 'topic' reference is deleted
+PASS: Variant 2 Fact: Branch 'main' reference still points to commit C
+================================================================
+Summary: 17 passed, 0 failed.
+================================================================
+ALL CHECKS PASSED.

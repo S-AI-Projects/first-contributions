@@ -1,0 +1,53 @@
+# Task R03-T031 Setup and Inputs
+
+Author Identity:
+- GIT_AUTHOR_NAME="Course Student"
+- GIT_AUTHOR_EMAIL="student@example.invalid"
+- GIT_COMMITTER_NAME="Course Student"
+- GIT_COMMITTER_EMAIL="student@example.invalid"
+
+Initial Repository Setup:
+1. Initialize bare remote repository:
+   git init --bare <tmpdir>/remote.git
+
+2. Initialize local repository with default branch 'main':
+   git init -b main <tmpdir>/local
+   git remote add origin file://<tmpdir>/remote.git
+
+3. Commit A:
+   Create notes.txt with content "alpha\n"
+   git add notes.txt
+   git commit -m "Commit A"
+
+4. Commit B:
+   Append "beta\n" to notes.txt (content becomes "alpha\nbeta\n")
+   git add notes.txt
+   git commit -m "Commit B"
+
+5. Commit C:
+   Create todo.txt with content "one\n"
+   git add todo.txt
+   git commit -m "Commit C"
+
+6. Remote and Branch Setup:
+   git push -u origin main
+   git push origin <commit_A_sha>:refs/heads/topic
+   git branch --track topic origin/topic
+   git branch -f topic <commit_B_sha>
+
+Commands Executed:
+1. Safe Deletion Test:
+   git branch --delete topic
+
+2. Variant 1 (Forced Deletion with -D):
+   git branch -D topic
+
+3. Variant 2 (Forced Deletion with --delete --force in independent repo):
+   git branch --delete --force topic
+
+4. Verification Commands:
+   git branch --list
+   git rev-parse refs/heads/main
+   git cat-file -t <commit_B_sha>
+   git symbolic-ref HEAD
+   git status --porcelain
