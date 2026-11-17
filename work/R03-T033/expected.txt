@@ -1,0 +1,45 @@
+# Task R03-T033 Expected Outputs and Git States
+
+1. Common Initial State:
+   - Branch 'main' points to Commit C.
+   - Commit C tree contains 'notes.txt' ("alpha\nbeta\n") and 'todo.txt' ("one\n").
+   - Branch 'topic' points to Commit B.
+   - Working tree is clean.
+
+2. Test 1: Recovery from Accidental 'git reset --hard HEAD~':
+   - Execution: git reset --hard HEAD~
+     * Mistake state: HEAD points to Commit B.
+     * todo.txt is deleted from the working tree.
+     * Working tree is clean at Commit B state.
+   - Reflog Inspection:
+     * HEAD@{1} records the pre-reset commit hash (Commit C).
+   - Recovery Execution: git reset --hard HEAD@{1}
+     * Exit code: 0
+     * Restored commit: HEAD points to original Commit C hash.
+     * Restored tree: Tree hash matches original tree_c hash.
+     * Restored file: todo.txt exists with content "one\n".
+     * Working tree is clean.
+
+3. Test 2: Moving Commit to Topic & Branch Reflog Recovery:
+   - Soft Reset: git reset HEAD~ --soft
+     * HEAD moves to Commit B.
+     * todo.txt remains staged in the index (A  todo.txt).
+   - Stash: git stash
+     * Stash entry stash@{0} is created.
+     * Working tree is clean.
+   - Branch Switch: git checkout topic
+     * Symbolic ref is refs/heads/topic.
+   - Apply and Commit:
+     * Stash is popped onto topic and committed as new commit C_topic.
+     * Tree hash of topic matches original tree_c.
+   - Branch Recovery on main:
+     * Switch to main: HEAD is at Commit B.
+     * main@{1} points to Commit C.
+     * Recovery Execution: git reset --hard main@{1}
+     * Restored commit: main points to Commit C hash.
+     * Restored tree: main tree hash matches original tree_c.
+     * Working tree files match Commit C state.
+     * Working tree is clean.
+
+4. Recovery Limitation:
+   - What cannot be recovered: Any unstaged or untracked changes in the working tree that were never committed or stashed prior to running git reset --hard cannot be recovered from the reflog, as Git never stored them as commit or stash objects.

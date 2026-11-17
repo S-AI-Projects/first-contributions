@@ -1,0 +1,29 @@
+================================================================
+Starting automated verification: check.py (R03-T033)
+================================================================
+--- Test 1: Recovery from Accidental 'git reset --hard' ---
+PASS: Init: HEAD is at commit C
+PASS: Mistake: HEAD rolled back to commit B
+PASS: Mistake effect: todo.txt missing from working tree
+PASS: Reflog records pre-reset commit in HEAD@{1}
+PASS: HEAD@{1} points to original commit C
+PASS: Recovery Fact 1: Commit hash restored to original commit C
+PASS: Recovery Fact 2: Tree hash matches original tree_c exactly
+PASS: Recovery Fact 3: todo.txt restored with original contents ('one\n')
+PASS: Recovery Fact 4: Working tree is clean after recovery
+--- Test 2: Move Commit to Branch & Reflog Branch Recovery ---
+PASS: Workflow 1: git reset HEAD~ --soft moved main to commit B
+PASS: Workflow 2: todo.txt remains staged in index
+PASS: Workflow 3: git stash recorded directory state
+PASS: Workflow 4: git checkout topic switched to topic branch
+PASS: Workflow 5: Changes committed to topic; tree hash matches tree_c
+PASS: Recovery Switch: On main branch, currently at commit B
+PASS: Branch reflog: main@{1} points to original commit C
+PASS: Branch Recovery Fact 1: main restored to commit C
+PASS: Branch Recovery Fact 2: main tree hash matches original tree_c
+PASS: Branch Recovery Fact 3: Working tree files on main match commit C state
+PASS: Branch Recovery Fact 4: Working tree is clean
+================================================================
+Summary: 20 passed, 0 failed.
+================================================================
+ALL CHECKS PASSED.
