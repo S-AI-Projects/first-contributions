@@ -84,3 +84,36 @@ commit message 2
 That you can freely change before you decide to exit the editor to save these changes.
 
 Running git log again should show you the commit message you entered before exiting the screen with the commits combined into one.
+
+# Example: which branch does squashing change?
+
+Squashing rewrites the branch that is checked out, so it helps to name every ref explicitly. Here is a small local example (no remote needed).
+
+The local branch `main` has three commits, A, B and C. The local branch `topic` was created at B, and `topic` is checked out:
+
+```
+A --- B --- C   <- main
+      ^
+      topic (checked out)
+```
+
+`git log` shows the history of the checked-out branch, so it lists B and A, but not C. `HEAD~2` is counted from `topic`, not from `main`. `topic` has only two commits, so `HEAD~2` does not exist:
+
+```
+git rebase -i HEAD~2
+fatal: invalid upstream 'HEAD~2'
+```
+
+Nothing changes when this fails. `git rebase -i main` does not help either: `git log --oneline main..topic` is empty, because `topic` has no commits that `main` lacks. There is nothing to squash, and git simply moves `topic` forward to the tip of `main`.
+
+To squash A and B into one commit, rebase from the root of `topic`:
+
+```
+git rebase -i --root
+```
+
+Change the second `pick` to `squash`, then save and edit the combined message as described above.
+
+Afterwards only the local branch `refs/heads/topic` has moved. It points to a new commit with the same files as B. The local branch `main` still has A, B and C, so `topic` and `main` no longer share history. A remote-tracking ref such as `origin/topic` is not touched by a local squash. The old commit B can still be found with `git reflog topic` until git cleans it up.
+
+In everyday work a feature branch is usually ahead of `main`. In that case `git rebase -i main` lists exactly the commits in `main..topic`, which are the ones you can squash.
