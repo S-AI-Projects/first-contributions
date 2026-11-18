@@ -1,0 +1,20 @@
+{
+  "task": "R03-T052",
+  "guide": "docs/additional-material/git_workflow_scenarios/squashing-commits.md",
+  "author": "Course Student <student@example.invalid>",
+  "commits": {
+    "A": "create notes.txt 'alpha\\n'",
+    "B": "append 'beta\\n' to notes.txt",
+    "C": "add todo.txt 'one\\n'"
+  },
+  "branches": {
+    "main": "A-B-C",
+    "topic": "at B (checked out)"
+  },
+  "remote": "none: squashing is a local rewrite",
+  "scenarios": [
+    "git log + git rebase -i HEAD~2",
+    "git rebase -i main",
+    "git rebase -i --root"
+  ]
+}
