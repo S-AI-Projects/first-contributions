@@ -1,0 +1,20 @@
+{
+  "task": "R03-T054",
+  "guide": "docs/additional-material/git_workflow_scenarios/amending-a-commit.md",
+  "author": "Course Student <student@example.invalid>",
+  "commits": {
+    "A": "create notes.txt 'alpha\\n'",
+    "B": "append 'beta\\n' to notes.txt",
+    "C": "add todo.txt 'one\\n'",
+    "D": "add 'release notes.txt' and 'sample data/readings.csv' on topic, then amend"
+  },
+  "branches": {
+    "main": "A-B-C",
+    "topic": "at B, checked out"
+  },
+  "remote": "none: amending is a local rewrite",
+  "paths": [
+    "release notes.txt",
+    "sample data/readings.csv"
+  ]
+}
