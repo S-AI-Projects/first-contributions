@@ -33,5 +33,54 @@ Date:   Mon Jun 3 23:06:05 2024 -0600
 - Limit number of commits in log: <i>(In this case, `5`)</i><br> 
     `git log -n 5`
 
+## Recovering a commit that disappeared from the log
+
+`git log` lists only commits that can be reached from a branch. If a branch is moved back by mistake, for example with `git reset --hard`, the commits it skipped disappear from the log. Git has not deleted them yet, and the reflog records where the branch used to point.
+
+The example below uses a throw-away repository, because `git reset --hard` discards changes. `main` has commits A, B and C, and `topic` points at B.
+
+Check the log and note the commit ids and the tree id of `main`:
+
+```
+git log --oneline -n 3
+git rev-parse main^{tree}
+```
+
+The mistake: reset `main` to B, thinking "go back one commit":
+
+```
+git reset --hard <id-of-B>
+```
+
+Now `git log` lists only B and A. `git log --all` does too, because no branch points at C any more. Only `main` has moved; `topic` is unchanged.
+
+The recovery point is the reflog entry from before the reset. List the reflog and copy the id of the commit you lost (here, the entry whose message ends with "C: add todo.txt"):
+
+```
+git reflog
+```
+
+Move `main` back to it. Right after the mistake, `main@{1}` is the same commit:
+
+```
+git reset --hard <id-of-C>
+```
+
+Verify the result:
+
+```
+git log --oneline
+git status
+git rev-parse main^{tree}
+```
+
+`git log` lists C, B and A again, `git status` is clean, and the tree id printed by `git rev-parse main^{tree}` equals the one you noted before the mistake.
+
+What this cannot recover:
+
+- Uncommitted changes to tracked files. `git reset --hard` throws them away, and no commit or reflog entry holds them.
+- Commits whose reflog entries have expired and been removed by `git gc`.
+- Anything on another machine. The reflog is local to your repository and is not pushed.
+
 ## Refer
 - [Official documentation](https://git-scm.com/docs/git-log)

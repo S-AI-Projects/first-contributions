@@ -1,0 +1,17 @@
+{
+  "task": "R03-T053",
+  "guide": "docs/additional-material/git_workflow_scenarios/check-commit-log.md",
+  "author": "Course Student <student@example.invalid>",
+  "commits": {
+    "A": "create notes.txt 'alpha\\n'",
+    "B": "append 'beta\\n' to notes.txt",
+    "C": "add todo.txt 'one\\n'"
+  },
+  "branches": {
+    "main": "A-B-C (checked out)",
+    "topic": "at B"
+  },
+  "remote": "none: the reflog is local",
+  "mistake": "git reset --hard <B>, with an uncommitted edit in notes.txt",
+  "recovery": "git reflog -> git reset --hard <C>"
+}
