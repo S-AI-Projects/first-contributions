@@ -65,6 +65,34 @@ In our example, we would run the commit command as follows:
 
 Among the three methods described here, the precedence order is `command-line > repository > global`. This means that, if a variable is configured in the command-line as well as globally, the command-line value would be used for the operation.
 
+## Troubleshooting: `git commit` says it does not know who you are
+
+**Triggering state.** You staged a change and ran `git commit`, but git cannot find a `user.name` and a `user.email` in any of the three places described above (command line, repository, global), and it cannot guess them from your computer. You can check this with `git var GIT_AUTHOR_IDENT`, which fails in the same way when no identity is available.
+
+**Error category.** This is a fatal configuration error, not a problem with your change. `git commit` exits with a nonzero status (typically 128) and creates no commit. The exact wording of the message differs between git versions and between computers (on some computers git guesses a name and email, so you may never see it), so look for "Author identity unknown" or "Please tell me who you are" rather than for the exact text. Your change is not lost: it is still staged.
+
+```
+$ git commit -m "Add gamma"
+Author identity unknown
+
+*** Please tell me who you are.
+...
+$ git status --short
+M  notes.txt
+```
+
+**Smallest correction.** Tell git who you are, then run the same commit command again. Nothing else needs to change:
+
+```
+$ git config user.email "you@example.com"
+$ git config user.name "Your Name"
+$ git commit -m "Add gamma"
+```
+
+These two settings apply to this repository only. Use the `--global` versions from the message above to set them once for every repository, or supply them for a single command with `git -c user.name='Your Name' -c user.email='you@example.com' commit -m "Add gamma"`. A `-c` setting is not saved, so the next plain `git commit` fails again.
+
+Once the identity is stored with `git config` (with or without `--global`), `git var GIT_AUTHOR_IDENT` prints your name and email, and `git log -1` shows them on the new commit.
+
 ## Beyond User Details
 
 We have dealt with only the user details till now while working with the config. However, there are several other configuration options available. Some of them are:
