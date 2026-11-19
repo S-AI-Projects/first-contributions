@@ -48,6 +48,60 @@ But since what we want to achieve here is to amend the previous commit, we would
 
 That way, both changes would be in one single commit.
 
+## Amending a commit when a path contains spaces
+
+Names that contain spaces must be quoted in the shell. Without quotes the shell splits the name into separate words, and git receives the wrong paths. This example uses a file named `release notes.txt` and a directory named `sample data`, on a branch called `topic`.
+
+Without quotes, git receives two separate paths, `release` and `notes.txt`, and refuses. The same happens for `sample data`. Nothing is staged:
+
+```
+$ git add release notes.txt
+fatal: pathspec 'release' did not match any files
+$ git add sample data
+fatal: pathspec 'sample' did not match any files
+```
+
+With quotes, each name reaches git as one path. `--` marks everything after it as a path:
+
+```
+$ git add -- "release notes.txt" "sample data"
+$ git commit -m "D: add release notes and sample data"
+```
+
+Later you notice that a line is missing from `release notes.txt`. Edit the file, stage only that file, and amend, as described above:
+
+```
+$ git add -- "release notes.txt"
+$ git status --short
+ M notes.txt
+M  "release notes.txt"
+$ git commit --amend --no-edit
+```
+
+The quotes around `release notes.txt` in the `git status --short` output are only how git displays a name with spaces. They are not part of the name. The other modified file, `notes.txt`, was not staged, so it is not part of the amended commit. `--no-edit` keeps the old message and does not open the editor.
+
+Only the `topic` branch is affected. It now points to a new commit that replaces the old one, with the same parent and the same message. Other branches, such as `main`, do not move.
+
+### When `--` is required
+
+`--` separates revisions (branches, tags, commit ids) from paths. Commands such as `git log` accept both, so git has to decide which one a word is. If a file has the same name as a branch, git refuses to guess:
+
+```
+$ git log --oneline topic
+fatal: ambiguous argument 'topic': both revision and filename
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+```
+
+Put `--` after the word to mean the branch, or before it to mean the file:
+
+```
+$ git log --oneline topic --     # history of the branch topic
+$ git log --oneline -- topic     # history of the file topic
+```
+
+`git add` takes only paths, so this ambiguity cannot happen there. Quoted paths with spaces also work without `--`, for example `git log "release notes.txt"`, as long as the name is not also a revision. Writing `git log -- "release notes.txt"` removes any doubt.
+
 ## Modifying commits on remote
 
 If the commit that you like to amend has been already pushed to the remote, amending this commit will lead to your local history being diverged from the remote (since you basically create a new commit and replace the amended one). Since you want to change the commit on the remote, you need to overwrite the remotes history on your branch. To achieve that, follow the same procedure as described above, but use force push when pushing your commit to the remote.
