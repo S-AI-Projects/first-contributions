@@ -1,0 +1,22 @@
+{
+  "task": "R03-T055",
+  "guide": "docs/additional-material/git_workflow_scenarios/configuring-git.md",
+  "author_of_A_B_C": "Course Student <student@example.invalid>",
+  "commits": {
+    "A": "create notes.txt 'alpha\\n'",
+    "B": "append 'beta\\n' to notes.txt",
+    "C": "add todo.txt 'one\\n'"
+  },
+  "branches": {
+    "main": "A-B-C",
+    "topic": "at B, checked out"
+  },
+  "remote": "none: configuration is local",
+  "violated_precondition": "no user.name/user.email anywhere and user.useConfigOnly=true",
+  "bad_command": "git commit -m \"D: add gamma\"",
+  "corrections": [
+    "git config user.email/user.name (repository)",
+    "git -c user.name=... -c user.email=... commit (one command)",
+    "git config --global user.email/user.name (temporary HOME)"
+  ]
+}
