@@ -43,3 +43,44 @@ git pull upstream main
 ```
 
 So by now or at this point, all your repositories are up-to-date. Well done! You should do this, every time your GitHub repo tells you that you are a few commits behind.
+
+## Two ways to integrate upstream
+
+After configuring the `upstream` remote, you can make the fetch and integration steps explicit:
+
+```sh
+git fetch upstream
+git switch main
+git rebase upstream/main
+```
+
+Or fetch and rebase in one command:
+
+```sh
+git switch main
+git pull --rebase upstream main
+```
+
+Both update local `main` with upstream's commits. The first leaves `upstream/main` as an inspectable remote-tracking ref after fetch and lets you review it before rebasing. `pull --rebase` fetches and rebases immediately, so there is no pause to inspect before integration. Both replay local-only commits and can stop for conflicts; resolve them before continuing. With plain `git pull upstream main`, Git merges by default unless configured otherwise, which can create a merge commit when the histories have diverged. These commands update your local branch; pushing `main` to `origin` is a separate step that updates your fork.
+
+## Check prerequisites before syncing
+
+Before running the sync commands, confirm:
+
+- You are inside the intended clone (`git rev-parse --show-toplevel`).
+- `main` exists locally and is the branch you intend to update (`git branch --show-current`). Save or commit work before switching; check both staged and unstaged changes with `git status --short`.
+- `origin` points to your fork and `upstream` points to the source repository (`git remote -v`). Add `upstream` only if it is absent; do not add a duplicate remote.
+- If you will create commits during conflict resolution, a repository-local `user.name` and `user.email` are configured. Set them with `git config user.name 'Course Student'` and `git config user.email 'student@example.invalid'`; omit `--global` to avoid changing identity for other repositories.
+
+A minimal safe setup is:
+
+```sh
+git status --short --branch
+git remote -v
+git config --local user.name 'Course Student'
+git config --local user.email 'student@example.invalid'
+# Only when upstream is not already listed:
+git remote add upstream https://github.com/firstcontributions/first-contributions.git
+```
+
+Keep a clean working tree before switching to `main`. The local config commands are examples; use your own commit identity in your repository.
