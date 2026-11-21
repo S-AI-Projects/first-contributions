@@ -64,3 +64,20 @@ git push --force
 ```
 
 > Using `--force-with-lease` is a safer option instead of `--force` which avoids overwriting other people's changes on the remote branch (if you do not intend to do so).
+
+## Verify an amend in an isolated repository
+
+This shell sequence records the current tip, stages a correction, and amends the latest commit without changing its message:
+
+```sh
+before=$(git rev-parse HEAD)
+printf 'corrected line\n' >> notes.txt
+git add -- notes.txt
+git commit --amend --no-edit
+after=$(git rev-parse HEAD)
+test "$before" != "$after"
+git show --format= --stat HEAD
+git status --short
+```
+
+The focused integration check is `python3 work/R03-T008/check.py`. It runs this published sequence in a temporary repository and asserts that the amended commit has a new object ID, retains its parent, contains the staged line, and leaves a clean index and working tree. The check also fails if the decisive `git commit --amend --no-edit` line is removed from this example. Amending replaces a commit, so coordinate before rewriting history already shared with others; on a remote, use `--force-with-lease` only when rewriting that branch is agreed.
