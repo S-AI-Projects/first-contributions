@@ -1,0 +1,207 @@
+{
+  "checks": [
+    {
+      "check": "start: HEAD is on topic",
+      "expected": "refs/heads/topic",
+      "actual": "refs/heads/topic",
+      "ok": true
+    },
+    {
+      "check": "start: topic is at B, main is at C",
+      "expected": {
+        "refs/heads/main": "bf42f1bf05cb544159f7e25fd37087bab953e152",
+        "refs/heads/topic": "60c6e0cf7e2798e3682f4478f54c953d46031f63"
+      },
+      "actual": {
+        "refs/heads/main": "bf42f1bf05cb544159f7e25fd37087bab953e152",
+        "refs/heads/topic": "60c6e0cf7e2798e3682f4478f54c953d46031f63"
+      },
+      "ok": true
+    },
+    {
+      "check": "start: notes.txt has the uncommitted edit",
+      "expected": "alpha\nbeta\ngamma (uncommitted)\n",
+      "actual": "alpha\nbeta\ngamma (uncommitted)\n",
+      "ok": true
+    },
+    {
+      "check": "start: status shows the edit and the untracked file",
+      "expected": [
+        " M notes.txt",
+        "?? scratch.txt"
+      ],
+      "actual": [
+        " M notes.txt",
+        "?? scratch.txt"
+      ],
+      "ok": true
+    },
+    {
+      "check": "start: author of every commit",
+      "expected": [
+        "Course Student <student@example.invalid>",
+        "Course Student <student@example.invalid>",
+        "Course Student <student@example.invalid>"
+      ],
+      "actual": [
+        "Course Student <student@example.invalid>",
+        "Course Student <student@example.invalid>",
+        "Course Student <student@example.invalid>"
+      ],
+      "ok": true
+    },
+    {
+      "check": "guide syntax `git reset topic main --hard` exits 128",
+      "expected": 128,
+      "actual": 128,
+      "ok": true
+    },
+    {
+      "check": "...with 'Cannot do hard reset with paths'",
+      "expected": true,
+      "actual": true,
+      "ok": true
+    },
+    {
+      "check": "...and refs, index, worktree are unchanged",
+      "expected": {
+        "head": "refs/heads/topic",
+        "refs": {
+          "refs/heads/main": "bf42f1bf05cb544159f7e25fd37087bab953e152",
+          "refs/heads/topic": "60c6e0cf7e2798e3682f4478f54c953d46031f63"
+        },
+        "index_tree": "f85b72cccab2aab0cfca333f78ab1ff302be5f7b",
+        "worktree": {
+          "notes.txt": "alpha\nbeta\ngamma (uncommitted)\n",
+          "scratch.txt": "scratch\n"
+        },
+        "status": [
+          " M notes.txt",
+          "?? scratch.txt"
+        ]
+      },
+      "actual": {
+        "head": "refs/heads/topic",
+        "refs": {
+          "refs/heads/main": "bf42f1bf05cb544159f7e25fd37087bab953e152",
+          "refs/heads/topic": "60c6e0cf7e2798e3682f4478f54c953d46031f63"
+        },
+        "index_tree": "f85b72cccab2aab0cfca333f78ab1ff302be5f7b",
+        "worktree": {
+          "notes.txt": "alpha\nbeta\ngamma (uncommitted)\n",
+          "scratch.txt": "scratch\n"
+        },
+        "status": [
+          " M notes.txt",
+          "?? scratch.txt"
+        ]
+      },
+      "ok": true
+    },
+    {
+      "check": "ref moved: only refs/heads/topic changed, B -> C",
+      "expected": {
+        "refs/heads/topic": [
+          "60c6e0cf7e2798e3682f4478f54c953d46031f63",
+          "bf42f1bf05cb544159f7e25fd37087bab953e152"
+        ]
+      },
+      "actual": {
+        "refs/heads/topic": [
+          "60c6e0cf7e2798e3682f4478f54c953d46031f63",
+          "bf42f1bf05cb544159f7e25fd37087bab953e152"
+        ]
+      },
+      "ok": true
+    },
+    {
+      "check": "refs: topic and main both point at C",
+      "expected": {
+        "refs/heads/main": "bf42f1bf05cb544159f7e25fd37087bab953e152",
+        "refs/heads/topic": "bf42f1bf05cb544159f7e25fd37087bab953e152"
+      },
+      "actual": {
+        "refs/heads/main": "bf42f1bf05cb544159f7e25fd37087bab953e152",
+        "refs/heads/topic": "bf42f1bf05cb544159f7e25fd37087bab953e152"
+      },
+      "ok": true
+    },
+    {
+      "check": "HEAD still on topic",
+      "expected": "refs/heads/topic",
+      "actual": "refs/heads/topic",
+      "ok": true
+    },
+    {
+      "check": "index tree equals the tree of C",
+      "expected": "70d571a7a75867c09d38254b1252d5e2402adaa6",
+      "actual": "70d571a7a75867c09d38254b1252d5e2402adaa6",
+      "ok": true
+    },
+    {
+      "check": "worktree: edit discarded, todo.txt added, scratch.txt kept",
+      "expected": {
+        "notes.txt": "alpha\nbeta\n",
+        "todo.txt": "one\n",
+        "scratch.txt": "scratch\n"
+      },
+      "actual": {
+        "notes.txt": "alpha\nbeta\n",
+        "scratch.txt": "scratch\n",
+        "todo.txt": "one\n"
+      },
+      "ok": true
+    },
+    {
+      "check": "status shows only the untracked file",
+      "expected": [
+        "?? scratch.txt"
+      ],
+      "actual": [
+        "?? scratch.txt"
+      ],
+      "ok": true
+    },
+    {
+      "check": "ORIG_HEAD keeps the old tip (B)",
+      "expected": "60c6e0cf7e2798e3682f4478f54c953d46031f63",
+      "actual": "60c6e0cf7e2798e3682f4478f54c953d46031f63",
+      "ok": true
+    },
+    {
+      "check": "topic's reflog records the reset",
+      "expected": "reset: moving to main",
+      "actual": "reset: moving to main",
+      "ok": true
+    }
+  ],
+  "commit_ids_this_run": {
+    "A": "2a5a53557f23a9d20f9b752a117a42793ba8b982",
+    "B": "60c6e0cf7e2798e3682f4478f54c953d46031f63",
+    "C": "bf42f1bf05cb544159f7e25fd37087bab953e152"
+  },
+  "prediction": {
+    "head": "refs/heads/topic",
+    "refs": {
+      "refs/heads/main": "bf42f1bf05cb544159f7e25fd37087bab953e152",
+      "refs/heads/topic": "bf42f1bf05cb544159f7e25fd37087bab953e152"
+    },
+    "changed_refs": {
+      "refs/heads/topic": [
+        "60c6e0cf7e2798e3682f4478f54c953d46031f63",
+        "bf42f1bf05cb544159f7e25fd37087bab953e152"
+      ]
+    },
+    "index_tree": "70d571a7a75867c09d38254b1252d5e2402adaa6",
+    "worktree": {
+      "notes.txt": "alpha\nbeta\n",
+      "todo.txt": "one\n",
+      "scratch.txt": "scratch\n"
+    },
+    "status": [
+      "?? scratch.txt"
+    ],
+    "orig_head": "60c6e0cf7e2798e3682f4478f54c953d46031f63"
+  },
+  "explanation": "git reset --hard main, run while topic was checked out, moved refs/heads/topic from 60c6e0cf7e2798e3682f4478f54c953d46031f63 (B) to bf42f1bf05cb544159f7e25fd37087bab953e152 (C) and made the index and worktree match C's tree 70d571a7a75867c09d38254b1252d5e2402adaa6. refs/heads/main did not move."
+}

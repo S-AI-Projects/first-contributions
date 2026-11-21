@@ -1,0 +1,18 @@
+{
+  "author": "Course Student <student@example.invalid>",
+  "branch": "main",
+  "commits": {
+    "A": "create notes.txt with 'alpha\\n'",
+    "B": "append 'beta\\n' to notes.txt",
+    "C": "add todo.txt with 'one\\n'"
+  },
+  "extra_branch": "topic at B",
+  "exercise_setup": [
+    "git checkout topic",
+    "append 'gamma (uncommitted)' to notes.txt (not staged)",
+    "create untracked scratch.txt"
+  ],
+  "operation": "git reset --hard main  (run on topic)",
+  "also_run": "git reset topic main --hard  (the guide's literal form)",
+  "remote": "not needed (reset works on local refs)"
+}
