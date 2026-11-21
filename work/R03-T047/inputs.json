@@ -1,0 +1,17 @@
+{
+  "task": "R03-T047",
+  "guide": "docs/additional-material/git_workflow_scenarios/resetting-a-commit.md",
+  "author": "Course Student <student@example.invalid>",
+  "prerequisites_checked": [
+    "repository state (inside work tree)",
+    "active branch (main)",
+    "working tree cleanliness (clean)",
+    "target commit existence (sha_b in rev-list)",
+    "local repository configuration (user.name/email)"
+  ],
+  "operation": "git reset <commit_b>",
+  "passes": [
+    "run1 (independent repo 1)",
+    "run2 (independent repo 2)"
+  ]
+}
