@@ -74,3 +74,16 @@ We have dealt with only the user details till now while working with the config.
 3.  `color.ui` - to specify a boolean value for using colors in git's output.
 
 We have abstracted some details for ease of understanding. For further reading, head over to [git-scm.com](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration).
+
+## Paths containing spaces
+
+Quoting protects a path containing spaces from being split by your shell. The `--` marker ends Git options, which is useful when a path begins with a dash. It does not replace quotes around spaces.
+
+```sh
+mkdir 'sample data'
+printf 'release notes\n' > 'release notes.txt'
+git add -- 'sample data' 'release notes.txt'
+git commit -m 'Add release notes and sample data'
+```
+
+The quoted strings are each one path argument. If a file named `release notes.txt` is already tracked, stage that exact path with `git add -- 'release notes.txt'`. For revision-taking commands such as `git restore`, use `--` before a path (for example, `git restore -- 'release notes.txt'`) so Git does not confuse it with a revision or option. `--` is not needed for ordinary filenames that cannot be parsed as options, but is a clear boundary when paths are involved.
