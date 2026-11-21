@@ -84,3 +84,34 @@ commit message 2
 That you can freely change before you decide to exit the editor to save these changes.
 
 Running git log again should show you the commit message you entered before exiting the screen with the commits combined into one.
+
+## A reproducible before-and-after
+
+Here is a non-interactive way to combine the latest two local commits. It replaces the current branch tip with one new commit whose tree contains both commits' changes:
+
+```sh
+git log --oneline --decorate -3
+git reset --soft HEAD~2
+git commit -m 'Combine notes and todo'
+git log --oneline --decorate -3
+```
+
+Before:
+
+```text
+HEAD -> main: C (adds todo.txt)
+              B (appends beta to notes.txt) <- topic
+              A (creates notes.txt)
+index: C's tree; working tree: C's tree; clean
+```
+
+After:
+
+```text
+HEAD -> main: S (one new commit containing A+B+C's final files)
+              P (parent before A)
+HEAD -> topic: B -> A -> P
+index: S's staged tree; working tree: S's tree; clean
+```
+
+The reset moves `main` back two commits while keeping the combined changes staged; `git commit` creates S. The old B and C object IDs are no longer ancestors of `main`, while the resulting file tree is unchanged. This rewrites local history; coordinate before replacing commits others may have based work on. Interactive `git rebase -i` offers per-commit `squash`/`fixup` choices, but the soft-reset sequence is useful when combining exactly the latest two commits.
