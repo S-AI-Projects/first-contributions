@@ -1,0 +1,18 @@
+{
+  "task": "R03-T045",
+  "guide": "docs/additional-material/git_workflow_scenarios/rebase-vs-merge.md",
+  "author": "Course Student <student@example.invalid>",
+  "paths_with_spaces": [
+    "release notes.txt",
+    "sample data/data.txt"
+  ],
+  "commands": [
+    "git switch topic",
+    "git rebase main",
+    "git checkout -- <path>"
+  ],
+  "passes": [
+    "run1 (independent repo 1)",
+    "run2 (independent repo 2)"
+  ]
+}
