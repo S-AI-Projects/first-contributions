@@ -1,0 +1,11 @@
+{
+  "task": "R03-T044",
+  "guide": "docs/additional-material/git_workflow_scenarios/configuring-git.md",
+  "author_global": "Course Student <student@example.invalid>",
+  "author_local": "Project Contributor <contributor@project.invalid>",
+  "comparison": "git config --global vs git config --local",
+  "passes": [
+    "run1 (independent environment 1)",
+    "run2 (independent environment 2)"
+  ]
+}
