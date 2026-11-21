@@ -88,3 +88,17 @@ git config --global pull.rebase true
 
 **NOTE: Setting the global option ensures your local branches stay clean and linear without unnecessary merge commits.**
 
+## Recover after rebasing the wrong branch
+
+In this disposable example, `main` receives commit C and a later main-only update. `topic` starts at B and receives its own commit D. If you accidentally rebase `topic` onto `main`, Git replays D and records the old topic tip in `ORIG_HEAD`. Restore the original topic tip immediately:
+
+```bash
+git switch topic
+git rev-parse HEAD          # save this topic tip as D before rebasing
+git rebase main             # the mistaken operation
+git reset --hard ORIG_HEAD  # restore topic to D
+git rev-parse HEAD           # compare with the saved D
+git status --short           # clean
+```
+
+The check saves D's object ID and tree before rebasing, confirms that the rebase created a different topic tip, then uses `ORIG_HEAD` and asserts the original commit and tree are restored. `ORIG_HEAD` is a short-lived recovery point; a later operation can replace it. If so, inspect `git reflog` and verify the target object before resetting. This cannot restore uncommitted work that a destructive operation discarded, and a rebase changes commit IDs even when file contents stay the same. Coordinate before rewriting shared history.
