@@ -39,3 +39,135 @@ or you can also decide to customize the message to your liking.
 *   Run ```git push origin <branch-name>``` to push the reverted changes to Github.
 
 And that is it, the change would be undone. In this case,  my repository would be reverted to how it looked like in ```c1b9fc1```
+
+---
+
+## Prediction-and-Verification Exercise: Reverting Commit C
+
+To understand how `git revert` works under the hood, work through this prediction exercise using an isolated repository.
+
+### 1. Repository Setup
+
+We create a repository with author `Course Student <student@example.invalid>` on branch `main` with three commits:
+- **Commit A**: creates `notes.txt` with `"alpha\n"`
+- **Commit B**: appends `"beta\n"` to `notes.txt`
+- **Commit C**: creates `todo.txt` with `"one\n"`
+- Branch `topic` created at Commit B.
+
+```bash
+# Author identity
+export GIT_AUTHOR_NAME="Course Student"
+export GIT_AUTHOR_EMAIL="student@example.invalid"
+export GIT_COMMITTER_NAME="Course Student"
+export GIT_COMMITTER_EMAIL="student@example.invalid"
+
+# Initialize repository
+git init -b main repo
+cd repo
+
+# Commit A
+printf "alpha\n" > notes.txt
+git add notes.txt
+git commit -m "Commit A: create notes.txt"
+
+# Commit B
+printf "beta\n" >> notes.txt
+git add notes.txt
+git commit -m "Commit B: append beta to notes.txt"
+COMMIT_B=$(git rev-parse HEAD)
+
+# Branch topic at Commit B
+git branch topic "$COMMIT_B"
+
+# Commit C on main
+printf "one\n" > todo.txt
+git add todo.txt
+git commit -m "Commit C: add todo.txt"
+COMMIT_C=$(git rev-parse HEAD)
+```
+
+Viewing the initial state:
+
+```bash
+$ git log --oneline
+<COMMIT_C> (HEAD -> main) Commit C: add todo.txt
+<COMMIT_B> (topic) Commit B: append beta to notes.txt
+<COMMIT_A> Commit A: create notes.txt
+```
+
+---
+
+### 2. Predict the Resulting State
+
+Before running `git revert <COMMIT_C>`, pause and predict the outcome across the core areas of Git state:
+
+1. **Ref & Commit Graph**:
+   - *Question*: Will Commit C be deleted from history, or will a new commit be created?
+   - *Prediction*: Unlike `git reset`, `git revert` is purely forward-moving. Commit C remains in history permanently. A brand new commit (let's call it Commit D) will be added to the tip of `main` with parent Commit C. The history will become `[Commit D, Commit C, Commit B, Commit A]`.
+2. **Index & Tree Contents**:
+   - *Question*: Which files and tree objects will change?
+   - *Prediction*: The change introduced by Commit C was the addition of `todo.txt`. Reverting it applies the exact inverse patch: deleting `todo.txt`. The new commit tree will contain `notes.txt`, but `todo.txt` will be completely removed from the Git tree.
+3. **Working Tree Status**:
+   - *Question*: What will `git status` show?
+   - *Prediction*: `todo.txt` will be deleted from your hard drive, and `git status` will report a completely clean working directory.
+4. **Other Branches**:
+   - *Question*: Will branch `topic` change?
+   - *Prediction*: `refs/heads/topic` will remain completely unaffected and stay pointed at Commit B.
+
+---
+
+### 3. Execution
+
+Execute the revert:
+
+```bash
+git revert --no-edit "$COMMIT_C"
+```
+
+Output:
+```text
+[main <COMMIT_D>] Revert "Commit C: add todo.txt"
+ 1 file changed, 1 deletion(-)
+ delete mode 100644 todo.txt
+```
+
+---
+
+### 4. Verification and Explanation of Results
+
+Now verify your predictions against the real Git state:
+
+#### Check 1: Commit Graph and Refs
+```bash
+$ git log --oneline
+<COMMIT_D> (HEAD -> main) Revert "Commit C: add todo.txt"
+<COMMIT_C> Commit C: add todo.txt
+<COMMIT_B> (topic) Commit B: append beta to notes.txt
+<COMMIT_A> Commit A: create notes.txt
+```
+*Result*: Confirms prediction 1. A new commit `<COMMIT_D>` was created, preserving Commit C in the permanent linear history.
+
+#### Check 2: Tree Contents
+```bash
+$ git ls-tree --name-only HEAD
+notes.txt
+```
+*Result*: Confirms prediction 2. The tree object associated with `<COMMIT_D>` contains only `notes.txt`. The blob for `todo.txt` has been removed from this snapshot.
+
+#### Check 3: Working Tree State
+```bash
+$ ls
+notes.txt
+
+$ git status
+On branch main
+nothing to commit, working tree clean
+```
+*Result*: Confirms prediction 3. `todo.txt` was removed from the local filesystem, and the working tree is clean.
+
+#### Check 4: Other Branches
+```bash
+$ git rev-parse topic
+<COMMIT_B>
+```
+*Result*: Confirms prediction 4. `topic` was not modified and remains at Commit B.
