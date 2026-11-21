@@ -1,0 +1,14 @@
+{
+  "task": "R03-T046",
+  "guide": "docs/additional-material/git_workflow_scenarios/resetting-a-commit.md",
+  "author": "Course Student <student@example.invalid>",
+  "bad_commands": [
+    "git reset badc0de",
+    "git reset deadbeef"
+  ],
+  "corrected_command": "git reset <valid_commithash>",
+  "passes": [
+    "run1 (independent repo 1)",
+    "run2 (independent repo 2)"
+  ]
+}
