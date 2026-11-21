@@ -1,0 +1,20 @@
+{
+  "task": "R03-T043",
+  "guide": "docs/additional-material/git_workflow_scenarios/amending-a-commit.md",
+  "author": "Course Student <student@example.invalid>",
+  "commits": {
+    "A": "create notes.txt with 'alpha\\n'",
+    "B": "append 'beta\\n' to notes.txt",
+    "C": "add todo.txt with 'one\\n'",
+    "B_prime": "Amend commit B on branch topic with 'gamma\\n'"
+  },
+  "branches": {
+    "main": "A-B-C (fixed at C)",
+    "topic": "A-B' (amended at B')"
+  },
+  "remote": "local bare repository via file:// URI",
+  "passes": [
+    "run1 (independent repo 1)",
+    "run2 (independent repo 2)"
+  ]
+}
