@@ -1,0 +1,47 @@
+{
+  "task": "R03-T058",
+  "guide": "docs/additional-material/git_workflow_scenarios/resolving-merge-conflicts.md",
+  "guide_commands": [
+    "git status",
+    "git add",
+    "git commit -m \"Resolved merge conflicts\""
+  ],
+  "author": "Course Student <student@example.invalid> (set with git config in the temporary repository)",
+  "commits": {
+    "A": "create notes.txt 'alpha\\n'",
+    "B": "append 'beta\\n' to notes.txt",
+    "C": "add todo.txt 'one\\n'",
+    "D": "topic: line 2 of notes.txt changed",
+    "E": "main: line 2 of notes.txt changed differently"
+  },
+  "branches": {
+    "main": "A-B-C-E (checked out)",
+    "topic": "A-B-D (created at B)"
+  },
+  "remote": "none: a merge is local",
+  "violated_on_purpose": [
+    "commit before git add",
+    "commit without name/email"
+  ],
+  "setup_example": [
+    "git init -b main",
+    "git config user.name \"Your Name\"",
+    "git config user.email \"you@example.com\"",
+    "printf 'alpha\\n' > notes.txt",
+    "git add notes.txt",
+    "git commit -m \"A: create notes.txt\"",
+    "printf 'beta\\n' >> notes.txt",
+    "git commit -am \"B: append beta\"",
+    "printf 'one\\n' > todo.txt",
+    "git add todo.txt",
+    "git commit -m \"C: add todo.txt\"",
+    "git branch topic HEAD~1",
+    "git switch topic",
+    "printf 'alpha\\nbeta from topic\\n' > notes.txt",
+    "git commit -am \"D: change line 2 on topic\"",
+    "git switch main",
+    "printf 'alpha\\nbeta from main\\n' > notes.txt",
+    "git commit -am \"E: change line 2 on main\"",
+    "git merge topic"
+  ]
+}
