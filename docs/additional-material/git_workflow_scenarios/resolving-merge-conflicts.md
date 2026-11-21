@@ -107,3 +107,73 @@ git checkout -b feature-branch
 - [FreeCodeCamp: Practical Guide to Merge Conflicts](https://www.freecodecamp.org/news/resolve-merge-conflicts-in-git-a-practical-guide/)
 
 By following this guide, you'll be well-equipped to handle merge conflicts confidently, ensuring a smoother contribution process to any open source project!
+
+## Before you start: preconditions
+
+The steps in this guide (`git status`, `git add`, `git commit -m "Resolved merge conflicts"`) only work in a particular state. Check each item below. The last column shows what you should see.
+
+| # | Prerequisite | Check with | You should see |
+|---|---|---|---|
+| 1 | You started the merge from a clean working tree | `git status`, before `git merge` | `nothing to commit, working tree clean` |
+| 2 | You are on the branch you merged into | `git status` | `On branch main` (or your own branch name) |
+| 3 | The merge stopped on a conflict | `git status` and `git status --short` | `You have unmerged paths.`, `both modified:   notes.txt`, and `UU notes.txt` |
+| 4 | The conflicted file has conflict markers while you edit it, and none when you are done | `git diff --check` | `leftover conflict marker` lines at first, no output when done |
+| 5 | The resolved file is staged | `git add notes.txt`, then `git status` | `All conflicts fixed but you are still merging.` |
+| 6 | Your name and email are configured | `git config user.name` and `git config user.email` | your name and your email |
+
+**Minimal setup example.** Start in an empty folder. Use your own name and email in the two `git config` lines (see [configuring git](configuring-git.md)).
+
+```
+git init -b main
+git config user.name "Your Name"
+git config user.email "you@example.com"
+printf 'alpha\n' > notes.txt
+git add notes.txt
+git commit -m "A: create notes.txt"
+printf 'beta\n' >> notes.txt
+git commit -am "B: append beta"
+printf 'one\n' > todo.txt
+git add todo.txt
+git commit -m "C: add todo.txt"
+git branch topic HEAD~1
+git switch topic
+printf 'alpha\nbeta from topic\n' > notes.txt
+git commit -am "D: change line 2 on topic"
+git switch main
+printf 'alpha\nbeta from main\n' > notes.txt
+git commit -am "E: change line 2 on main"
+git merge topic
+```
+
+The last command stops with a conflict:
+
+```
+Auto-merging notes.txt
+CONFLICT (content): Merge conflict in notes.txt
+Automatic merge failed; fix conflicts and then commit the result.
+```
+
+`notes.txt` now contains the conflict markers:
+
+```
+alpha
+<<<<<<< HEAD
+beta from main
+=======
+beta from topic
+>>>>>>> topic
+```
+
+Edit the file to the text you want to keep, for example `beta from main and topic`, and then finish the merge:
+
+```
+git add notes.txt
+git commit -m "Resolved merge conflicts"
+```
+
+The merge commit has two parents, the old tip of `main` and the tip of `topic`. Only `main` moves; `topic` stays where it was.
+
+**What happens when a prerequisite is missing**
+
+- Committing before `git add` (prerequisite 5) fails with `error: Committing is not possible because you have unmerged files.` Nothing changes, and the merge is still in progress.
+- Committing without a name and email (prerequisite 6) fails with `Author identity unknown`. The merge is still in progress and your resolved file is still staged, so set the name and email and run the same `git commit` again.
