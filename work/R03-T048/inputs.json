@@ -1,0 +1,14 @@
+{
+  "task": "R03-T048",
+  "guide": "docs/additional-material/git_workflow_scenarios/undoing-a-commit.md",
+  "guide_test": "tests/guides/test_undoing_a_commit.py",
+  "author": "Course Student <student@example.invalid>",
+  "commands": [
+    "git reset <file>",
+    "git reset --hard HEAD~1"
+  ],
+  "runs": [
+    "unchanged (exit 0)",
+    "GUIDE_TEST_OMIT=reset (exit 1)"
+  ]
+}
