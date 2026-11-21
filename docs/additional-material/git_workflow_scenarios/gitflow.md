@@ -117,3 +117,25 @@ Here we discussed the Git Flow Workflow. Git Flow is one of the many styles of G
 1. When the release branch is done it is merged into develop and master.
 1. If an issue in the master is detected a hotfix branch is created from master.
 1. Once the hotfix is complete it is merged to both develop and master.
+
+## Predict, run, and verify: create `develop`
+
+Start on `main` with a clean working tree. Predict what these commands will change before running them:
+
+```sh
+git branch develop
+git push -u origin develop
+```
+
+**Prediction:** `develop` will point to the same commit as `main`. Creating the branch does not switch `HEAD`; neither the index nor working tree changes. The push creates `origin/develop` at that same commit and records the upstream tracking branch for local `develop`.
+
+**Verification:**
+
+```sh
+git rev-parse main develop origin/develop
+git status --short --branch
+git diff --cached --exit-code
+git diff --exit-code
+```
+
+All three object IDs should match, `HEAD` remains on `main`, and both diffs are empty. To actually work in the Gitflow integration branch, switch to it with `git switch develop`. Gitflow tools may initialize additional branch conventions through `git flow init`; the two commands above create and publish only the `develop` branch and do not initialize the full model. The focused local verification is `python3 work/R03-T010/check.py`.
