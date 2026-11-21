@@ -1,55 +1,44 @@
-# Undo local commits 
+# Undoing a commit
 
-To undo a local commit, all you need to do is
-```
-git reset
-```
-This command will reset your staging area to your most recent commit, but the changes you made to your working directory will not change. So, you can still re-commit again what you've changed.
-Or, if you only want to remove one file from your previous commit. Then, you can do the command below
-```
-git reset <file>
-```
-The command will remove only the specified file from the staging area, but changes made on the file will still remain.
+`git reset` moves the current branch reference and updates the index and working tree according to its mode. Use it only when you understand which state you want to keep. This example uses a disposable repository so the reset cannot affect your project.
 
-Example of ```git reset``` usage
-```
-# Make changes in index.php and tutorial.php
-# Add files into the staging area
-$ git add .
-# Remembered both files need to be committed separately
-# Unstage tutorial.php
-$ git reset tutorial.php
-# Commit index.php first
-$ git commit -m "Changed index.php"
-# Commit tutorial.php now
-$ git add tutorial.php
-$ git commit -m "Changed tutorial.php"
+## Undo the latest local commit and discard its changes
+
+The following sequence creates three commits on `main`. Commit A creates `notes.txt`, commit B appends to it, and commit C creates `todo.txt`. It also creates `topic` at B. The author is set only in this temporary repository.
+
+```sh
+tmp=$(mktemp -d)
+git -C "$tmp" init -b main
+git -C "$tmp" config user.name 'Course Student'
+git -C "$tmp" config user.email 'student@example.invalid'
+cd "$tmp"
+printf 'alpha\n' > notes.txt
+git add notes.txt && git commit -m 'A: add notes'
+printf 'beta\n' >> notes.txt
+git add notes.txt && git commit -m 'B: append notes'
+B=$(git rev-parse HEAD)
+git branch topic "$B"
+printf 'one\n' > todo.txt
+git add todo.txt && git commit -m 'C: add todo'
+git reset --hard "$B"
 ```
 
-Let's say if you have messed up your local repository and you just want to reset it to your last commit.
-Then, you can run the command below.
-```
-git reset --hard
-```
-The command will not only reset your staging area, but also revert all your changes on the files to your last commit.
-The mode ```--hard``` tells Git to undo all the changes in the working directory too.
-You should only run this when you are really sure of throwing your whole local development out.
+The final command moves `main` from C back to B, resets the index and working tree to B, and removes `todo.txt` from this temporary working tree. The `topic` branch still points to B. The commit object C may remain temporarily in Git’s object database, but it is no longer reachable from these branches.
 
-Example of ```git reset --hard``` usage
-```
-# Decided to start a crazy experiment
-# Create a new file 'crazy.php' and add some code to it
-# Commit crazy.php
-$ git add crazy.php
-$ git commit -m "Started a crazy dev"
-# Edit crazy.php file again and changed a lot of other files
-# Commit all tracked files
-$ git add .
-$ git commit -m "Continued dev"
-# Tested and things went out of hand
-# Decided to remove the whole things
-$ git reset --hard HEAD~2
-```
-The ```git reset --hard HEAD~2``` moves the current branch backward by 2 commit points at the same time reverting all changes you have made and remove the 2 snapshots we have just created from project history.
+Expected state (the abbreviated object IDs vary):
 
-P.s. Never perform ```git reset --hard``` if you've already pushed your commits to a shared repository as it will cause problems to everyone on that repository.
+```text
+$ git status --short --branch
+## main
+$ git log --oneline --decorate -3
+<B> (HEAD -> main, topic) B: append notes
+<A> A: add notes
+```
+
+`notes.txt` contains `alpha` and `beta`, `todo.txt` is absent, and the index and working tree are clean. The branch tip changed from C to B; the `topic` ref stayed at B. `git reset --hard` overwrites tracked working-tree changes, so do not use it to discard work you need. For a shared commit, prefer `git revert`, which adds a new commit instead of moving a published branch backward.
+
+## Keep the changes while undoing the commit
+
+If you want to remove the latest commit but keep its changes staged, use `git reset --soft HEAD~`. The branch moves back one commit; the index and working tree keep the changes from the removed commit. With `--mixed` (the default), the changes remain in the working tree but become unstaged. These modes still rewrite the current branch history, so use them for local commits that have not been shared.
+
+Run the focused state check with `python3 work/R03-T001/check.py` from the repository root.
