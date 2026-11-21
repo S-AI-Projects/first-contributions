@@ -1,0 +1,20 @@
+{
+  "task": "R03-T041",
+  "guide": "docs/additional-material/git_workflow_scenarios/removing-a-file.md",
+  "author": "Course Student <student@example.invalid>",
+  "commits": {
+    "A": "create notes.txt with 'alpha\\n'",
+    "B": "append 'beta\\n' to notes.txt",
+    "C": "add todo.txt with 'one\\n'",
+    "D": "Remove todo.txt from repository (via git rm --cached todo.txt)"
+  },
+  "branches": {
+    "main": "A-B-C-D",
+    "topic": "at B (preserved)"
+  },
+  "remote": "local bare repository via file:// URI",
+  "passes": [
+    "run1 (temporary directory 1)",
+    "run2 (temporary directory 2)"
+  ]
+}
