@@ -1,0 +1,20 @@
+{
+  "task": "R03-T042",
+  "guide": "docs/additional-material/git_workflow_scenarios/squashing-commits.md",
+  "author": "Course Student <student@example.invalid>",
+  "commits": {
+    "A": "create notes.txt with 'alpha\\n'",
+    "B": "append 'beta\\n' to notes.txt",
+    "C": "add todo.txt with 'one\\n'",
+    "BC": "Accidental squash of B and C"
+  },
+  "recovery_method": "git reset --hard ORIG_HEAD / git reflog",
+  "branches": {
+    "main": "A-B-C (restored)",
+    "topic": "at B (preserved)"
+  },
+  "passes": [
+    "run1 (recovery via ORIG_HEAD)",
+    "run2 (recovery via reflog commit SHA)"
+  ]
+}
