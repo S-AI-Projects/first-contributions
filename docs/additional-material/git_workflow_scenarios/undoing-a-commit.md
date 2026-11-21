@@ -53,3 +53,24 @@ $ git reset --hard HEAD~2
 The ```git reset --hard HEAD~2``` moves the current branch backward by 2 commit points at the same time reverting all changes you have made and remove the 2 snapshots we have just created from project history.
 
 P.s. Never perform ```git reset --hard``` if you've already pushed your commits to a shared repository as it will cause problems to everyone on that repository.
+
+---
+
+## Checking the Undoing Commits Commands (Automated Guide Test)
+
+This guide is covered by an automated test suite located at `tests/guides/test_undoing_a_commit.py`. The test builds an isolated temporary repository to verify the behavior of unstaging a file (`git reset <file>`) and resetting local commits (`git reset --hard HEAD~1`) without affecting any other branches.
+
+### Running the Guide Test
+
+From the root of the repository, execute:
+
+```bash
+python3 tests/guides/test_undoing_a_commit.py
+```
+
+### What the Test Verifies
+
+1. **Unstaging a File**: Verifies that `git reset <file>` removes the specified file from the staging area while leaving other staged changes and working directory modifications untouched.
+2. **Hard Reset**: Verifies that `git reset --hard HEAD~1` rolls back the current branch pointer by one commit and discards working tree changes.
+3. **Branch Isolation**: Asserts that other branches (such as `topic`) remain completely untouched at their original commit.
+4. **Failure Propagation and Cleanup**: Verifies that omitting the reset command causes the test to fail, and confirms that all temporary test directories are properly deleted.
