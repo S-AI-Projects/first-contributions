@@ -48,6 +48,7 @@ https://github.com/mzubairmashal/first-contributions/blob/main/Contributors.md
 -  [Zorochan](https://github.com/zorochanuwu) - WORLD HERE I COME TO CONQUER THE OPENSOURCE 
 - cat - first contribution
 - [Omar](https://github.com/OmarHanfi) - alsalam ealaykum
+- [Harshit Jha](https://github.com/harshitbuilds-dev) - This is my first open source contribution!
 - [sudip karki] (https://github.com/Sudipk007)
 - Pratham Tiwari - my first contribution
 - [Andrés](https://github.com/andresbama7) - Aprendiendo a contribuir con Git y GitHub.
