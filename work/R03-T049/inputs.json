@@ -1,0 +1,16 @@
+{
+  "task": "R03-T049",
+  "guide": "docs/additional-material/git_workflow_scenarios/reverting-a-commit.md",
+  "author": "Course Student <student@example.invalid>",
+  "operation": "git revert --no-edit <commit_c>",
+  "predicted_states": [
+    "commit graph: new forward commit D added, C preserved",
+    "tree: todo.txt deleted from tree, notes.txt preserved",
+    "working tree: todo.txt removed from disk, working tree clean",
+    "other branches: topic untouched at commit B"
+  ],
+  "passes": [
+    "run1 (independent repo 1)",
+    "run2 (independent repo 2)"
+  ]
+}
