@@ -1,0 +1,27 @@
+================================================================
+Starting automated verification: check.py (R03-T034)
+================================================================
+--- Test 1: Branch and Remote Semantics on topic ---
+PASS: Baseline: main points to Commit C
+PASS: Baseline: topic points to Commit B
+PASS: Baseline: origin/main points to Commit C
+PASS: Baseline: origin/topic points to Commit B
+PASS: Fact 1: Intended ref (refs/heads/topic) changed to new commit
+PASS: Fact 2: Unrelated local ref (refs/heads/main) stayed fixed at commit C
+PASS: Fact 3: Remote ref (refs/remotes/origin/main) stayed fixed at commit C
+PASS: Fact 4: Remote tracking ref (refs/remotes/origin/topic) stayed fixed at commit B
+PASS: Fact 5: notes.txt remains present on filesystem in working tree
+PASS: Fact 5b: notes.txt content preserved ('alpha\nbeta\n')
+PASS: Fact 6a: notes.txt is removed from index on topic
+PASS: Fact 6b: .gitignore is tracked in index on topic
+PASS: Fact 6c: notes.txt remains tracked in index on main
+PASS: Fact 6d: .gitignore is not present in index on main
+--- Test 2: Bulk Untracking with git rm -r --cached . ---
+PASS: Bulk untrack: notes.txt removed from topic index
+PASS: Bulk untrack: debug.log not added to topic index
+PASS: Bulk untrack: .gitignore is tracked
+PASS: Bulk untrack: working tree is clean
+================================================================
+Summary: 18 passed, 0 failed.
+================================================================
+ALL CHECKS PASSED.

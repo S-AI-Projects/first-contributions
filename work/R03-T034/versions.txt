@@ -1,0 +1,4 @@
+Git Version: git version 2.50.1 (Apple Git-155)
+Python Version: Python 3.15.2
+Operating System: Darwin 25.6.0 (macOS arm64)
+Documentation Renderer: Unavailable (No repository-specific or system-wide markdown/asciidoc renderer is configured or installed in this repository; documented honestly as instructed).
