@@ -1,0 +1,595 @@
+{
+  "expected": {
+    "global_only": [
+      "cache"
+    ],
+    "repository_only": [
+      "cache"
+    ],
+    "global_and_repository": [
+      "cache",
+      "cache"
+    ],
+    "global_and_repository_timeout": [
+      "cache",
+      "cache --timeout=3600"
+    ],
+    "global_after_repository_timeout": [
+      "cache"
+    ],
+    "repository": {
+      "branch": "main",
+      "commit_count": "3",
+      "topic_at": "B",
+      "notes_txt": "alpha\nbeta\n",
+      "todo_txt": "one\n"
+    }
+  },
+  "actual": {
+    "commands": [
+      {
+        "command": [
+          "git",
+          "init",
+          "--initial-branch=main",
+          "$TMP/repo"
+        ],
+        "cwd": null,
+        "returncode": 0,
+        "stdout": "Initialized empty Git repository in $TMP/repo/.git/",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.name",
+          "Course Student"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.email",
+          "student@example.invalid"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "A"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "[main (root-commit) c3ed016] A\n 1 file changed, 1 insertion(+)\n create mode 100644 notes.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "c3ed01664fef708b28343aa7eb37e2f8f606892a",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "B"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "[main e702149] B\n 1 file changed, 1 insertion(+)",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "e702149e15cb1c2e6d2b58e3f913f1df2fa23f0e",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "todo.txt"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "C"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "[main b92e3e9] C\n 1 file changed, 1 insertion(+)\n create mode 100644 todo.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "b92e3e9912531d737891ac04e6f161a37b6aeb37",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "topic",
+          "e702149e15cb1c2e6d2b58e3f913f1df2fa23f0e"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "--reverse",
+          "--format=%an%x00%ae",
+          "main"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "Course Student\u0000student@example.invalid\nCourse Student\u0000student@example.invalid\nCourse Student\u0000student@example.invalid",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "main",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-list",
+          "--count",
+          "main"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "3",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "b92e3e9912531d737891ac04e6f161a37b6aeb37",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "topic"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "e702149e15cb1c2e6d2b58e3f913f1df2fa23f0e",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "--global",
+          "credential.helper",
+          "cache"
+        ],
+        "cwd": null,
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "--get-all",
+          "credential.helper"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "cache",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "credential.helper",
+          "cache"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "--local",
+          "--get-all",
+          "credential.helper"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "cache",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "--get-all",
+          "credential.helper"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "cache\ncache",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "credential.helper",
+          "cache --timeout=3600"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "--local",
+          "--get-all",
+          "credential.helper"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "cache --timeout=3600",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "--get-all",
+          "credential.helper"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "cache\ncache --timeout=3600",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "--global",
+          "--get-all",
+          "credential.helper"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "cache",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "--show-origin",
+          "--get-all",
+          "credential.helper"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "file:$TMP/home/.gitconfig\tcache\nfile:.git/config\tcache --timeout=3600",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "main",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-list",
+          "--count",
+          "main"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "3",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "b92e3e9912531d737891ac04e6f161a37b6aeb37",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "topic"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "e702149e15cb1c2e6d2b58e3f913f1df2fa23f0e",
+        "stderr": ""
+      }
+    ],
+    "checks": [
+      {
+        "name": "all initial commit authors",
+        "expected": [
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ]
+        ],
+        "actual": [
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ]
+        ],
+        "passed": true
+      },
+      {
+        "name": "main branch",
+        "expected": "main",
+        "actual": "main",
+        "passed": true
+      },
+      {
+        "name": "three commits",
+        "expected": "3",
+        "actual": "3",
+        "passed": true
+      },
+      {
+        "name": "main points to C",
+        "expected": "b92e3e9912531d737891ac04e6f161a37b6aeb37",
+        "actual": "b92e3e9912531d737891ac04e6f161a37b6aeb37",
+        "passed": true
+      },
+      {
+        "name": "topic points to B",
+        "expected": "e702149e15cb1c2e6d2b58e3f913f1df2fa23f0e",
+        "actual": "e702149e15cb1c2e6d2b58e3f913f1df2fa23f0e",
+        "passed": true
+      },
+      {
+        "name": "global cache helper",
+        "expected": [
+          "cache"
+        ],
+        "actual": [
+          "cache"
+        ],
+        "passed": true
+      },
+      {
+        "name": "repository cache helper",
+        "expected": [
+          "cache"
+        ],
+        "actual": [
+          "cache"
+        ],
+        "passed": true
+      },
+      {
+        "name": "global and repository helpers",
+        "expected": [
+          "cache",
+          "cache"
+        ],
+        "actual": [
+          "cache",
+          "cache"
+        ],
+        "passed": true
+      },
+      {
+        "name": "repository timeout setting",
+        "expected": [
+          "cache --timeout=3600"
+        ],
+        "actual": [
+          "cache --timeout=3600"
+        ],
+        "passed": true
+      },
+      {
+        "name": "timeout helper is added to global effective config",
+        "expected": [
+          "cache",
+          "cache --timeout=3600"
+        ],
+        "actual": [
+          "cache",
+          "cache --timeout=3600"
+        ],
+        "passed": true
+      },
+      {
+        "name": "repository timeout does not change global helper",
+        "expected": [
+          "cache"
+        ],
+        "actual": [
+          "cache"
+        ],
+        "passed": true
+      },
+      {
+        "name": "both config scopes are shown",
+        "expected": 2,
+        "actual": 2,
+        "passed": true
+      },
+      {
+        "name": "repository state",
+        "expected": {
+          "branch": "main",
+          "commit_count": "3",
+          "main_head": "b92e3e9912531d737891ac04e6f161a37b6aeb37",
+          "topic_head": "e702149e15cb1c2e6d2b58e3f913f1df2fa23f0e",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_txt": "one\n"
+        },
+        "actual": {
+          "branch": "main",
+          "commit_count": "3",
+          "main_head": "b92e3e9912531d737891ac04e6f161a37b6aeb37",
+          "topic_head": "e702149e15cb1c2e6d2b58e3f913f1df2fa23f0e",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_txt": "one\n"
+        },
+        "passed": true
+      }
+    ],
+    "commits": {
+      "A": "c3ed01664fef708b28343aa7eb37e2f8f606892a",
+      "B": "e702149e15cb1c2e6d2b58e3f913f1df2fa23f0e",
+      "C": "b92e3e9912531d737891ac04e6f161a37b6aeb37"
+    },
+    "config": {
+      "global_only": [
+        "cache"
+      ],
+      "repository_only": [
+        "cache"
+      ],
+      "global_and_repository": [
+        "cache",
+        "cache"
+      ],
+      "global_and_repository_timeout": [
+        "cache",
+        "cache --timeout=3600"
+      ],
+      "global_after_repository_timeout": [
+        "cache"
+      ],
+      "origins": [
+        "global: cache",
+        "local: cache --timeout=3600"
+      ]
+    },
+    "repository": {
+      "branch": "main",
+      "commit_count": "3",
+      "main_head": "b92e3e9912531d737891ac04e6f161a37b6aeb37",
+      "topic_head": "e702149e15cb1c2e6d2b58e3f913f1df2fa23f0e",
+      "notes_txt": "alpha\nbeta\n",
+      "todo_txt": "one\n"
+    }
+  },
+  "failure": null
+}

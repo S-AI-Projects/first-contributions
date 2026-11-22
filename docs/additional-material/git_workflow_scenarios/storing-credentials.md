@@ -8,13 +8,16 @@ We will be covering one of the methods available to us - [git credential cache](
 
 ## Caching
 
-We can use git credential cache to store our username and password.
+The `cache` helper keeps credentials in the memory of a Git credential-cache
+daemon for a limited time. It does not write them to a plaintext credentials
+file. The default timeout is 900 seconds (15 minutes); credentials may be
+forgotten sooner if the daemon exits, for example when the system restarts.
 
-**Attention:** This method saves the credentials in *plaintext* on your PC's disk. Everyone on your computer can access it, e.g. malicious NPM modules.
+This is temporary caching, not persistent credential storage.
 
 ### Global Credential Cache
 
-If we wish to, we can store the credentials for every repository we are working with using one simple command:
+To configure the cache helper at the global scope, run:
 
 ```
 $ git config --global credential.helper cache
@@ -24,7 +27,8 @@ $ git config --global credential.helper cache
 
 ### Repository Credential Cache
 
-We can store the credentials for the repository we are working with using one simple command, similar to before: 
+To configure a helper for only the current repository, run this inside its
+working tree:
 
 ```
 $ git config credential.helper cache
@@ -32,15 +36,26 @@ $ git config credential.helper cache
 
 **Reminder:** Please follow the security policies of your place of work/study.
 
+Global and repository-level helper values can both appear in Git's effective
+configuration. Setting a repository-level timeout does not edit the global
+value; inspect the configured values and their origins with:
+
+```
+git config --show-origin --get-all credential.helper
+```
+
 ### Cache Timeout
 
-If we do not specify a length of time to store our credentials, they can potentially be stored forever. However, we can determine how long they will be kept in memory using this command:
+To choose how many seconds credentials remain in the cache, set a timeout:
 
 ```
-git config credential.helper 'cache --timeout=<timeout>'
+git config credential.helper 'cache --timeout=3600'
 ```
 
-Using the helper, the credentials will never touch the disk and will be erased after the specified timeout. The default value is 900 seconds (15 minutes).
+This example sets a one-hour timeout for the repository-level helper. Without
+an explicit timeout, the cache helper uses its 900-second default. Cached
+credentials remain in memory and are forgotten after the timeout or if the
+cache daemon exits.
 
 #### References
 [Stack Overflow](https://stackoverflow.com/questions/35942754/how-can-i-save-username-and-password-in-git)
