@@ -44,19 +44,22 @@ This way, they can work without interfering with each other's progress.
 ```sh
 git branch my-new-branch
 ```
-This creates a new branch named `my-new-branch` without switching to it.
+This creates a branch pointer at the current commit without switching to it.
+Your working tree and current branch stay as they were.
 
 ### Switch to a Branch
 ```sh
 git checkout my-new-branch
 ```
-This moves you to `my-new-branch`, allowing you to work on it.
+This moves `HEAD` to the existing branch, allowing you to work on it.
 
 ### Create and Switch to a Branch (Shortcut)
 ```sh
 git checkout -b my-new-branch
 ```
-This creates and switches to the new branch in a single step.
+This creates the branch at the current commit and switches to it in one step.
+It is equivalent to running `git branch my-new-branch` followed by
+`git checkout my-new-branch`.
 
 ### Delete a Branch (After Merging)
 ```sh

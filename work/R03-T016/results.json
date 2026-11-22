@@ -1,0 +1,612 @@
+{
+  "expected": {
+    "branch_then_checkout": {
+      "after_branch_command": {
+        "current_branch": "main",
+        "new_branch_head": "C"
+      },
+      "after_checkout": {
+        "current_branch": "my-new-branch",
+        "new_branch_head": "C"
+      }
+    },
+    "checkout_b": {
+      "current_branch": "my-new-branch",
+      "new_branch_head": "C",
+      "main_head": "C"
+    },
+    "both_methods_create_branch_at_same_commit": true
+  },
+  "actual": {
+    "commands": [
+      {
+        "command": [
+          "git",
+          "init",
+          "--initial-branch=main",
+          "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T016-huqsmeko/repos/branch-then-checkout"
+        ],
+        "cwd": null,
+        "returncode": 0,
+        "stdout": "Initialized empty Git repository in $TMP/repos/branch-then-checkout/.git/",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.name",
+          "Course Student"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.email",
+          "student@example.invalid"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "A"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "[main (root-commit) f735ca7] A\n 1 file changed, 1 insertion(+)\n create mode 100644 notes.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "f735ca7ba027aedf305f7efeb0ccd17d6993d7a1",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "B"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "[main 70fe85c] B\n 1 file changed, 1 insertion(+)",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "70fe85c1e9805975e1db30e14e961b8e4756cb48",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "todo.txt"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "C"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "[main a54bc4a] C\n 1 file changed, 1 insertion(+)\n create mode 100644 todo.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "topic",
+          "70fe85c1e9805975e1db30e14e961b8e4756cb48"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "-t",
+          "f735ca7ba027aedf305f7efeb0ccd17d6993d7a1"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "commit",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "topic"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "70fe85c1e9805975e1db30e14e961b8e4756cb48",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "my-new-branch"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "main",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "my-new-branch"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "checkout",
+          "my-new-branch"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "Switched to branch 'my-new-branch'"
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "my-new-branch",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "$TMP/repos/branch-then-checkout",
+        "returncode": 0,
+        "stdout": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "init",
+          "--initial-branch=main",
+          "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T016-huqsmeko/repos/checkout-b"
+        ],
+        "cwd": null,
+        "returncode": 0,
+        "stdout": "Initialized empty Git repository in $TMP/repos/checkout-b/.git/",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.name",
+          "Course Student"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.email",
+          "student@example.invalid"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "A"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "[main (root-commit) f735ca7] A\n 1 file changed, 1 insertion(+)\n create mode 100644 notes.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "f735ca7ba027aedf305f7efeb0ccd17d6993d7a1",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "B"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "[main 70fe85c] B\n 1 file changed, 1 insertion(+)",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "70fe85c1e9805975e1db30e14e961b8e4756cb48",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "todo.txt"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "C"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "[main a54bc4a] C\n 1 file changed, 1 insertion(+)\n create mode 100644 todo.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "topic",
+          "70fe85c1e9805975e1db30e14e961b8e4756cb48"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "-t",
+          "f735ca7ba027aedf305f7efeb0ccd17d6993d7a1"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "commit",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "topic"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "70fe85c1e9805975e1db30e14e961b8e4756cb48",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "checkout",
+          "-b",
+          "my-new-branch"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "Switched to a new branch 'my-new-branch'"
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "my-new-branch",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "cwd": "$TMP/repos/checkout-b",
+        "returncode": 0,
+        "stdout": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9",
+        "stderr": ""
+      }
+    ],
+    "scenarios": [
+      {
+        "name": "branch_then_checkout",
+        "after_branch_command": {
+          "current_branch": "main",
+          "new_branch_head": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9"
+        },
+        "after_checkout": {
+          "current_branch": "my-new-branch",
+          "new_branch_head": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9"
+        }
+      },
+      {
+        "name": "checkout_b",
+        "state": {
+          "current_branch": "my-new-branch",
+          "new_branch_head": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9",
+          "main_head": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9"
+        }
+      }
+    ],
+    "commits": {
+      "A": "f735ca7ba027aedf305f7efeb0ccd17d6993d7a1",
+      "B": "70fe85c1e9805975e1db30e14e961b8e4756cb48",
+      "C": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9"
+    },
+    "checks": [
+      {
+        "name": "commit A exists",
+        "expected": "commit",
+        "actual": "commit",
+        "passed": true
+      },
+      {
+        "name": "main starts at C",
+        "expected": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9",
+        "actual": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9",
+        "passed": true
+      },
+      {
+        "name": "topic starts at B",
+        "expected": "70fe85c1e9805975e1db30e14e961b8e4756cb48",
+        "actual": "70fe85c1e9805975e1db30e14e961b8e4756cb48",
+        "passed": true
+      },
+      {
+        "name": "git branch creates without switching",
+        "expected": {
+          "current_branch": "main",
+          "new_branch_head": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9"
+        },
+        "actual": {
+          "current_branch": "main",
+          "new_branch_head": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9"
+        },
+        "passed": true
+      },
+      {
+        "name": "git checkout switches to the created branch",
+        "expected": {
+          "current_branch": "my-new-branch",
+          "new_branch_head": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9"
+        },
+        "actual": {
+          "current_branch": "my-new-branch",
+          "new_branch_head": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9"
+        },
+        "passed": true
+      },
+      {
+        "name": "commit A exists",
+        "expected": "commit",
+        "actual": "commit",
+        "passed": true
+      },
+      {
+        "name": "main starts at C",
+        "expected": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9",
+        "actual": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9",
+        "passed": true
+      },
+      {
+        "name": "topic starts at B",
+        "expected": "70fe85c1e9805975e1db30e14e961b8e4756cb48",
+        "actual": "70fe85c1e9805975e1db30e14e961b8e4756cb48",
+        "passed": true
+      },
+      {
+        "name": "git checkout -b creates and switches at current commit",
+        "expected": {
+          "current_branch": "my-new-branch",
+          "new_branch_head": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9",
+          "main_head": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9"
+        },
+        "actual": {
+          "current_branch": "my-new-branch",
+          "new_branch_head": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9",
+          "main_head": "a54bc4ac4e4edbc988367b2f7d1195d9c1c2d5c9"
+        },
+        "passed": true
+      },
+      {
+        "name": "both methods create the new branch at the same commit",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      }
+    ]
+  },
+  "failure": null
+}

@@ -1,0 +1,43 @@
+{
+  "repository": {
+    "initial_branch": "main",
+    "author_name": "Course Student",
+    "author_email": "student@example.invalid",
+    "commits": [
+      {
+        "label": "A",
+        "file": "notes.txt",
+        "content": "alpha\n"
+      },
+      {
+        "label": "B",
+        "append": "notes.txt",
+        "content": "beta\n"
+      },
+      {
+        "label": "C",
+        "file": "todo.txt",
+        "content": "one\n"
+      }
+    ],
+    "topic_branch_at": "B"
+  },
+  "operations_under_test": [
+    [
+      "git",
+      "branch",
+      "my-new-branch"
+    ],
+    [
+      "git",
+      "checkout",
+      "my-new-branch"
+    ],
+    [
+      "git",
+      "checkout",
+      "-b",
+      "my-new-branch"
+    ]
+  ]
+}
