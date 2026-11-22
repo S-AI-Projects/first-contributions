@@ -1,0 +1,39 @@
+# Task R03-T035 Expected Outputs and Git States
+
+1. Initial State:
+   - Branch 'main' points to Commit C.
+   - Branch 'topic' points to Commit B.
+   - Working tree is clean.
+
+2. Unquoted Command Failure:
+   - Command: git add release notes.txt
+   - Exit Code: Non-zero (128)
+   - Stderr: fatal: pathspec 'release' did not match any files
+   - Explanation: Shell splits the path by whitespace into two arguments ('release' and 'notes.txt').
+
+3. Quoted Command Success:
+   - Command: git add "release notes.txt" "sample data/data.txt"
+   - Exit Code: 0
+   - Staged Files: 'release notes.txt' and 'sample data/data.txt' are staged in index.
+
+4. Path Disambiguation using '--':
+   - Unquoted Checkout: git checkout -- release notes.txt
+     * Exit Code: Non-zero
+     * Stderr: error: pathspec 'release' did not match any file(s) known to git
+   - Quoted Checkout: git checkout -- "release notes.txt"
+     * Exit Code: 0
+     * Restores clean content of 'release notes.txt'.
+   - Diff Across Revisions: git diff main..topic -- "release notes.txt" "sample data"
+     * Exit Code: 0
+     * Explicitly isolates the diff to the specified paths with spaces.
+
+5. Branch Deletion Semantics:
+   - Safe Deletion: git branch --delete topic
+     * Exit Code: Non-zero (1)
+     * Stderr: error: the branch 'topic' is not fully merged
+     * State: 'topic' branch reference remains intact.
+   - Forced Deletion: git branch -D topic (or git branch --delete --force topic)
+     * Exit Code: 0
+     * State: 'topic' branch reference is completely removed from refs/heads/.
+     * 'main' branch remains at Commit C.
+     * Working tree is clean.

@@ -1,0 +1,39 @@
+================================================================
+Starting automated verification: check.py (R03-T035)
+================================================================
+--- Run 1: Quoting, Disambiguation & Branch Deletion ---
+PASS: Run 1: Switched to branch topic
+PASS: Run 1 Fact 1: Unquoted git add fails with non-zero exit
+PASS: Run 1 Fact 1b: Error specifies pathspec 'release' did not match
+PASS: Run 1 Fact 2a: 'release notes.txt' is staged
+PASS: Run 1 Fact 2b: 'sample data/data.txt' is staged
+PASS: Run 1 Fact 3a: Unquoted checkout fails to match split path
+PASS: Run 1 Fact 3b: Quoted checkout with '--' restores clean content
+PASS: Run 1 Fact 4a: Diff correctly identifies release notes.txt across revisions
+PASS: Run 1 Fact 4b: Diff correctly identifies sample data/data.txt across revisions
+PASS: Run 1 Fact 5a: Safe deletion (git branch --delete topic) fails (non-zero)
+PASS: Run 1 Fact 5b: Error message specifies branch is not fully merged
+PASS: Run 1 Fact 6: Forced deletion with -D topic succeeds
+PASS: Run 1 Fact 7a: Branch 'topic' reference completely removed
+PASS: Run 1 Fact 7b: Branch 'main' reference remains unchanged at Commit C
+PASS: Run 1 Fact 7c: Working tree on main is clean
+--- Run 2: Quoting, Disambiguation & Branch Deletion ---
+PASS: Run 2: Switched to branch topic
+PASS: Run 2 Fact 1: Unquoted git add fails with non-zero exit
+PASS: Run 2 Fact 1b: Error specifies pathspec 'release' did not match
+PASS: Run 2 Fact 2a: 'release notes.txt' is staged
+PASS: Run 2 Fact 2b: 'sample data/data.txt' is staged
+PASS: Run 2 Fact 3a: Unquoted checkout fails to match split path
+PASS: Run 2 Fact 3b: Quoted checkout with '--' restores clean content
+PASS: Run 2 Fact 4a: Diff correctly identifies release notes.txt across revisions
+PASS: Run 2 Fact 4b: Diff correctly identifies sample data/data.txt across revisions
+PASS: Run 2 Fact 5a: Safe deletion (git branch --delete topic) fails (non-zero)
+PASS: Run 2 Fact 5b: Error message specifies branch is not fully merged
+PASS: Run 2 Fact 6: Forced deletion with --delete --force topic succeeds
+PASS: Run 2 Fact 7a: Branch 'topic' reference completely removed
+PASS: Run 2 Fact 7b: Branch 'main' reference remains unchanged at Commit C
+PASS: Run 2 Fact 7c: Working tree on main is clean
+================================================================
+Summary: 30 passed, 0 failed.
+================================================================
+ALL CHECKS PASSED.

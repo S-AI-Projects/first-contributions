@@ -1,0 +1,54 @@
+# Task R03-T035 Setup and Inputs
+
+Author Identity:
+- GIT_AUTHOR_NAME="Course Student"
+- GIT_AUTHOR_EMAIL="student@example.invalid"
+- GIT_COMMITTER_NAME="Course Student"
+- GIT_COMMITTER_EMAIL="student@example.invalid"
+
+Initial Repository Setup:
+1. Initialize local repository with default branch 'main':
+   git init -b main <tmpdir>
+
+2. Commit A:
+   Create notes.txt with "alpha\n"
+   git add notes.txt
+   git commit -m "Commit A"
+
+3. Commit B:
+   Append "beta\n" to notes.txt
+   git add notes.txt
+   git commit -m "Commit B"
+
+4. Commit C:
+   Create todo.txt with "one\n"
+   git add todo.txt
+   git commit -m "Commit C"
+
+5. Create branch topic at Commit B:
+   git branch topic <commit_B_sha>
+
+Tested Paths with Spaces:
+- File: "release notes.txt"
+- Directory: "sample data"
+- Nested File: "sample data/data.txt"
+
+Executed Workflow Commands:
+1. Branch switch:
+   git switch topic
+
+2. Unquoted vs Quoted staging:
+   git add release notes.txt               # Expected failure
+   git add "release notes.txt" "sample data/data.txt"  # Expected success
+   git commit -m "Add release notes and sample data on topic"
+
+3. Revision vs Path disambiguation with '--':
+   git checkout -- release notes.txt       # Unquoted failure
+   git checkout -- "release notes.txt"     # Quoted success
+   git diff main..topic -- "release notes.txt" "sample data"
+
+4. Branch deletion:
+   git switch main
+   git branch --delete topic               # Expected failure (unmerged)
+   git branch -D topic                     # Forced deletion (Run 1)
+   git branch --delete --force topic       # Forced deletion (Run 2)
