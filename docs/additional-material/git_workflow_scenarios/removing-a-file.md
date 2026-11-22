@@ -1,23 +1,41 @@
 # Removing a file from Git
 
-Sometimes, you may want to remove a file from Git but not delete it from your computer. You can achieve this by using the following command:
+Use `git rm --cached` when you want Git to stop tracking a file without
+deleting your working copy:
 
-``git rm <file> --cached``
+```shell
+git rm --cached <file>
+```
 
 ## So what happened?
 
-Git will no longer keep track of changes in the removed file. As far as Git knows, it's as if you had deleted the file. If you were to locate the file in your file system, you will notice that it's still there.
+The removal is staged in the index, but the file remains in your working
+directory. Git will no longer include it in the next commit unless you add it
+again. By contrast, `git rm <file>` removes the file from both the index and
+your working directory.
 
-Notice that in the example above, the flag `--cached` is used. If we didn't add this flag, Git will remove the file from not just the repo, but from your file system too.
+To publish the removal, commit it and push that commit to the remote branch:
 
-If you commit the change with `git commit -m "Remove file1.js"` and push it to the remote repository using `git push origin main` (or whichever branch you're working on), the remote repository will remove the file.
+```shell
+git commit -m "Stop tracking <file>"
+git push origin <branch>
+```
+
+The remote repository removes the file when it receives the commit. Running
+`git rm --cached` by itself changes only your local index.
 
 ## Additional features
 
--   If you want to remove more than one file, you can include them all in the same command:
+-   To stop tracking multiple files while retaining their working copies, list
+    each path after `--cached`:
 
-    `git rm file1.js file2.js file3.js --cached`
+    ```shell
+    git rm --cached file1.js file2.js file3.js
+    ```
 
--   You can use a wildcard (*) to remove similar files. For example, if you would like to remove all .txt files from your local repository:
+-   You can also use a shell wildcard. For example, stage removal of tracked
+    text files while keeping the files on disk:
 
-    `git rm *.txt --cached`
+    ```shell
+    git rm --cached -- '*.txt'
+    ```
