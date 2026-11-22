@@ -62,7 +62,17 @@ $ git stash apply
 #
 ```
 
-You can see that git re-modifies the file that you uncommitted when you saved the stash. In this case, you had a clean working directory when you tried to apply the stash, and you tried to apply it on the same branch you saved it from; but having a clean working directory and applying it on the same branch aren’t necessary to successfully apply a stash. You can save a stash on one branch, switch to another branch later, and re-apply the changes in the new branch. You can also have modified and uncommitted files in your working directory when you apply a stash, git gives merge conflicts if anything no longer applies cleanly.
+Applying a stash restores its changes to your working directory. It does not
+have to be applied on the branch where it was created: you can save changes on
+one branch, switch to another branch, and run `git stash apply`. If the changes
+apply cleanly against the other branch, they are restored there.
+
+The working directory does not have to be clean either. Unrelated local files
+can remain in place while the stash is applied. If the branch has changes that
+overlap with the stashed edits, Git may report merge conflicts; resolve any
+conflicts before continuing. `git stash apply` keeps the stash on the stash
+list, including when it reports a conflict, so you can retry or drop it after
+you have finished.
 
 The changes made to your files are reapplied, but the file you staged was not restaged. To do so you need to run the command ```git stash apply``` with a ```--index``` to tell the command to reapply the staged changes. If you have run that instead, you would have returned to your original position:
 
