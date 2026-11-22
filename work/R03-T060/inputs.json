@@ -1,0 +1,50 @@
+{
+  "task": "R03-T060",
+  "guide": "docs/additional-material/git_workflow_scenarios/installing-git-ubuntu.md",
+  "guide_commands": [
+    "git --version",
+    "git config --global user.name \"Your Name\""
+  ],
+  "author": "Course Student <student@example.invalid>",
+  "commits": {
+    "A": "create notes.txt 'alpha\\n'",
+    "B": "append 'beta\\n' to notes.txt",
+    "C": "add todo.txt 'one\\n'"
+  },
+  "branches": {
+    "main": "A-B-C",
+    "topic": "at B, checked out"
+  },
+  "remote": "none: configuration and commits are local",
+  "commit_dates": [
+    "2026-01-01T12:00:00+0000",
+    "2026-01-02T12:00:00+0000",
+    "2026-01-03T12:00:00+0000"
+  ],
+  "runs": "twice, in two separate temporary directories",
+  "example": [
+    "git --version",
+    "git config --global user.name \"Your Name\"",
+    "git config --global user.email \"youremail@domain.com\"",
+    "git init -b main",
+    "printf 'alpha\\n' > notes.txt",
+    "git add notes.txt",
+    "git commit -m \"A: create notes.txt\"",
+    "printf 'beta\\n' >> notes.txt",
+    "git commit -am \"B: append beta\"",
+    "printf 'one\\n' > todo.txt",
+    "git add todo.txt",
+    "git commit -m \"C: add todo.txt\"",
+    "git branch topic HEAD~1",
+    "git switch topic"
+  ],
+  "shown_in_guide": [
+    "git config --global user.name",
+    "git config --global --list",
+    "cat ~/.gitconfig",
+    "git status",
+    "git branch",
+    "git log --format='%an <%ae>: %s'",
+    "git log --format='%an <%ae>: %s' main"
+  ]
+}
