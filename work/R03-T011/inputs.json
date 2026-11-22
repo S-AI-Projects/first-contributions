@@ -1,0 +1,54 @@
+{
+  "repository": {
+    "initial_branch": "main",
+    "author_name": "Course Student",
+    "author_email": "student@example.invalid",
+    "commits": [
+      {
+        "label": "A",
+        "message": "A",
+        "files": {
+          "notes.txt": "alpha\n"
+        }
+      },
+      {
+        "label": "B",
+        "message": "B",
+        "append": {
+          "notes.txt": "beta\n"
+        }
+      },
+      {
+        "label": "C",
+        "message": "C",
+        "files": {
+          "todo.txt": "one\n"
+        }
+      }
+    ],
+    "topic_start": "B"
+  },
+  "deletion_commands": [
+    [
+      "branch",
+      "-d",
+      "topic"
+    ],
+    [
+      "branch",
+      "--delete",
+      "topic"
+    ],
+    [
+      "branch",
+      "-D",
+      "topic"
+    ],
+    [
+      "branch",
+      "--delete",
+      "--force",
+      "topic"
+    ]
+  ]
+}
