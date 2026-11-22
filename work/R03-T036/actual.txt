@@ -1,0 +1,22 @@
+================================================================
+Starting automated verification: check.py (R03-T036)
+================================================================
+--- Testing Workflow 1: git stash apply (Default) ---
+PASS: Workflow 1 Fact 1: File is unstaged in status (' M notes.txt')
+PASS: Workflow 1 Fact 2a: git diff --cached is empty (not restaged)
+PASS: Workflow 1 Fact 2b: git diff contains unstaged changes
+PASS: Workflow 1 Fact 3: stash@{0} is preserved on stash stack
+PASS: Workflow 1 Fact 4a: topic ref remains at Commit B
+PASS: Workflow 1 Fact 4b: main ref remains at Commit C
+--- Testing Workflow 2: git stash apply --index ---
+PASS: Workflow 2 Fact 1: File is re-staged in status ('M  notes.txt')
+PASS: Workflow 2 Fact 2a: git diff --cached contains staged changes
+PASS: Workflow 2 Fact 2b: git diff is empty (no unstaged changes)
+PASS: Workflow 2 Fact 3: stash@{0} is preserved on stash stack
+--- Testing Workflow 3: git stash pop (Comparison with apply) ---
+PASS: Workflow 3 Fact 1: Stash stack is empty after pop (stash@{0} dropped)
+PASS: Workflow 3 Fact 2: Working tree contains restored changes
+================================================================
+Summary: 12 passed, 0 failed.
+================================================================
+ALL CHECKS PASSED.

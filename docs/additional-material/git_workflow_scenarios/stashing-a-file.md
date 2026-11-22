@@ -135,3 +135,70 @@ Dropped refs/stash@{0} (f0dfc4d5dc332d1cee34a634182e168c4efc3359)
 ```
 
 This is a nice shortcut to recover stashed work easily and work on it in a new branch.
+
+---
+
+## Comparing Ways to Reapply Stashed Changes
+
+When restoring stashed work, Git offers different commands and flags that address the same situation with subtle but important observable differences in the resulting repository state.
+
+### Comparison Table
+
+| Command | Preconditions | Staging Area (Index) State | Working Tree State | Stash Stack State |
+| :--- | :--- | :--- | :--- | :--- |
+| **`git stash apply`** | Stash entry exists on stack; clean or non-conflicting working tree | **Unstaged**: staged changes are restored into the working tree as unstaged modifications (` M <file>`) | Contains all restored file modifications | **Preserved**: `stash@{0}` remains available on the stack |
+| **`git stash apply --index`** | Stash entry exists on stack; clean or non-conflicting working tree | **Staged**: previously staged changes are restored directly into the index (`M  <file>`) | Contains all restored file modifications | **Preserved**: `stash@{0}` remains available on the stack |
+| **`git stash pop`** | Stash entry exists on stack; clean or non-conflicting working tree | **Unstaged**: behaves like `git stash apply` (unless `--index` is passed) | Contains all restored file modifications | **Dropped**: `stash@{0}` is automatically deleted upon successful apply |
+
+---
+
+### Observable Differences Explained
+
+1. **Index (Staging Area) Difference:**
+   - With `git stash apply`, Git does not attempt to reinstate the index. Running `git diff --cached` returns empty output, and `git status` shows all restored changes under "Changes not staged for commit".
+   - With `git stash apply --index`, Git checks whether the staged state from the stash can be cleanly re-applied to the current index. If successful, `git diff --cached` shows the staged changes, preserving your exact staging state prior to stashing.
+2. **Stash Stack Persistence:**
+   - `git stash apply` is non-destructive to the stash list. You can apply the same stash across multiple branches.
+   - `git stash pop` applies the stash and immediately drops it from `git stash list`. If merge conflicts occur during the pop, Git leaves the stash on the stack so work is not lost.
+
+---
+
+### Reproducible Example
+
+Consider a repository with `main` at Commit C and `topic` at Commit B:
+
+```bash
+# On branch topic, stage a modification to notes.txt
+git switch topic
+echo "staged WIP line" >> notes.txt
+git add notes.txt
+
+# Save changes to stash
+git stash
+```
+
+#### Option A: Default `git stash apply`
+```bash
+$ git stash apply
+$ git status --porcelain
+ M notes.txt
+$ git diff --cached
+# (empty output — changes were not re-staged)
+```
+
+#### Option B: Staged Preservation with `git stash apply --index`
+```bash
+$ git stash apply --index
+$ git status --porcelain
+M  notes.txt
+$ git diff --cached
+# (shows staged diff — changes are re-staged in the index)
+```
+
+---
+
+## Related Guides
+
+- [Moving a commit to a different branch](moving-a-commit-to-a-different-branch.md)
+- [Resetting a commit](resetting-a-commit.md)
+- [Official Git Stash Documentation](https://git-scm.com/docs/git-stash)

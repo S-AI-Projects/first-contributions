@@ -1,0 +1,24 @@
+# Task R03-T036 Expected Outputs and Git States
+
+1. Common Initial Precondition:
+   - Branch 'main' points to Commit C.
+   - Branch 'topic' points to Commit B.
+   - Stash entry 'stash@{0}' contains staged WIP changes to 'notes.txt'.
+   - Working tree and index are clean after stashing.
+
+2. Workflow 1: git stash apply (Default)
+   - Status: ' M notes.txt' (unstaged working tree modification).
+   - Staging Area (Index): Clean; git diff --cached produces empty output.
+   - Working Tree: Contains restored edits; git diff shows the changes.
+   - Stash Stack: 'stash@{0}' is preserved on the stack.
+   - Branch Refs: 'refs/heads/topic' remains at Commit B; 'refs/heads/main' remains at Commit C.
+
+3. Workflow 2: git stash apply --index
+   - Status: 'M  notes.txt' (re-staged index modification).
+   - Staging Area (Index): Preserved; git diff --cached contains the staged changes.
+   - Working Tree: Unstaged diff (git diff) is clean/empty.
+   - Stash Stack: 'stash@{0}' is preserved on the stack.
+
+4. Workflow 3: git stash pop
+   - Restores working tree changes.
+   - Stash Stack: 'stash@{0}' is automatically dropped; git stash list is empty.

@@ -1,0 +1,57 @@
+# Task R03-T036 Setup and Inputs
+
+Author Identity:
+- GIT_AUTHOR_NAME="Course Student"
+- GIT_AUTHOR_EMAIL="student@example.invalid"
+- GIT_COMMITTER_NAME="Course Student"
+- GIT_COMMITTER_EMAIL="student@example.invalid"
+
+Initial Repository Setup:
+1. Initialize local repository with default branch 'main':
+   git init -b main <tmpdir>
+
+2. Commit A:
+   Create notes.txt with "alpha\n"
+   git add notes.txt
+   git commit -m "Commit A"
+
+3. Commit B:
+   Append "beta\n" to notes.txt
+   git add notes.txt
+   git commit -m "Commit B"
+
+4. Commit C:
+   Create todo.txt with "one\n"
+   git add todo.txt
+   git commit -m "Commit C"
+
+5. Create branch topic at Commit B:
+   git branch topic <commit_B_sha>
+
+Common Stash Precondition:
+1. Switch to topic:
+   git switch topic
+2. Stage an update to notes.txt:
+   echo "staged WIP line" >> notes.txt
+   git add notes.txt
+3. Create stash:
+   git stash
+
+Compared Workflows:
+- Workflow 1 (Guide Default):
+  git stash apply
+  git status --porcelain
+  git diff --cached
+  git diff
+  git stash list
+
+- Workflow 2 (Staged Index Preservation):
+  git stash apply --index
+  git status --porcelain
+  git diff --cached
+  git diff
+  git stash list
+
+- Workflow 3 (Automatic Stack Drop):
+  git stash pop
+  git stash list
