@@ -1,18 +1,73 @@
 {
+  "task": "R03-T059",
+  "guide": "docs/additional-material/git_workflow_scenarios/resetting-a-branch.md",
+  "operation": "git reset (--soft, --mixed, --hard) of topic to main",
   "author": "Course Student <student@example.invalid>",
-  "branch": "main",
   "commits": {
-    "A": "create notes.txt with 'alpha\\n'",
+    "A": "create notes.txt 'alpha\\n'",
     "B": "append 'beta\\n' to notes.txt",
-    "C": "add todo.txt with 'one\\n'"
+    "C": "add todo.txt 'one\\n'"
   },
-  "extra_branch": "topic at B",
-  "exercise_setup": [
-    "git checkout topic",
-    "append 'gamma (uncommitted)' to notes.txt (not staged)",
-    "create untracked scratch.txt"
+  "branches": {
+    "main": "A-B-C",
+    "topic": "at B, checked out"
+  },
+  "remote": "none: git reset is local",
+  "commit_dates": [
+    "2026-01-01T12:00:00+0000",
+    "2026-01-02T12:00:00+0000",
+    "2026-01-03T12:00:00+0000"
   ],
-  "operation": "git reset --hard main  (run on topic)",
-  "also_run": "git reset topic main --hard  (the guide's literal form)",
-  "remote": "not needed (reset works on local refs)"
+  "example": [
+    "git init -b main",
+    "printf 'alpha\\n' > notes.txt",
+    "git add notes.txt",
+    "git commit -m \"A: create notes.txt\"",
+    "printf 'beta\\n' >> notes.txt",
+    "git commit -am \"B: append beta\"",
+    "printf 'one\\n' > todo.txt",
+    "git add todo.txt",
+    "git commit -m \"C: add todo.txt\"",
+    "git branch topic HEAD~1",
+    "git switch topic"
+  ],
+  "predictions": {
+    "--soft": {
+      "command": "git reset --soft main",
+      "index": [
+        "notes.txt"
+      ],
+      "worktree": [
+        "notes.txt"
+      ],
+      "status": [
+        "D  todo.txt"
+      ]
+    },
+    "--mixed": {
+      "command": "git reset main",
+      "index": [
+        "notes.txt",
+        "todo.txt"
+      ],
+      "worktree": [
+        "notes.txt"
+      ],
+      "status": [
+        " D todo.txt"
+      ]
+    },
+    "--hard": {
+      "command": "git reset --hard main",
+      "index": [
+        "notes.txt",
+        "todo.txt"
+      ],
+      "worktree": [
+        "notes.txt",
+        "todo.txt"
+      ],
+      "status": []
+    }
+  }
 }

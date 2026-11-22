@@ -1,3 +1,0 @@
-git version 2.55.0
-Python 3.15.2
-OS macOS-27.2.1-arm64-arm-64bit-Mach-O
