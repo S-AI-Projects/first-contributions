@@ -1,0 +1,30 @@
+# Task R03-T034 Expected Outputs and Git States
+
+1. Common Initial State:
+   - Branch 'main' points to Commit C.
+   - Remote tracking ref 'origin/main' points to Commit C.
+   - Branch 'topic' points to Commit B.
+   - Remote tracking ref 'origin/topic' points to Commit B.
+   - Working trees and indices are clean.
+
+2. Test 1: Branch and Remote Semantics when modifying .gitignore on topic:
+   - Command: git rm --cached notes.txt (while on topic)
+   - Working tree: notes.txt remains present on disk with contents "alpha\nbeta\n".
+   - Index on topic: notes.txt is removed from the staging area.
+   - Commit on topic: git commit -m "Untrack notes.txt and add .gitignore on topic"
+   - Reference Isolation:
+     * Intended local ref: refs/heads/topic updates to new commit hash.
+     * Unrelated local ref: refs/heads/main remains strictly fixed at Commit C hash.
+     * Remote ref: refs/remotes/origin/main remains strictly fixed at Commit C hash.
+     * Remote tracking ref: refs/remotes/origin/topic remains strictly fixed at Commit B hash until pushed.
+   - Branch Index Isolation:
+     * On topic: git ls-files lists .gitignore, but does NOT list notes.txt.
+     * On main: git ls-files continues to track notes.txt and todo.txt; .gitignore does not exist.
+
+3. Test 2: Bulk Untracking with git rm -r --cached .:
+   - Command: git rm -r --cached .
+   - After re-adding git add .:
+     * Only non-ignored files are re-staged into the index.
+     * Ignored files (notes.txt, debug.log) are successfully excluded from the index.
+     * .gitignore is tracked in the index.
+     * Working tree is clean after commit.
