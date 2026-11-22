@@ -1,0 +1,136 @@
+{
+  "expected": {
+    "self_test": "valid fixture passes; invalid fixture is identified with exact line numbers",
+    "catalogue": {
+      "entries": [
+        {
+          "name": "Agent Verifier",
+          "url": "https://packet.guru/agents/reference",
+          "status": "ok"
+        },
+        {
+          "name": "Application Environment Verification",
+          "url": "https://github.com/fingerprintjs/aev",
+          "status": "ok"
+        },
+        {
+          "name": "BinaryEdge",
+          "url": "https://docs.binaryedge.io/api-v2.html",
+          "status": "ok"
+        }
+      ],
+      "normal_mode_exit_code": 0
+    }
+  },
+  "actual": {
+    "self_test": [
+      {
+        "name": "valid fixture",
+        "fixture": "valid.md",
+        "expected": {
+          "passed": true,
+          "statuses": [
+            "ok",
+            "ok",
+            "ok"
+          ],
+          "line_numbers": [
+            3,
+            4,
+            5
+          ]
+        },
+        "actual": {
+          "passed": true,
+          "statuses": [
+            "ok",
+            "ok",
+            "ok"
+          ],
+          "line_numbers": [
+            3,
+            4,
+            5
+          ],
+          "scope": "README.md lines 1-5"
+        },
+        "passed": true
+      },
+      {
+        "name": "invalid fixture",
+        "fixture": "invalid.md",
+        "expected": {
+          "passed": false,
+          "statuses": [
+            "incorrect_url",
+            "missing",
+            "ok"
+          ],
+          "line_numbers": [
+            3,
+            null,
+            4
+          ]
+        },
+        "actual": {
+          "passed": false,
+          "statuses": [
+            "incorrect_url",
+            "missing",
+            "ok"
+          ],
+          "line_numbers": [
+            3,
+            null,
+            4
+          ],
+          "scope": "README.md lines 1-4"
+        },
+        "passed": true
+      }
+    ],
+    "catalogue": {
+      "passed": false,
+      "scope": "README.md (whole file; no API catalogue heading)",
+      "entries": {
+        "Agent Verifier": {
+          "expected_url": "https://packet.guru/agents/reference",
+          "occurrences": []
+        },
+        "Application Environment Verification": {
+          "expected_url": "https://github.com/fingerprintjs/aev",
+          "occurrences": []
+        },
+        "BinaryEdge": {
+          "expected_url": "https://docs.binaryedge.io/api-v2.html",
+          "occurrences": []
+        }
+      },
+      "checks": [
+        {
+          "name": "Agent Verifier",
+          "line_number": null,
+          "expected_url": "https://packet.guru/agents/reference",
+          "actual_url": null,
+          "status": "missing"
+        },
+        {
+          "name": "Application Environment Verification",
+          "line_number": null,
+          "expected_url": "https://github.com/fingerprintjs/aev",
+          "actual_url": null,
+          "status": "missing"
+        },
+        {
+          "name": "BinaryEdge",
+          "line_number": null,
+          "expected_url": "https://docs.binaryedge.io/api-v2.html",
+          "actual_url": null,
+          "status": "missing"
+        }
+      ],
+      "normal_mode_exit_code": 1
+    }
+  },
+  "failure": null
+}

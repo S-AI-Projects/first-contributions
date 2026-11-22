@@ -1,0 +1,14 @@
+{
+  "source_file": "README.md",
+  "scope": "README.md (whole file; no API catalogue heading)",
+  "target_entries": {
+    "Agent Verifier": "https://packet.guru/agents/reference",
+    "Application Environment Verification": "https://github.com/fingerprintjs/aev",
+    "BinaryEdge": "https://docs.binaryedge.io/api-v2.html"
+  },
+  "source_target_lines": [],
+  "fixtures": [
+    "tools/course_checks/fixtures/r02-t014/valid.md",
+    "tools/course_checks/fixtures/r02-t014/invalid.md"
+  ]
+}
