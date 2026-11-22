@@ -1,21 +1,24 @@
 # Installing Git Ubuntu OS
 
-Git by default is likely already installed in your Ubuntu OS . You can confirm this by launching your terminal and entering following command in to your terminal:
+Git may already be installed on Ubuntu. Check by opening a terminal and
+running:
 
 ```shell
 $ git --version
 ```
 
-If you receive output similar to the following, then Voila! you have readily installed Git on your machine.
+If Git is installed, the command prints its version. The version number varies
+by Ubuntu release and installation source; `2.34.1` below is only an example,
+not a required version:
 
 ```shell
 Output
 $ git version 2.34.1
 ```
 
-If this applies to you, proceed to [set up git](#set-up-git) below.
+If this applies to you, proceed to [set up Git](#set-up-git) below.
 
-If a Git version number was not on the output as shown above, you can still install it using Ubuntu's APT default package manager.
+If the command is not found, install Git using Ubuntu's APT package manager.
 
 Update your local package index first by using the apt package management tools. Head back to your terminal and enter the following command.
 
@@ -23,13 +26,14 @@ Update your local package index first by using the apt package management tools.
 $ sudo apt update
 ```
 
-Once this is completed, then enter the following command to install in Git:
+Once the package index update is complete, install Git:
 
 ```shell
 $ sudo apt install git
 ```
 
-You can confirm that you have installed Git correctly by running the following command and checking that you receive relevant output.
+After installation, run the same version command again. It reports the version
+now available in your environment; it need not be `2.34.1`.
 
 ```shell
 $ git --version
@@ -40,16 +44,13 @@ Output
 $ git version 2.34.1
 ```
 
-With Git successfully installed, you can now proceed below by setting it up.
+With Git installed, proceed below to configure it.
 
 # Set up Git
 
-Configuration can be achieved by using the git config command.
-Specifically, you need to provide your name and email address because Git embeds this information into each commit you do.
-You can add this information by typing:
-
-Now that we are done with installing Git, let us configure it for first time use using "git config" command.
-We need to make sure your username and email address are set correctly. To set them, use the command:
+Configure the name and email Git records in your commits. The `--global`
+option saves these values for your user account and applies them to
+repositories that do not override them with repository-specific settings:
 
 ```shell
 $ git config --global user.name "Your Name"
@@ -62,7 +63,7 @@ You can display all the configuration items that have been set by entering the f
 $ git config --list
 ```
 
-If all config field have been set up to your need the output should look something like
+The output should contain the values you set, for example:
 
 ```shell
 user.name=Your Name
