@@ -1,0 +1,1085 @@
+{
+  "expected": {
+    "default_reset": {
+      "head": "C",
+      "topic": "B",
+      "staged_paths": [],
+      "unstaged_paths": [
+        "notes.txt",
+        "todo.txt"
+      ],
+      "notes_txt": "alpha\nbeta changed\n",
+      "todo_txt": "one changed\n"
+    },
+    "path_reset": {
+      "head": "C",
+      "topic": "B",
+      "staged_paths": [
+        "todo.txt"
+      ],
+      "unstaged_paths": [
+        "notes.txt"
+      ],
+      "notes_txt": "alpha changed\nbeta\n",
+      "todo_txt": "one changed\n"
+    },
+    "hard_reset": {
+      "head": "B",
+      "topic": "B",
+      "commit_count": "2",
+      "status": "",
+      "notes_txt": "alpha\nbeta\n",
+      "todo_exists": false
+    }
+  },
+  "actual": {
+    "scenarios": [
+      {
+        "name": "default_reset",
+        "state": {
+          "head": "cc65914810b3a1efea989e80b67b8f9d69c409d4",
+          "topic": "f363187eeb6747b8c37445155a34d9d29c1ab9b9",
+          "staged_paths": [],
+          "unstaged_paths": [
+            "notes.txt",
+            "todo.txt"
+          ],
+          "notes_txt": "alpha\nbeta changed\n",
+          "todo_txt": "one changed\n"
+        }
+      },
+      {
+        "name": "path_reset",
+        "state": {
+          "head": "cc65914810b3a1efea989e80b67b8f9d69c409d4",
+          "topic": "f363187eeb6747b8c37445155a34d9d29c1ab9b9",
+          "staged_paths": [
+            "todo.txt"
+          ],
+          "unstaged_paths": [
+            "notes.txt"
+          ],
+          "notes_txt": "alpha changed\nbeta\n",
+          "todo_txt": "one changed\n"
+        }
+      },
+      {
+        "name": "hard_reset",
+        "state": {
+          "head": "8d78b1c35cfa4c76503214bd898fdd81a1fd63b4",
+          "topic": "8d78b1c35cfa4c76503214bd898fdd81a1fd63b4",
+          "commit_count": "2",
+          "status": "",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_exists": false
+        }
+      }
+    ],
+    "commands": [
+      {
+        "command": [
+          "git",
+          "init",
+          "--initial-branch=main",
+          "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T012-jo8m30s1/default"
+        ],
+        "returncode": 0,
+        "stdout": "Initialized empty Git repository in /private/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T012-jo8m30s1/default/.git/",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.name",
+          "Course Student"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.email",
+          "student@example.invalid"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "A"
+        ],
+        "returncode": 0,
+        "stdout": "[main (root-commit) 11ada2f] A\n 1 file changed, 1 insertion(+)\n create mode 100644 notes.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "11ada2f85e85215f66da216cfbf9eae3c9d76a82",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "B"
+        ],
+        "returncode": 0,
+        "stdout": "[main f363187] B\n 1 file changed, 1 insertion(+)",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "f363187eeb6747b8c37445155a34d9d29c1ab9b9",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "todo.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "C"
+        ],
+        "returncode": 0,
+        "stdout": "[main cc65914] C\n 1 file changed, 1 insertion(+)\n create mode 100644 todo.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "cc65914810b3a1efea989e80b67b8f9d69c409d4",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "topic",
+          "f363187eeb6747b8c37445155a34d9d29c1ab9b9"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "--reverse",
+          "--format=%an%x00%ae",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "Course Student\u0000student@example.invalid\nCourse Student\u0000student@example.invalid\nCourse Student\u0000student@example.invalid",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "-t",
+          "11ada2f85e85215f66da216cfbf9eae3c9d76a82"
+        ],
+        "returncode": 0,
+        "stdout": "commit",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "cc65914810b3a1efea989e80b67b8f9d69c409d4",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "f363187eeb6747b8c37445155a34d9d29c1ab9b9",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-list",
+          "--count",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "3",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt",
+          "todo.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "reset"
+        ],
+        "returncode": 0,
+        "stdout": "Unstaged changes after reset:\nM\tnotes.txt\nM\ttodo.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "cc65914810b3a1efea989e80b67b8f9d69c409d4",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "f363187eeb6747b8c37445155a34d9d29c1ab9b9",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--name-only"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--name-only"
+        ],
+        "returncode": 0,
+        "stdout": "notes.txt\ntodo.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "init",
+          "--initial-branch=main",
+          "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T012-jo8m30s1/path"
+        ],
+        "returncode": 0,
+        "stdout": "Initialized empty Git repository in /private/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T012-jo8m30s1/path/.git/",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.name",
+          "Course Student"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.email",
+          "student@example.invalid"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "A"
+        ],
+        "returncode": 0,
+        "stdout": "[main (root-commit) 11ada2f] A\n 1 file changed, 1 insertion(+)\n create mode 100644 notes.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "11ada2f85e85215f66da216cfbf9eae3c9d76a82",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "B"
+        ],
+        "returncode": 0,
+        "stdout": "[main f363187] B\n 1 file changed, 1 insertion(+)",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "f363187eeb6747b8c37445155a34d9d29c1ab9b9",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "todo.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "C"
+        ],
+        "returncode": 0,
+        "stdout": "[main cc65914] C\n 1 file changed, 1 insertion(+)\n create mode 100644 todo.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "cc65914810b3a1efea989e80b67b8f9d69c409d4",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "topic",
+          "f363187eeb6747b8c37445155a34d9d29c1ab9b9"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "--reverse",
+          "--format=%an%x00%ae",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "Course Student\u0000student@example.invalid\nCourse Student\u0000student@example.invalid\nCourse Student\u0000student@example.invalid",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "-t",
+          "11ada2f85e85215f66da216cfbf9eae3c9d76a82"
+        ],
+        "returncode": 0,
+        "stdout": "commit",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "cc65914810b3a1efea989e80b67b8f9d69c409d4",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "f363187eeb6747b8c37445155a34d9d29c1ab9b9",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-list",
+          "--count",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "3",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt",
+          "todo.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "reset",
+          "--",
+          "notes.txt"
+        ],
+        "returncode": 0,
+        "stdout": "Unstaged changes after reset:\nM\tnotes.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "cc65914810b3a1efea989e80b67b8f9d69c409d4",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "f363187eeb6747b8c37445155a34d9d29c1ab9b9",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--name-only"
+        ],
+        "returncode": 0,
+        "stdout": "todo.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--name-only"
+        ],
+        "returncode": 0,
+        "stdout": "notes.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "init",
+          "--initial-branch=main",
+          "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T012-jo8m30s1/hard"
+        ],
+        "returncode": 0,
+        "stdout": "Initialized empty Git repository in /private/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T012-jo8m30s1/hard/.git/",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.name",
+          "Course Student"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.email",
+          "student@example.invalid"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "A"
+        ],
+        "returncode": 0,
+        "stdout": "[main (root-commit) 612f041] A\n 1 file changed, 1 insertion(+)\n create mode 100644 notes.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "612f04129baf9e2e4c874d2ed4dfb12ac2fa39cd",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "B"
+        ],
+        "returncode": 0,
+        "stdout": "[main 8d78b1c] B\n 1 file changed, 1 insertion(+)",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "8d78b1c35cfa4c76503214bd898fdd81a1fd63b4",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "todo.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "C"
+        ],
+        "returncode": 0,
+        "stdout": "[main 70783c3] C\n 1 file changed, 1 insertion(+)\n create mode 100644 todo.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "70783c3fdb5a2965ab6cc8b7654100ea68bfe18e",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "topic",
+          "8d78b1c35cfa4c76503214bd898fdd81a1fd63b4"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "--reverse",
+          "--format=%an%x00%ae",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "Course Student\u0000student@example.invalid\nCourse Student\u0000student@example.invalid\nCourse Student\u0000student@example.invalid",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "-t",
+          "612f04129baf9e2e4c874d2ed4dfb12ac2fa39cd"
+        ],
+        "returncode": 0,
+        "stdout": "commit",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "70783c3fdb5a2965ab6cc8b7654100ea68bfe18e",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "8d78b1c35cfa4c76503214bd898fdd81a1fd63b4",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-list",
+          "--count",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "3",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "reset",
+          "--hard",
+          "HEAD~1"
+        ],
+        "returncode": 0,
+        "stdout": "HEAD is now at 8d78b1c B",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "8d78b1c35cfa4c76503214bd898fdd81a1fd63b4",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "8d78b1c35cfa4c76503214bd898fdd81a1fd63b4",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-list",
+          "--count",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "2",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "status",
+          "--porcelain"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    ],
+    "checks": [
+      {
+        "name": "all initial commit authors",
+        "expected": [
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ]
+        ],
+        "actual": [
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ]
+        ],
+        "passed": true
+      },
+      {
+        "name": "A is an object",
+        "expected": "commit",
+        "actual": "commit",
+        "passed": true
+      },
+      {
+        "name": "main initially points to C",
+        "expected": "cc65914810b3a1efea989e80b67b8f9d69c409d4",
+        "actual": "cc65914810b3a1efea989e80b67b8f9d69c409d4",
+        "passed": true
+      },
+      {
+        "name": "topic initially points to B",
+        "expected": "f363187eeb6747b8c37445155a34d9d29c1ab9b9",
+        "actual": "f363187eeb6747b8c37445155a34d9d29c1ab9b9",
+        "passed": true
+      },
+      {
+        "name": "three initial commits",
+        "expected": "3",
+        "actual": "3",
+        "passed": true
+      },
+      {
+        "name": "default git reset preserves edits but unstages them",
+        "expected": {
+          "head": "cc65914810b3a1efea989e80b67b8f9d69c409d4",
+          "topic": "f363187eeb6747b8c37445155a34d9d29c1ab9b9",
+          "staged_paths": [],
+          "unstaged_paths": [
+            "notes.txt",
+            "todo.txt"
+          ],
+          "notes_txt": "alpha\nbeta changed\n",
+          "todo_txt": "one changed\n"
+        },
+        "actual": {
+          "head": "cc65914810b3a1efea989e80b67b8f9d69c409d4",
+          "topic": "f363187eeb6747b8c37445155a34d9d29c1ab9b9",
+          "staged_paths": [],
+          "unstaged_paths": [
+            "notes.txt",
+            "todo.txt"
+          ],
+          "notes_txt": "alpha\nbeta changed\n",
+          "todo_txt": "one changed\n"
+        },
+        "passed": true
+      },
+      {
+        "name": "all initial commit authors",
+        "expected": [
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ]
+        ],
+        "actual": [
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ]
+        ],
+        "passed": true
+      },
+      {
+        "name": "A is an object",
+        "expected": "commit",
+        "actual": "commit",
+        "passed": true
+      },
+      {
+        "name": "main initially points to C",
+        "expected": "cc65914810b3a1efea989e80b67b8f9d69c409d4",
+        "actual": "cc65914810b3a1efea989e80b67b8f9d69c409d4",
+        "passed": true
+      },
+      {
+        "name": "topic initially points to B",
+        "expected": "f363187eeb6747b8c37445155a34d9d29c1ab9b9",
+        "actual": "f363187eeb6747b8c37445155a34d9d29c1ab9b9",
+        "passed": true
+      },
+      {
+        "name": "three initial commits",
+        "expected": "3",
+        "actual": "3",
+        "passed": true
+      },
+      {
+        "name": "path git reset unstages only the selected path",
+        "expected": {
+          "head": "cc65914810b3a1efea989e80b67b8f9d69c409d4",
+          "topic": "f363187eeb6747b8c37445155a34d9d29c1ab9b9",
+          "staged_paths": [
+            "todo.txt"
+          ],
+          "unstaged_paths": [
+            "notes.txt"
+          ],
+          "notes_txt": "alpha changed\nbeta\n",
+          "todo_txt": "one changed\n"
+        },
+        "actual": {
+          "head": "cc65914810b3a1efea989e80b67b8f9d69c409d4",
+          "topic": "f363187eeb6747b8c37445155a34d9d29c1ab9b9",
+          "staged_paths": [
+            "todo.txt"
+          ],
+          "unstaged_paths": [
+            "notes.txt"
+          ],
+          "notes_txt": "alpha changed\nbeta\n",
+          "todo_txt": "one changed\n"
+        },
+        "passed": true
+      },
+      {
+        "name": "all initial commit authors",
+        "expected": [
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ]
+        ],
+        "actual": [
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ]
+        ],
+        "passed": true
+      },
+      {
+        "name": "A is an object",
+        "expected": "commit",
+        "actual": "commit",
+        "passed": true
+      },
+      {
+        "name": "main initially points to C",
+        "expected": "70783c3fdb5a2965ab6cc8b7654100ea68bfe18e",
+        "actual": "70783c3fdb5a2965ab6cc8b7654100ea68bfe18e",
+        "passed": true
+      },
+      {
+        "name": "topic initially points to B",
+        "expected": "8d78b1c35cfa4c76503214bd898fdd81a1fd63b4",
+        "actual": "8d78b1c35cfa4c76503214bd898fdd81a1fd63b4",
+        "passed": true
+      },
+      {
+        "name": "three initial commits",
+        "expected": "3",
+        "actual": "3",
+        "passed": true
+      },
+      {
+        "name": "hard git reset moves branch and discards local state",
+        "expected": {
+          "head": "8d78b1c35cfa4c76503214bd898fdd81a1fd63b4",
+          "topic": "8d78b1c35cfa4c76503214bd898fdd81a1fd63b4",
+          "commit_count": "2",
+          "status": "",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_exists": false
+        },
+        "actual": {
+          "head": "8d78b1c35cfa4c76503214bd898fdd81a1fd63b4",
+          "topic": "8d78b1c35cfa4c76503214bd898fdd81a1fd63b4",
+          "commit_count": "2",
+          "status": "",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_exists": false
+        },
+        "passed": true
+      }
+    ]
+  },
+  "failure": null
+}

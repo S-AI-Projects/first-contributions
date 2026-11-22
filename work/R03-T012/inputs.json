@@ -1,0 +1,58 @@
+{
+  "repository": {
+    "initial_branch": "main",
+    "author_name": "Course Student",
+    "author_email": "student@example.invalid",
+    "commits": [
+      {
+        "label": "A",
+        "message": "A",
+        "files": {
+          "notes.txt": "alpha\n"
+        }
+      },
+      {
+        "label": "B",
+        "message": "B",
+        "append": {
+          "notes.txt": "beta\n"
+        }
+      },
+      {
+        "label": "C",
+        "message": "C",
+        "files": {
+          "todo.txt": "one\n"
+        }
+      }
+    ],
+    "topic_start": "B"
+  },
+  "scenarios": [
+    {
+      "name": "default reset unstages all staged edits",
+      "command": [
+        "reset"
+      ],
+      "expected_effect": "main stays at C; both edits remain in the worktree and are unstaged"
+    },
+    {
+      "name": "path reset unstages only the selected path",
+      "command": [
+        "reset",
+        "--",
+        "notes.txt"
+      ],
+      "expected_effect": "main stays at C; notes.txt is unstaged and todo.txt remains staged"
+    },
+    {
+      "name": "hard reset moves main to B and restores its tree",
+      "command": [
+        "reset",
+        "--hard",
+        "HEAD~1"
+      ],
+      "expected_effect": "main moves from C to B; todo.txt is removed and notes.txt is restored"
+    }
+  ]
+}
