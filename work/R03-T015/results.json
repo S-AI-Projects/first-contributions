@@ -1,0 +1,326 @@
+{
+  "expected": {
+    "git_version": "git --version succeeds and reports a version, not a pinned value",
+    "global_name": "git config --global user.name stores Your Name in the isolated config",
+    "repo": {
+      "initial_branch": "main",
+      "author": [
+        "Course Student",
+        "student@example.invalid"
+      ],
+      "main_commit_count": "3",
+      "topic_points_to": "B",
+      "notes_txt": "alpha\nbeta\n",
+      "todo_txt": "one\n"
+    }
+  },
+  "actual": {
+    "commands": [
+      {
+        "command": [
+          "git",
+          "--version"
+        ],
+        "cwd": null,
+        "returncode": 0,
+        "stdout": "git version 2.50.1 (Apple Git-155)",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "--global",
+          "user.name",
+          "Your Name"
+        ],
+        "cwd": null,
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "--global",
+          "--get",
+          "user.name"
+        ],
+        "cwd": null,
+        "returncode": 0,
+        "stdout": "Your Name",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "init",
+          "--initial-branch=main",
+          "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo"
+        ],
+        "cwd": null,
+        "returncode": 0,
+        "stdout": "Initialized empty Git repository in /private/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo/.git/",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.name",
+          "Course Student"
+        ],
+        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.email",
+          "student@example.invalid"
+        ],
+        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "A"
+        ],
+        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "returncode": 0,
+        "stdout": "[main (root-commit) 68b5aa6] A\n 1 file changed, 1 insertion(+)\n create mode 100644 notes.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "returncode": 0,
+        "stdout": "68b5aa63254dab68eeca481b525100bd063b3522",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "B"
+        ],
+        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "returncode": 0,
+        "stdout": "[main 07d2a66] B\n 1 file changed, 1 insertion(+)",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "returncode": 0,
+        "stdout": "07d2a66e0f32137a695108e479e0b86018ceb30e",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "todo.txt"
+        ],
+        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "C"
+        ],
+        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "returncode": 0,
+        "stdout": "[main 0c42822] C\n 1 file changed, 1 insertion(+)\n create mode 100644 todo.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "returncode": 0,
+        "stdout": "0c42822053f3807933dc0ca9b8546d7449d39469",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "topic",
+          "07d2a66e0f32137a695108e479e0b86018ceb30e"
+        ],
+        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "show",
+          "-s",
+          "--format=%an%x00%ae",
+          "main"
+        ],
+        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "returncode": 0,
+        "stdout": "Course Student\u0000student@example.invalid",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "returncode": 0,
+        "stdout": "main",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-list",
+          "--count",
+          "main"
+        ],
+        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "returncode": 0,
+        "stdout": "3",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "returncode": 0,
+        "stdout": "0c42822053f3807933dc0ca9b8546d7449d39469",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "topic"
+        ],
+        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "returncode": 0,
+        "stdout": "07d2a66e0f32137a695108e479e0b86018ceb30e",
+        "stderr": ""
+      }
+    ],
+    "checks": [
+      {
+        "name": "Git version output format",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "global Git user.name",
+        "expected": "Your Name",
+        "actual": "Your Name",
+        "passed": true
+      },
+      {
+        "name": "commit C author identity",
+        "expected": [
+          "Course Student",
+          "student@example.invalid"
+        ],
+        "actual": [
+          "Course Student",
+          "student@example.invalid"
+        ],
+        "passed": true
+      },
+      {
+        "name": "temporary repository state",
+        "expected": {
+          "initial_branch": "main",
+          "main_commit_count": "3",
+          "main_head": "0c42822053f3807933dc0ca9b8546d7449d39469",
+          "topic_head": "07d2a66e0f32137a695108e479e0b86018ceb30e",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_txt": "one\n"
+        },
+        "actual": {
+          "initial_branch": "main",
+          "main_commit_count": "3",
+          "main_head": "0c42822053f3807933dc0ca9b8546d7449d39469",
+          "topic_head": "07d2a66e0f32137a695108e479e0b86018ceb30e",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_txt": "one\n"
+        },
+        "passed": true
+      }
+    ],
+    "commits": {
+      "A": "68b5aa63254dab68eeca481b525100bd063b3522",
+      "B": "07d2a66e0f32137a695108e479e0b86018ceb30e",
+      "C": "0c42822053f3807933dc0ca9b8546d7449d39469"
+    },
+    "git_version": "git version 2.50.1 (Apple Git-155)",
+    "repo_state": {
+      "initial_branch": "main",
+      "main_commit_count": "3",
+      "main_head": "0c42822053f3807933dc0ca9b8546d7449d39469",
+      "topic_head": "07d2a66e0f32137a695108e479e0b86018ceb30e",
+      "notes_txt": "alpha\nbeta\n",
+      "todo_txt": "one\n"
+    }
+  },
+  "failure": null
+}
