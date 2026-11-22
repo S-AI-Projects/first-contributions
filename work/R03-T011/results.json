@@ -1,0 +1,681 @@
+{
+  "expected": {
+    "author": [
+      "Course Student",
+      "student@example.invalid"
+    ],
+    "commit_count": 3,
+    "branch_head": "main at C",
+    "topic_initially_points_to": "B",
+    "deletion_variants": "Each command succeeds because topic is merged into main.",
+    "after_each_deletion": {
+      "topic_exists": false,
+      "current_branch": "main",
+      "main_head": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+      "notes_txt": "alpha\nbeta\n",
+      "todo_txt": "one\n",
+      "commit_count": "3"
+    }
+  },
+  "actual": {
+    "commands": [
+      {
+        "command": [
+          "git",
+          "init",
+          "--initial-branch=main",
+          "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T011-uq2qzvb3/repo"
+        ],
+        "returncode": 0,
+        "stdout": "Initialized empty Git repository in /private/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T011-uq2qzvb3/repo/.git/",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.name",
+          "Course Student"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.email",
+          "student@example.invalid"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "A"
+        ],
+        "returncode": 0,
+        "stdout": "[main (root-commit) 0578bde] A\n 1 file changed, 1 insertion(+)\n create mode 100644 notes.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "0578bde6636101c701c2543f80fac4208efc0afe",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "B"
+        ],
+        "returncode": 0,
+        "stdout": "[main 011f4e8] B\n 1 file changed, 1 insertion(+)",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "011f4e81c00e8caa6936766a859d30a5c04a4899",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "todo.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "C"
+        ],
+        "returncode": 0,
+        "stdout": "[main 870e8f0] C\n 1 file changed, 1 insertion(+)\n create mode 100644 todo.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "topic",
+          "011f4e81c00e8caa6936766a859d30a5c04a4899"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "--reverse",
+          "--format=%an%x00%ae",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "Course Student\u0000student@example.invalid\nCourse Student\u0000student@example.invalid\nCourse Student\u0000student@example.invalid",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-list",
+          "--count",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "3",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "011f4e81c00e8caa6936766a859d30a5c04a4899",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "merge-base",
+          "--is-ancestor",
+          "0578bde6636101c701c2543f80fac4208efc0afe",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "-d",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "Deleted branch topic (was 011f4e8).",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--list",
+          "--format=%(refname:short)",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "returncode": 0,
+        "stdout": "main",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-list",
+          "--count",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "3",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "topic",
+          "011f4e81c00e8caa6936766a859d30a5c04a4899"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--delete",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "Deleted branch topic (was 011f4e8).",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--list",
+          "--format=%(refname:short)",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "returncode": 0,
+        "stdout": "main",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-list",
+          "--count",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "3",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "topic",
+          "011f4e81c00e8caa6936766a859d30a5c04a4899"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "-D",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "Deleted branch topic (was 011f4e8).",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--list",
+          "--format=%(refname:short)",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "returncode": 0,
+        "stdout": "main",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-list",
+          "--count",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "3",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "topic",
+          "011f4e81c00e8caa6936766a859d30a5c04a4899"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--delete",
+          "--force",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "Deleted branch topic (was 011f4e8).",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--list",
+          "--format=%(refname:short)",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "returncode": 0,
+        "stdout": "main",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-list",
+          "--count",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "3",
+        "stderr": ""
+      }
+    ],
+    "checks": [
+      {
+        "name": "all commit authors",
+        "expected": [
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ]
+        ],
+        "actual": [
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ]
+        ],
+        "passed": true
+      },
+      {
+        "name": "three commits on main",
+        "expected": "3",
+        "actual": "3",
+        "passed": true
+      },
+      {
+        "name": "main points to C",
+        "expected": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+        "actual": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+        "passed": true
+      },
+      {
+        "name": "topic initially points to B",
+        "expected": "011f4e81c00e8caa6936766a859d30a5c04a4899",
+        "actual": "011f4e81c00e8caa6936766a859d30a5c04a4899",
+        "passed": true
+      },
+      {
+        "name": "A remains in main history",
+        "expected": "",
+        "actual": "",
+        "passed": true
+      },
+      {
+        "name": "deletion variant 1: branch -d topic",
+        "expected": {
+          "topic_exists": false,
+          "current_branch": "main",
+          "main_head": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_txt": "one\n",
+          "commit_count": "3"
+        },
+        "actual": {
+          "topic_exists": false,
+          "current_branch": "main",
+          "main_head": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_txt": "one\n",
+          "commit_count": "3"
+        },
+        "passed": true
+      },
+      {
+        "name": "deletion variant 2: branch --delete topic",
+        "expected": {
+          "topic_exists": false,
+          "current_branch": "main",
+          "main_head": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_txt": "one\n",
+          "commit_count": "3"
+        },
+        "actual": {
+          "topic_exists": false,
+          "current_branch": "main",
+          "main_head": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_txt": "one\n",
+          "commit_count": "3"
+        },
+        "passed": true
+      },
+      {
+        "name": "deletion variant 3: branch -D topic",
+        "expected": {
+          "topic_exists": false,
+          "current_branch": "main",
+          "main_head": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_txt": "one\n",
+          "commit_count": "3"
+        },
+        "actual": {
+          "topic_exists": false,
+          "current_branch": "main",
+          "main_head": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_txt": "one\n",
+          "commit_count": "3"
+        },
+        "passed": true
+      },
+      {
+        "name": "deletion variant 4: branch --delete --force topic",
+        "expected": {
+          "topic_exists": false,
+          "current_branch": "main",
+          "main_head": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_txt": "one\n",
+          "commit_count": "3"
+        },
+        "actual": {
+          "topic_exists": false,
+          "current_branch": "main",
+          "main_head": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_txt": "one\n",
+          "commit_count": "3"
+        },
+        "passed": true
+      }
+    ],
+    "commits": {
+      "A": "0578bde6636101c701c2543f80fac4208efc0afe",
+      "B": "011f4e81c00e8caa6936766a859d30a5c04a4899",
+      "C": "870e8f02f83669ca58bc14cdf209f5e10ec6259f"
+    },
+    "deletions": [
+      {
+        "command": [
+          "git",
+          "branch",
+          "-d",
+          "topic"
+        ],
+        "output": "Deleted branch topic (was 011f4e8).",
+        "after": {
+          "topic_exists": false,
+          "current_branch": "main",
+          "main_head": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_txt": "one\n",
+          "commit_count": "3"
+        }
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--delete",
+          "topic"
+        ],
+        "output": "Deleted branch topic (was 011f4e8).",
+        "after": {
+          "topic_exists": false,
+          "current_branch": "main",
+          "main_head": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_txt": "one\n",
+          "commit_count": "3"
+        }
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "-D",
+          "topic"
+        ],
+        "output": "Deleted branch topic (was 011f4e8).",
+        "after": {
+          "topic_exists": false,
+          "current_branch": "main",
+          "main_head": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_txt": "one\n",
+          "commit_count": "3"
+        }
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--delete",
+          "--force",
+          "topic"
+        ],
+        "output": "Deleted branch topic (was 011f4e8).",
+        "after": {
+          "topic_exists": false,
+          "current_branch": "main",
+          "main_head": "870e8f02f83669ca58bc14cdf209f5e10ec6259f",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_txt": "one\n",
+          "commit_count": "3"
+        }
+      }
+    ]
+  },
+  "failure": null
+}
