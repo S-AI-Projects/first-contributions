@@ -5,15 +5,33 @@ How can you change that? This is what this tutorial covers.
 ## Moving the latest commits to an existing branch
 To do this, type:
 
-```git reset HEAD~ --soft``` - Undoes the last commit, but leaves the changes available.  
-```git stash``` - Records the state of the directory.  
+```shell
+git reset HEAD~ --soft
+```
 
-```git checkout name-of-the-correct-branch``` - Switches to another branch.
-```git stash pop``` - Removes latest stashed state.  
-```git add .``` - Or try adding individual files.  
-```git commit -m "your message here"``` - Saves and Commits the changes.  
+This moves the current branch back one commit but keeps that commit's changes
+staged in the index. The changes are still available; they have not been
+discarded.
 
-Now your changes are on the correct branch
+```shell
+git stash
+git checkout name-of-the-correct-branch
+git stash pop
+```
+
+`git stash` saves the staged changes and cleans the working tree so you can
+switch branches. After checking out the correct branch, `git stash pop` reapplies
+the saved changes and removes that stash entry if it applies successfully.
+Review the restored changes, then stage and commit them on the correct branch:
+
+```shell
+git add <files>
+git commit -m "your message here"
+```
+
+For example, if commit C was accidentally made on `main` after commit B, and
+`topic` points to B, this sequence moves C's changes onto `topic`. `main` stays
+at B, while `topic` receives a new commit containing the restored changes.
 
 
 ### Moving the latest commits to a new Branch

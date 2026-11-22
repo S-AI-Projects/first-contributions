@@ -1,0 +1,58 @@
+{
+  "repository": {
+    "initial_branch": "main",
+    "author_name": "Course Student",
+    "author_email": "student@example.invalid",
+    "commits": [
+      {
+        "label": "A",
+        "file": "notes.txt",
+        "content": "alpha\n"
+      },
+      {
+        "label": "B",
+        "append": "notes.txt",
+        "content": "beta\n"
+      },
+      {
+        "label": "C",
+        "file": "todo.txt",
+        "content": "one\n"
+      }
+    ],
+    "topic_branch_at": "B"
+  },
+  "operation_sequence": [
+    [
+      "git",
+      "reset",
+      "HEAD~",
+      "--soft"
+    ],
+    [
+      "git",
+      "stash"
+    ],
+    [
+      "git",
+      "checkout",
+      "topic"
+    ],
+    [
+      "git",
+      "stash",
+      "pop"
+    ],
+    [
+      "git",
+      "add",
+      "todo.txt"
+    ],
+    [
+      "git",
+      "commit",
+      "-m",
+      "C moved to topic"
+    ]
+  ]
+}
