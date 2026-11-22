@@ -12,6 +12,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 OUTPUT_DIR = ROOT / "work" / "R03-T015"
 VERSION_PATTERN = re.compile(r"^git version \d+(?:\.\d+)+(?:[-+.]?\w.*)?$")
+TEMP_ROOT: Path | None = None
 
 results = {
     "expected": {
@@ -37,11 +38,11 @@ def run(command, *, cwd=None, env=None):
     )
     results["actual"]["commands"].append(
         {
-            "command": command,
-            "cwd": str(cwd) if cwd else None,
+            "command": [sanitize(item) for item in command],
+            "cwd": sanitize(str(cwd)) if cwd else None,
             "returncode": completed.returncode,
-            "stdout": completed.stdout.strip(),
-            "stderr": completed.stderr.strip(),
+            "stdout": sanitize(completed.stdout.strip()),
+            "stderr": sanitize(completed.stderr.strip()),
         }
     )
     if completed.returncode:
@@ -50,6 +51,14 @@ def run(command, *, cwd=None, env=None):
             f"{completed.stderr}"
         )
     return completed.stdout.strip()
+
+
+def sanitize(value):
+    if TEMP_ROOT is not None:
+        return value.replace(str(TEMP_ROOT.resolve()), "$TMP").replace(
+            str(TEMP_ROOT), "$TMP"
+        )
+    return value
 
 
 def check(name, actual, expected):
@@ -143,10 +152,12 @@ def test_repository(repo):
 
 
 def main():
+    global TEMP_ROOT
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     try:
         with tempfile.TemporaryDirectory(prefix="R03-T015-") as directory:
             temporary_root = Path(directory)
+            TEMP_ROOT = temporary_root
             test_version_and_global_name(temporary_root / "home")
             repo = temporary_root / "repo"
             repo.mkdir()

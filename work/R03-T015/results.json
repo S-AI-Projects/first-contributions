@@ -57,11 +57,11 @@
           "git",
           "init",
           "--initial-branch=main",
-          "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo"
+          "$TMP/repo"
         ],
         "cwd": null,
         "returncode": 0,
-        "stdout": "Initialized empty Git repository in /private/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo/.git/",
+        "stdout": "Initialized empty Git repository in $TMP/repo/.git/",
         "stderr": ""
       },
       {
@@ -71,7 +71,7 @@
           "user.name",
           "Course Student"
         ],
-        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "cwd": "$TMP/repo",
         "returncode": 0,
         "stdout": "",
         "stderr": ""
@@ -83,7 +83,7 @@
           "user.email",
           "student@example.invalid"
         ],
-        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "cwd": "$TMP/repo",
         "returncode": 0,
         "stdout": "",
         "stderr": ""
@@ -94,7 +94,7 @@
           "add",
           "notes.txt"
         ],
-        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "cwd": "$TMP/repo",
         "returncode": 0,
         "stdout": "",
         "stderr": ""
@@ -106,9 +106,9 @@
           "-m",
           "A"
         ],
-        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "cwd": "$TMP/repo",
         "returncode": 0,
-        "stdout": "[main (root-commit) 68b5aa6] A\n 1 file changed, 1 insertion(+)\n create mode 100644 notes.txt",
+        "stdout": "[main (root-commit) a23504e] A\n 1 file changed, 1 insertion(+)\n create mode 100644 notes.txt",
         "stderr": ""
       },
       {
@@ -117,9 +117,9 @@
           "rev-parse",
           "HEAD"
         ],
-        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "cwd": "$TMP/repo",
         "returncode": 0,
-        "stdout": "68b5aa63254dab68eeca481b525100bd063b3522",
+        "stdout": "a23504eea6e01fdfeb8b12d258204fd6ae523371",
         "stderr": ""
       },
       {
@@ -128,7 +128,7 @@
           "add",
           "notes.txt"
         ],
-        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "cwd": "$TMP/repo",
         "returncode": 0,
         "stdout": "",
         "stderr": ""
@@ -140,9 +140,9 @@
           "-m",
           "B"
         ],
-        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "cwd": "$TMP/repo",
         "returncode": 0,
-        "stdout": "[main 07d2a66] B\n 1 file changed, 1 insertion(+)",
+        "stdout": "[main bd4ac69] B\n 1 file changed, 1 insertion(+)",
         "stderr": ""
       },
       {
@@ -151,9 +151,9 @@
           "rev-parse",
           "HEAD"
         ],
-        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "cwd": "$TMP/repo",
         "returncode": 0,
-        "stdout": "07d2a66e0f32137a695108e479e0b86018ceb30e",
+        "stdout": "bd4ac696c7a97d8b95576b79ba86764b8b036e39",
         "stderr": ""
       },
       {
@@ -162,7 +162,7 @@
           "add",
           "todo.txt"
         ],
-        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "cwd": "$TMP/repo",
         "returncode": 0,
         "stdout": "",
         "stderr": ""
@@ -174,9 +174,9 @@
           "-m",
           "C"
         ],
-        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "cwd": "$TMP/repo",
         "returncode": 0,
-        "stdout": "[main 0c42822] C\n 1 file changed, 1 insertion(+)\n create mode 100644 todo.txt",
+        "stdout": "[main c55c3d2] C\n 1 file changed, 1 insertion(+)\n create mode 100644 todo.txt",
         "stderr": ""
       },
       {
@@ -185,9 +185,9 @@
           "rev-parse",
           "HEAD"
         ],
-        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "cwd": "$TMP/repo",
         "returncode": 0,
-        "stdout": "0c42822053f3807933dc0ca9b8546d7449d39469",
+        "stdout": "c55c3d21cf784322e8a1cb2728d51ad3a90e8d69",
         "stderr": ""
       },
       {
@@ -195,9 +195,9 @@
           "git",
           "branch",
           "topic",
-          "07d2a66e0f32137a695108e479e0b86018ceb30e"
+          "bd4ac696c7a97d8b95576b79ba86764b8b036e39"
         ],
-        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "cwd": "$TMP/repo",
         "returncode": 0,
         "stdout": "",
         "stderr": ""
@@ -210,7 +210,7 @@
           "--format=%an%x00%ae",
           "main"
         ],
-        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "cwd": "$TMP/repo",
         "returncode": 0,
         "stdout": "Course Student\u0000student@example.invalid",
         "stderr": ""
@@ -221,7 +221,7 @@
           "branch",
           "--show-current"
         ],
-        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "cwd": "$TMP/repo",
         "returncode": 0,
         "stdout": "main",
         "stderr": ""
@@ -233,7 +233,7 @@
           "--count",
           "main"
         ],
-        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "cwd": "$TMP/repo",
         "returncode": 0,
         "stdout": "3",
         "stderr": ""
@@ -244,9 +244,9 @@
           "rev-parse",
           "main"
         ],
-        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "cwd": "$TMP/repo",
         "returncode": 0,
-        "stdout": "0c42822053f3807933dc0ca9b8546d7449d39469",
+        "stdout": "c55c3d21cf784322e8a1cb2728d51ad3a90e8d69",
         "stderr": ""
       },
       {
@@ -255,9 +255,9 @@
           "rev-parse",
           "topic"
         ],
-        "cwd": "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T015-6ajnie80/repo",
+        "cwd": "$TMP/repo",
         "returncode": 0,
-        "stdout": "07d2a66e0f32137a695108e479e0b86018ceb30e",
+        "stdout": "bd4ac696c7a97d8b95576b79ba86764b8b036e39",
         "stderr": ""
       }
     ],
@@ -291,16 +291,16 @@
         "expected": {
           "initial_branch": "main",
           "main_commit_count": "3",
-          "main_head": "0c42822053f3807933dc0ca9b8546d7449d39469",
-          "topic_head": "07d2a66e0f32137a695108e479e0b86018ceb30e",
+          "main_head": "c55c3d21cf784322e8a1cb2728d51ad3a90e8d69",
+          "topic_head": "bd4ac696c7a97d8b95576b79ba86764b8b036e39",
           "notes_txt": "alpha\nbeta\n",
           "todo_txt": "one\n"
         },
         "actual": {
           "initial_branch": "main",
           "main_commit_count": "3",
-          "main_head": "0c42822053f3807933dc0ca9b8546d7449d39469",
-          "topic_head": "07d2a66e0f32137a695108e479e0b86018ceb30e",
+          "main_head": "c55c3d21cf784322e8a1cb2728d51ad3a90e8d69",
+          "topic_head": "bd4ac696c7a97d8b95576b79ba86764b8b036e39",
           "notes_txt": "alpha\nbeta\n",
           "todo_txt": "one\n"
         },
@@ -308,16 +308,16 @@
       }
     ],
     "commits": {
-      "A": "68b5aa63254dab68eeca481b525100bd063b3522",
-      "B": "07d2a66e0f32137a695108e479e0b86018ceb30e",
-      "C": "0c42822053f3807933dc0ca9b8546d7449d39469"
+      "A": "a23504eea6e01fdfeb8b12d258204fd6ae523371",
+      "B": "bd4ac696c7a97d8b95576b79ba86764b8b036e39",
+      "C": "c55c3d21cf784322e8a1cb2728d51ad3a90e8d69"
     },
     "git_version": "git version 2.50.1 (Apple Git-155)",
     "repo_state": {
       "initial_branch": "main",
       "main_commit_count": "3",
-      "main_head": "0c42822053f3807933dc0ca9b8546d7449d39469",
-      "topic_head": "07d2a66e0f32137a695108e479e0b86018ceb30e",
+      "main_head": "c55c3d21cf784322e8a1cb2728d51ad3a90e8d69",
+      "topic_head": "bd4ac696c7a97d8b95576b79ba86764b8b036e39",
       "notes_txt": "alpha\nbeta\n",
       "todo_txt": "one\n"
     }
