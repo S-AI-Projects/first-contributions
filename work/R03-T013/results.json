@@ -1,0 +1,1544 @@
+{
+  "expected": {
+    "clean_cross_branch": {
+      "branch": "topic",
+      "head": "B",
+      "notes_txt": "alpha\nbeta\nstashed line\n",
+      "todo_exists": false,
+      "stash_count": 1,
+      "status": " M notes.txt"
+    },
+    "dirty_non_conflicting": {
+      "branch": "topic",
+      "head": "B",
+      "notes_txt": "alpha\nbeta\nstashed line\n",
+      "draft_txt": "local draft\n",
+      "stash_count": 1,
+      "status": " M notes.txt\n?? draft.txt"
+    },
+    "dirty_conflicting": {
+      "branch": "topic",
+      "head": "topic test commit",
+      "stash_count": 1,
+      "unmerged_paths": [
+        "notes.txt"
+      ],
+      "conflict_markers": true,
+      "draft_txt": "uncommitted local draft\n",
+      "status": "UU notes.txt\n?? draft.txt"
+    }
+  },
+  "actual": {
+    "scenarios": [
+      {
+        "name": "clean_cross_branch",
+        "state": {
+          "branch": "topic",
+          "head": "64d170770505e85f35373846effb990e18a8060a",
+          "notes_txt": "alpha\nbeta\nstashed line\n",
+          "todo_exists": false,
+          "stash_count": 1,
+          "status": " M notes.txt"
+        }
+      },
+      {
+        "name": "dirty_non_conflicting",
+        "state": {
+          "branch": "topic",
+          "head": "64d170770505e85f35373846effb990e18a8060a",
+          "notes_txt": "alpha\nbeta\nstashed line\n",
+          "draft_txt": "local draft\n",
+          "stash_count": 1,
+          "status": " M notes.txt\n?? draft.txt"
+        }
+      },
+      {
+        "name": "dirty_conflicting",
+        "state": {
+          "branch": "topic",
+          "head": "a2abbe766f6dc9fb52a7936ea6f9604ccca5d7f7",
+          "stash_count": 1,
+          "unmerged_paths": [
+            "notes.txt"
+          ],
+          "conflict_markers": true,
+          "draft_txt": "uncommitted local draft\n",
+          "status": "UU notes.txt\n?? draft.txt"
+        },
+        "apply_output": ""
+      }
+    ],
+    "commands": [
+      {
+        "command": [
+          "git",
+          "init",
+          "--initial-branch=main",
+          "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T013-h371u5wl/clean"
+        ],
+        "returncode": 0,
+        "stdout": "Initialized empty Git repository in /private/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T013-h371u5wl/clean/.git/",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.name",
+          "Course Student"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.email",
+          "student@example.invalid"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "A"
+        ],
+        "returncode": 0,
+        "stdout": "[main (root-commit) de2c6b6] A\n 1 file changed, 1 insertion(+)\n create mode 100644 notes.txt",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "de2c6b6eca67ccd8f3dd8409c67c5e18be3d43d9",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "B"
+        ],
+        "returncode": 0,
+        "stdout": "[main 64d1707] B\n 1 file changed, 1 insertion(+)",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "64d170770505e85f35373846effb990e18a8060a",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "todo.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "C"
+        ],
+        "returncode": 0,
+        "stdout": "[main 97c5dd6] C\n 1 file changed, 1 insertion(+)\n create mode 100644 todo.txt",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "97c5dd679a0e46ba6e44db4341f91e2e035a8138",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "topic",
+          "64d170770505e85f35373846effb990e18a8060a"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "--reverse",
+          "--format=%an%x00%ae",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "Course Student\u0000student@example.invalid\nCourse Student\u0000student@example.invalid\nCourse Student\u0000student@example.invalid",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-list",
+          "--count",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "3",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "97c5dd679a0e46ba6e44db4341f91e2e035a8138",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "64d170770505e85f35373846effb990e18a8060a",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "-t",
+          "de2c6b6eca67ccd8f3dd8409c67c5e18be3d43d9"
+        ],
+        "returncode": 0,
+        "stdout": "commit",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "stash",
+          "push",
+          "-m",
+          "stash test edit"
+        ],
+        "returncode": 0,
+        "stdout": "Saved working directory and index state On main: stash test edit",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "status",
+          "--porcelain"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "stash@{0}"
+        ],
+        "returncode": 0,
+        "stdout": "973cff555491470ec9e08cad2daf221ce8bdc9c4",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "switch",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "Switched to branch 'topic'",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "returncode": 0,
+        "stdout": "topic",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "64d170770505e85f35373846effb990e18a8060a",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "stash",
+          "apply"
+        ],
+        "returncode": 0,
+        "stdout": "On branch topic\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   notes.txt\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "returncode": 0,
+        "stdout": "topic",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "64d170770505e85f35373846effb990e18a8060a",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "stash",
+          "list",
+          "--format=%H"
+        ],
+        "returncode": 0,
+        "stdout": "973cff555491470ec9e08cad2daf221ce8bdc9c4",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "status",
+          "--porcelain"
+        ],
+        "returncode": 0,
+        "stdout": "M notes.txt",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "stash@{0}"
+        ],
+        "returncode": 0,
+        "stdout": "973cff555491470ec9e08cad2daf221ce8bdc9c4",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "stash",
+          "list",
+          "--format=%H"
+        ],
+        "returncode": 0,
+        "stdout": "973cff555491470ec9e08cad2daf221ce8bdc9c4",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "init",
+          "--initial-branch=main",
+          "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T013-h371u5wl/non-conflicting"
+        ],
+        "returncode": 0,
+        "stdout": "Initialized empty Git repository in /private/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T013-h371u5wl/non-conflicting/.git/",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.name",
+          "Course Student"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.email",
+          "student@example.invalid"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "A"
+        ],
+        "returncode": 0,
+        "stdout": "[main (root-commit) de2c6b6] A\n 1 file changed, 1 insertion(+)\n create mode 100644 notes.txt",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "de2c6b6eca67ccd8f3dd8409c67c5e18be3d43d9",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "B"
+        ],
+        "returncode": 0,
+        "stdout": "[main 64d1707] B\n 1 file changed, 1 insertion(+)",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "64d170770505e85f35373846effb990e18a8060a",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "todo.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "C"
+        ],
+        "returncode": 0,
+        "stdout": "[main 97c5dd6] C\n 1 file changed, 1 insertion(+)\n create mode 100644 todo.txt",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "97c5dd679a0e46ba6e44db4341f91e2e035a8138",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "topic",
+          "64d170770505e85f35373846effb990e18a8060a"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "--reverse",
+          "--format=%an%x00%ae",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "Course Student\u0000student@example.invalid\nCourse Student\u0000student@example.invalid\nCourse Student\u0000student@example.invalid",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-list",
+          "--count",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "3",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "97c5dd679a0e46ba6e44db4341f91e2e035a8138",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "64d170770505e85f35373846effb990e18a8060a",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "-t",
+          "de2c6b6eca67ccd8f3dd8409c67c5e18be3d43d9"
+        ],
+        "returncode": 0,
+        "stdout": "commit",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "stash",
+          "push",
+          "-m",
+          "stash test edit"
+        ],
+        "returncode": 0,
+        "stdout": "Saved working directory and index state On main: stash test edit",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "status",
+          "--porcelain"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "stash@{0}"
+        ],
+        "returncode": 0,
+        "stdout": "973cff555491470ec9e08cad2daf221ce8bdc9c4",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "switch",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "Switched to branch 'topic'",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "returncode": 0,
+        "stdout": "topic",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "64d170770505e85f35373846effb990e18a8060a",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "stash",
+          "apply"
+        ],
+        "returncode": 0,
+        "stdout": "On branch topic\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n  (use \"git restore <file>...\" to discard changes in working directory)\n\tmodified:   notes.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tdraft.txt\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "returncode": 0,
+        "stdout": "topic",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "64d170770505e85f35373846effb990e18a8060a",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "stash",
+          "list",
+          "--format=%H"
+        ],
+        "returncode": 0,
+        "stdout": "973cff555491470ec9e08cad2daf221ce8bdc9c4",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "status",
+          "--porcelain"
+        ],
+        "returncode": 0,
+        "stdout": "M notes.txt\n?? draft.txt",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "stash@{0}"
+        ],
+        "returncode": 0,
+        "stdout": "973cff555491470ec9e08cad2daf221ce8bdc9c4",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "stash",
+          "list",
+          "--format=%H"
+        ],
+        "returncode": 0,
+        "stdout": "973cff555491470ec9e08cad2daf221ce8bdc9c4",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "init",
+          "--initial-branch=main",
+          "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T013-h371u5wl/conflicting"
+        ],
+        "returncode": 0,
+        "stdout": "Initialized empty Git repository in /private/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T013-h371u5wl/conflicting/.git/",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.name",
+          "Course Student"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.email",
+          "student@example.invalid"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "A"
+        ],
+        "returncode": 0,
+        "stdout": "[main (root-commit) 94d524d] A\n 1 file changed, 1 insertion(+)\n create mode 100644 notes.txt",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "94d524de91d018a663f2bdc167bf238dce3f0cea",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "B"
+        ],
+        "returncode": 0,
+        "stdout": "[main cb8ca7f] B\n 1 file changed, 1 insertion(+)",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "cb8ca7f676f56f39022b561f452d5fc49ea70203",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "todo.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "C"
+        ],
+        "returncode": 0,
+        "stdout": "[main a1fa888] C\n 1 file changed, 1 insertion(+)\n create mode 100644 todo.txt",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "a1fa8883b8bd03e4e261d4da3a319fd0c8ea722f",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "topic",
+          "cb8ca7f676f56f39022b561f452d5fc49ea70203"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "--reverse",
+          "--format=%an%x00%ae",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "Course Student\u0000student@example.invalid\nCourse Student\u0000student@example.invalid\nCourse Student\u0000student@example.invalid",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-list",
+          "--count",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "3",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "returncode": 0,
+        "stdout": "a1fa8883b8bd03e4e261d4da3a319fd0c8ea722f",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "cb8ca7f676f56f39022b561f452d5fc49ea70203",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "cat-file",
+          "-t",
+          "94d524de91d018a663f2bdc167bf238dce3f0cea"
+        ],
+        "returncode": 0,
+        "stdout": "commit",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "stash",
+          "push",
+          "-m",
+          "stash test edit"
+        ],
+        "returncode": 0,
+        "stdout": "Saved working directory and index state On main: stash test edit",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "status",
+          "--porcelain"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "stash@{0}"
+        ],
+        "returncode": 0,
+        "stdout": "842fc24c8cce9c03f520e9f67945c56e36054900",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "switch",
+          "topic"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "Switched to branch 'topic'",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "returncode": 0,
+        "stdout": "topic",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "cb8ca7f676f56f39022b561f452d5fc49ea70203",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "D: change alpha on topic"
+        ],
+        "returncode": 0,
+        "stdout": "[topic a2abbe7] D: change alpha on topic\n 1 file changed, 1 insertion(+), 1 deletion(-)",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "a2abbe766f6dc9fb52a7936ea6f9604ccca5d7f7",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "stash",
+          "apply"
+        ],
+        "returncode": 1,
+        "stdout": "Auto-merging notes.txt\nCONFLICT (content): Merge conflict in notes.txt\nOn branch topic\nUnmerged paths:\n  (use \"git restore --staged <file>...\" to unstage)\n  (use \"git add <file>...\" to mark resolution)\n\tboth modified:   notes.txt\n\nUntracked files:\n  (use \"git add <file>...\" to include in what will be committed)\n\tdraft.txt\n\nno changes added to commit (use \"git add\" and/or \"git commit -a\")",
+        "stderr": "",
+        "expected_returncode": 1
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--name-only",
+          "--diff-filter=U"
+        ],
+        "returncode": 0,
+        "stdout": "notes.txt",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "returncode": 0,
+        "stdout": "topic",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "returncode": 0,
+        "stdout": "a2abbe766f6dc9fb52a7936ea6f9604ccca5d7f7",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "stash",
+          "list",
+          "--format=%H"
+        ],
+        "returncode": 0,
+        "stdout": "842fc24c8cce9c03f520e9f67945c56e36054900",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "status",
+          "--porcelain"
+        ],
+        "returncode": 0,
+        "stdout": "UU notes.txt\n?? draft.txt",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "stash@{0}"
+        ],
+        "returncode": 0,
+        "stdout": "842fc24c8cce9c03f520e9f67945c56e36054900",
+        "stderr": "",
+        "expected_returncode": 0
+      },
+      {
+        "command": [
+          "git",
+          "stash",
+          "list",
+          "--format=%H"
+        ],
+        "returncode": 0,
+        "stdout": "842fc24c8cce9c03f520e9f67945c56e36054900",
+        "stderr": "",
+        "expected_returncode": 0
+      }
+    ],
+    "commits": {
+      "A": "94d524de91d018a663f2bdc167bf238dce3f0cea",
+      "B": "cb8ca7f676f56f39022b561f452d5fc49ea70203",
+      "C": "a1fa8883b8bd03e4e261d4da3a319fd0c8ea722f"
+    },
+    "checks": [
+      {
+        "name": "all initial commit authors",
+        "expected": [
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ]
+        ],
+        "actual": [
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ]
+        ],
+        "passed": true
+      },
+      {
+        "name": "main contains three commits",
+        "expected": "3",
+        "actual": "3",
+        "passed": true
+      },
+      {
+        "name": "main points to C",
+        "expected": "97c5dd679a0e46ba6e44db4341f91e2e035a8138",
+        "actual": "97c5dd679a0e46ba6e44db4341f91e2e035a8138",
+        "passed": true
+      },
+      {
+        "name": "topic points to B",
+        "expected": "64d170770505e85f35373846effb990e18a8060a",
+        "actual": "64d170770505e85f35373846effb990e18a8060a",
+        "passed": true
+      },
+      {
+        "name": "A is a commit",
+        "expected": "commit",
+        "actual": "commit",
+        "passed": true
+      },
+      {
+        "name": "main is clean after stash",
+        "expected": "",
+        "actual": "",
+        "passed": true
+      },
+      {
+        "name": "target branch is topic",
+        "expected": "topic",
+        "actual": "topic",
+        "passed": true
+      },
+      {
+        "name": "topic points to B",
+        "expected": "64d170770505e85f35373846effb990e18a8060a",
+        "actual": "64d170770505e85f35373846effb990e18a8060a",
+        "passed": true
+      },
+      {
+        "name": "cross-branch apply succeeds",
+        "expected": 0,
+        "actual": 0,
+        "passed": true
+      },
+      {
+        "name": "clean cross-branch application state",
+        "expected": {
+          "branch": "topic",
+          "head": "64d170770505e85f35373846effb990e18a8060a",
+          "notes_txt": "alpha\nbeta\nstashed line\n",
+          "todo_exists": false,
+          "stash_count": 1,
+          "status": " M notes.txt"
+        },
+        "actual": {
+          "branch": "topic",
+          "head": "64d170770505e85f35373846effb990e18a8060a",
+          "notes_txt": "alpha\nbeta\nstashed line\n",
+          "todo_exists": false,
+          "stash_count": 1,
+          "status": " M notes.txt"
+        },
+        "passed": true
+      },
+      {
+        "name": "apply leaves the stash on the stack",
+        "expected": "973cff555491470ec9e08cad2daf221ce8bdc9c4",
+        "actual": "973cff555491470ec9e08cad2daf221ce8bdc9c4",
+        "passed": true
+      },
+      {
+        "name": "one stash remains",
+        "expected": 1,
+        "actual": 1,
+        "passed": true
+      },
+      {
+        "name": "all initial commit authors",
+        "expected": [
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ]
+        ],
+        "actual": [
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ]
+        ],
+        "passed": true
+      },
+      {
+        "name": "main contains three commits",
+        "expected": "3",
+        "actual": "3",
+        "passed": true
+      },
+      {
+        "name": "main points to C",
+        "expected": "97c5dd679a0e46ba6e44db4341f91e2e035a8138",
+        "actual": "97c5dd679a0e46ba6e44db4341f91e2e035a8138",
+        "passed": true
+      },
+      {
+        "name": "topic points to B",
+        "expected": "64d170770505e85f35373846effb990e18a8060a",
+        "actual": "64d170770505e85f35373846effb990e18a8060a",
+        "passed": true
+      },
+      {
+        "name": "A is a commit",
+        "expected": "commit",
+        "actual": "commit",
+        "passed": true
+      },
+      {
+        "name": "main is clean after stash",
+        "expected": "",
+        "actual": "",
+        "passed": true
+      },
+      {
+        "name": "target branch is topic",
+        "expected": "topic",
+        "actual": "topic",
+        "passed": true
+      },
+      {
+        "name": "topic points to B",
+        "expected": "64d170770505e85f35373846effb990e18a8060a",
+        "actual": "64d170770505e85f35373846effb990e18a8060a",
+        "passed": true
+      },
+      {
+        "name": "non-conflicting dirty apply succeeds",
+        "expected": 0,
+        "actual": 0,
+        "passed": true
+      },
+      {
+        "name": "dirty non-conflicting application state",
+        "expected": {
+          "branch": "topic",
+          "head": "64d170770505e85f35373846effb990e18a8060a",
+          "notes_txt": "alpha\nbeta\nstashed line\n",
+          "draft_txt": "local draft\n",
+          "stash_count": 1,
+          "status": " M notes.txt\n?? draft.txt"
+        },
+        "actual": {
+          "branch": "topic",
+          "head": "64d170770505e85f35373846effb990e18a8060a",
+          "notes_txt": "alpha\nbeta\nstashed line\n",
+          "draft_txt": "local draft\n",
+          "stash_count": 1,
+          "status": " M notes.txt\n?? draft.txt"
+        },
+        "passed": true
+      },
+      {
+        "name": "apply leaves the stash on the stack",
+        "expected": "973cff555491470ec9e08cad2daf221ce8bdc9c4",
+        "actual": "973cff555491470ec9e08cad2daf221ce8bdc9c4",
+        "passed": true
+      },
+      {
+        "name": "one stash remains",
+        "expected": 1,
+        "actual": 1,
+        "passed": true
+      },
+      {
+        "name": "all initial commit authors",
+        "expected": [
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ]
+        ],
+        "actual": [
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ]
+        ],
+        "passed": true
+      },
+      {
+        "name": "main contains three commits",
+        "expected": "3",
+        "actual": "3",
+        "passed": true
+      },
+      {
+        "name": "main points to C",
+        "expected": "a1fa8883b8bd03e4e261d4da3a319fd0c8ea722f",
+        "actual": "a1fa8883b8bd03e4e261d4da3a319fd0c8ea722f",
+        "passed": true
+      },
+      {
+        "name": "topic points to B",
+        "expected": "cb8ca7f676f56f39022b561f452d5fc49ea70203",
+        "actual": "cb8ca7f676f56f39022b561f452d5fc49ea70203",
+        "passed": true
+      },
+      {
+        "name": "A is a commit",
+        "expected": "commit",
+        "actual": "commit",
+        "passed": true
+      },
+      {
+        "name": "main is clean after stash",
+        "expected": "",
+        "actual": "",
+        "passed": true
+      },
+      {
+        "name": "target branch is topic",
+        "expected": "topic",
+        "actual": "topic",
+        "passed": true
+      },
+      {
+        "name": "topic points to B",
+        "expected": "cb8ca7f676f56f39022b561f452d5fc49ea70203",
+        "actual": "cb8ca7f676f56f39022b561f452d5fc49ea70203",
+        "passed": true
+      },
+      {
+        "name": "conflicting apply reports failure",
+        "expected": 1,
+        "actual": 1,
+        "passed": true
+      },
+      {
+        "name": "dirty conflicting application state",
+        "expected": {
+          "branch": "topic",
+          "head": "a2abbe766f6dc9fb52a7936ea6f9604ccca5d7f7",
+          "stash_count": 1,
+          "unmerged_paths": [
+            "notes.txt"
+          ],
+          "conflict_markers": true,
+          "draft_txt": "uncommitted local draft\n",
+          "status": "UU notes.txt\n?? draft.txt"
+        },
+        "actual": {
+          "branch": "topic",
+          "head": "a2abbe766f6dc9fb52a7936ea6f9604ccca5d7f7",
+          "stash_count": 1,
+          "unmerged_paths": [
+            "notes.txt"
+          ],
+          "conflict_markers": true,
+          "draft_txt": "uncommitted local draft\n",
+          "status": "UU notes.txt\n?? draft.txt"
+        },
+        "passed": true
+      },
+      {
+        "name": "apply leaves the stash on the stack",
+        "expected": "842fc24c8cce9c03f520e9f67945c56e36054900",
+        "actual": "842fc24c8cce9c03f520e9f67945c56e36054900",
+        "passed": true
+      },
+      {
+        "name": "one stash remains",
+        "expected": 1,
+        "actual": 1,
+        "passed": true
+      },
+      {
+        "name": "conflict reports notes.txt",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      }
+    ]
+  },
+  "failure": null
+}

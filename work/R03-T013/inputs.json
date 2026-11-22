@@ -1,0 +1,54 @@
+{
+  "repository": {
+    "initial_branch": "main",
+    "author_name": "Course Student",
+    "author_email": "student@example.invalid",
+    "commits": [
+      {
+        "label": "A",
+        "message": "A",
+        "files": {
+          "notes.txt": "alpha\n"
+        }
+      },
+      {
+        "label": "B",
+        "message": "B",
+        "append": {
+          "notes.txt": "beta\n"
+        }
+      },
+      {
+        "label": "C",
+        "message": "C",
+        "files": {
+          "todo.txt": "one\n"
+        }
+      }
+    ],
+    "topic_start": "B"
+  },
+  "scenarios": [
+    {
+      "name": "apply on another branch with a clean worktree",
+      "stashed_edit": "append 'stashed line\\n' to notes.txt on main",
+      "target_branch": "topic",
+      "existing_edit": null,
+      "expected": "successful apply, branch remains topic, stash is retained"
+    },
+    {
+      "name": "apply on another branch with a non-conflicting local edit",
+      "stashed_edit": "append 'stashed line\\n' to notes.txt on main",
+      "target_branch": "topic",
+      "existing_edit": "create untracked draft.txt on topic",
+      "expected": "successful merge of both edits, stash is retained"
+    },
+    {
+      "name": "apply on another branch with a conflicting local edit",
+      "stashed_edit": "change alpha to stashed alpha on main",
+      "target_branch": "topic",
+      "existing_edit": "change alpha to local alpha on topic",
+      "expected": "apply reports conflict, conflict markers exist, stash is retained"
+    }
+  ]
+}
