@@ -1,0 +1,594 @@
+{
+  "expected": {
+    "after_soft_reset": {
+      "main": "B",
+      "current_branch": "main",
+      "staged_paths": [
+        "todo.txt"
+      ],
+      "todo_txt": "one\n"
+    },
+    "after_stash": {
+      "main": "B",
+      "status": "",
+      "stash_count": 1
+    },
+    "after_stash_pop_and_commit": {
+      "main": "B",
+      "topic_parent": "B",
+      "current_branch": "topic",
+      "topic_commit_count": "3",
+      "status": "",
+      "notes_txt": "alpha\nbeta\n",
+      "todo_txt": "one\n",
+      "stash_count": 0
+    }
+  },
+  "actual": {
+    "commands": [
+      {
+        "command": [
+          "git",
+          "init",
+          "--initial-branch=main",
+          "/var/folders/dh/c91jyh3x5mv7yqcjsw8tm03r0000gn/T/R03-T017-68z0b72c/repo"
+        ],
+        "cwd": null,
+        "returncode": 0,
+        "stdout": "Initialized empty Git repository in $TMP/repo/.git/",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.name",
+          "Course Student"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "config",
+          "user.email",
+          "student@example.invalid"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "A"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "[main (root-commit) 18c6b79] A\n 1 file changed, 1 insertion(+)\n create mode 100644 notes.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "18c6b79ab4045988f0729351c68cba8588903f7b",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "notes.txt"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "B"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "[main d0a99ae] B\n 1 file changed, 1 insertion(+)",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "todo.txt"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "C"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "[main 78c92fa] C\n 1 file changed, 1 insertion(+)\n create mode 100644 todo.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "78c92fab0c2a7c8b501f8aa3ae2f5f479568678e",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "topic",
+          "d0a99aef36b2ccec10961fbb320963ef1621cf63"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "log",
+          "--reverse",
+          "--format=%an%x00%ae",
+          "main"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "Course Student\u0000student@example.invalid\nCourse Student\u0000student@example.invalid\nCourse Student\u0000student@example.invalid",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "78c92fab0c2a7c8b501f8aa3ae2f5f479568678e",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "topic"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "reset",
+          "HEAD~",
+          "--soft"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "main",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--cached",
+          "--name-only"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "todo.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "stash"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "Saved working directory and index state WIP on main: d0a99ae B",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "status",
+          "--porcelain"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "stash",
+          "list",
+          "--format=%H"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "da16c6a4509860af84c0e9d6b6d58300be0fffd9",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "checkout",
+          "topic"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "Switched to branch 'topic'"
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "topic",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "stash",
+          "pop"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "On branch topic\nChanges to be committed:\n  (use \"git restore --staged <file>...\" to unstage)\n\tnew file:   todo.txt\n\nDropped refs/stash@{0} (da16c6a4509860af84c0e9d6b6d58300be0fffd9)",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "add",
+          "todo.txt"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "commit",
+          "-m",
+          "C moved to topic"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "[topic 5cd7949] C moved to topic\n 1 file changed, 1 insertion(+)\n create mode 100644 todo.txt",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "5cd794976e7400c5eaaee393f97e7679447bac22",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "HEAD^"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-parse",
+          "main"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "branch",
+          "--show-current"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "topic",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "rev-list",
+          "--count",
+          "topic"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "3",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "status",
+          "--porcelain"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "git",
+          "stash",
+          "list",
+          "--format=%H"
+        ],
+        "cwd": "$TMP/repo",
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      }
+    ],
+    "checks": [
+      {
+        "name": "initial commit authors",
+        "expected": [
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ]
+        ],
+        "actual": [
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ],
+          [
+            "Course Student",
+            "student@example.invalid"
+          ]
+        ],
+        "passed": true
+      },
+      {
+        "name": "main initially points to C",
+        "expected": "78c92fab0c2a7c8b501f8aa3ae2f5f479568678e",
+        "actual": "78c92fab0c2a7c8b501f8aa3ae2f5f479568678e",
+        "passed": true
+      },
+      {
+        "name": "topic initially points to B",
+        "expected": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+        "actual": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+        "passed": true
+      },
+      {
+        "name": "soft reset removes C from main but preserves its staged changes",
+        "expected": {
+          "main": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+          "current_branch": "main",
+          "staged_paths": [
+            "todo.txt"
+          ],
+          "todo_txt": "one\n"
+        },
+        "actual": {
+          "main": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+          "current_branch": "main",
+          "staged_paths": [
+            "todo.txt"
+          ],
+          "todo_txt": "one\n"
+        },
+        "passed": true
+      },
+      {
+        "name": "stash records the change and cleans the worktree",
+        "expected": {
+          "main": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+          "status": "",
+          "stash_count": 1
+        },
+        "actual": {
+          "main": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+          "status": "",
+          "stash_count": 1
+        },
+        "passed": true
+      },
+      {
+        "name": "checkout switched to topic",
+        "expected": "topic",
+        "actual": "topic",
+        "passed": true
+      },
+      {
+        "name": "pop restored todo.txt",
+        "expected": "one\n",
+        "actual": "one\n",
+        "passed": true
+      },
+      {
+        "name": "new topic commit is distinct from original C",
+        "expected": true,
+        "actual": true,
+        "passed": true
+      },
+      {
+        "name": "commit change now belongs to topic",
+        "expected": {
+          "main": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+          "topic_parent": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+          "current_branch": "topic",
+          "topic_commit_count": "3",
+          "status": "",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_txt": "one\n",
+          "stash_count": 0
+        },
+        "actual": {
+          "main": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+          "topic_parent": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+          "current_branch": "topic",
+          "topic_commit_count": "3",
+          "status": "",
+          "notes_txt": "alpha\nbeta\n",
+          "todo_txt": "one\n",
+          "stash_count": 0
+        },
+        "passed": true
+      }
+    ],
+    "commits": {
+      "A": "18c6b79ab4045988f0729351c68cba8588903f7b",
+      "B": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+      "C": "78c92fab0c2a7c8b501f8aa3ae2f5f479568678e"
+    },
+    "states": {
+      "after_soft_reset": {
+        "main": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+        "current_branch": "main",
+        "staged_paths": [
+          "todo.txt"
+        ],
+        "todo_txt": "one\n"
+      },
+      "after_stash": {
+        "main": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+        "status": "",
+        "stash_count": 1
+      },
+      "after_stash_pop_and_commit": {
+        "main": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+        "topic_parent": "d0a99aef36b2ccec10961fbb320963ef1621cf63",
+        "current_branch": "topic",
+        "topic_commit_count": "3",
+        "status": "",
+        "notes_txt": "alpha\nbeta\n",
+        "todo_txt": "one\n",
+        "stash_count": 0
+      }
+    }
+  },
+  "failure": null
+}
