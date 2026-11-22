@@ -71,6 +71,67 @@ user.email=youremail@domain.com
 
 ...
 
+# A complete example: check, configure, commit
+
+This example starts in an empty folder and uses nothing that is not listed here. It shows what `git --version` and `git config --global user.name` do. Use your own name and email in the two `git config` lines.
+
+**Note.** The two `git config --global` commands change your own global git configuration (usually `~/.gitconfig`). To try the example without touching it, first run `export HOME="$(mktemp -d)"` in a new terminal window. This only affects that window.
+
+```
+git --version
+git config --global user.name "Your Name"
+git config --global user.email "youremail@domain.com"
+git init -b main
+printf 'alpha\n' > notes.txt
+git add notes.txt
+git commit -m "A: create notes.txt"
+printf 'beta\n' >> notes.txt
+git commit -am "B: append beta"
+printf 'one\n' > todo.txt
+git add todo.txt
+git commit -m "C: add todo.txt"
+git branch topic HEAD~1
+git switch topic
+```
+
+`git --version` prints the installed version, for example `git version 2.34.1`. Your number may be different.
+
+The two `git config --global` commands write your name and email to the global config file. You can check what they did:
+
+```
+$ git config --global user.name
+Your Name
+$ git config --global --list
+user.name=Your Name
+user.email=youremail@domain.com
+$ cat ~/.gitconfig
+[user]
+	name = Your Name
+	email = youremail@domain.com
+```
+
+The `git config --list` command shown earlier prints exactly these two lines only when you run it outside a repository and nothing else is configured. Inside a repository it also lists the repository's own settings, for example `core.bare=false`. Use `git config --global --list` to see only the global ones.
+
+After the example, the repository looks like this:
+
+```
+$ git status
+On branch topic
+nothing to commit, working tree clean
+$ git branch
+  main
+* topic
+$ git log --format='%an <%ae>: %s'
+Your Name <youremail@domain.com>: B: append beta
+Your Name <youremail@domain.com>: A: create notes.txt
+$ git log --format='%an <%ae>: %s' main
+Your Name <youremail@domain.com>: C: add todo.txt
+Your Name <youremail@domain.com>: B: append beta
+Your Name <youremail@domain.com>: A: create notes.txt
+```
+
+The name and email on every commit come from `git config --global`. The repository has no `user.name` of its own: `git config --local user.name` prints nothing. `main` has the three commits A, B and C. `topic` is checked out and points at B, so its log does not show C, and the index and the working tree contain only `notes.txt` with the lines `alpha` and `beta`. Running the example again in another empty folder gives the same files, branches, index and config file. Only the commit ids differ, because they depend on the time you commit.
+
 # Persist Git Credentials
 
 By default, Git will keep asking you for your details everytime you want to push to a remote repo.
