@@ -1,0 +1,22 @@
+Verification Summary:
+Guide Check: PASSED (Found anchors, precondition checklist table, and setup walkthrough)
+
+Run 1:
+  - Commit A: 38585d3c39d613a34a1188df21788e53009911cd
+  - Commit B: 2ef7add4cd7d7afa1cf19ba914544b1895f00882
+  - Commit C: 561c7df4e1fa9aabea28fa08a1773a120f927369
+  - Worktree Check: true (VERIFIED)
+  - Current Branch: main (VERIFIED)
+  - Excludes Config: ~/.gitignore_global (VERIFIED)
+  - topic Ref: 2ef7add4cd7d7afa1cf19ba914544b1895f00882 (UNCHANGED)
+  - Result: ALL STATE ASSERTIONS PASSED
+
+Run 2:
+  - Commit A: 38585d3c39d613a34a1188df21788e53009911cd
+  - Commit B: 2ef7add4cd7d7afa1cf19ba914544b1895f00882
+  - Commit C: 561c7df4e1fa9aabea28fa08a1773a120f927369
+  - Worktree Check: true (VERIFIED)
+  - Current Branch: main (VERIFIED)
+  - Excludes Config: ~/.gitignore_global (VERIFIED)
+  - topic Ref: 2ef7add4cd7d7afa1cf19ba914544b1895f00882 (UNCHANGED)
+  - Result: ALL STATE ASSERTIONS PASSED

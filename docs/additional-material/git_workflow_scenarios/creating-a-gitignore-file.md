@@ -71,3 +71,54 @@ To undo `git rm --cached filename`, use:
 ```sh
 git add filename
 ```
+
+---
+
+## Prerequisites and Minimal Setup for .gitignore
+
+Before configuring `.gitignore` or executing untracking commands like `git rm --cached`, verify the following preconditions to ensure operations do not inadvertently disrupt uncommitted work or target the wrong branch.
+
+### Precondition Checklist
+
+| Requirement | What to Verify | Verification Command |
+|---|---|---|
+| **1. Repository State** | Active Git repository with prior commit history. | `git rev-parse --is-inside-work-tree` |
+| **2. Current Branch** | Confirmed on the intended branch (e.g. `main`) before modifying tracking. | `git branch --show-current` |
+| **3. Staged / Worktree State** | No pending uncommitted changes that could be disrupted by bulk untracking. | `git status --porcelain` |
+| **4. Excludes Configuration** | Verify `core.excludesfile` is configured when setting up global ignore rules. | `git config --get core.excludesfile` |
+
+### Minimal Setup Example
+
+```sh
+tmp=$(mktemp -d)
+git -C "$tmp" init -b main
+git -C "$tmp" config user.name 'Course Student'
+git -C "$tmp" config user.email 'student@example.invalid'
+cd "$tmp"
+
+# Create initial commits
+printf 'alpha\n' > notes.txt
+git add notes.txt && git commit -m 'A: add notes'
+printf 'beta\n' >> notes.txt
+git add notes.txt && git commit -m 'B: append notes'
+B=$(git rev-parse HEAD)
+git branch topic "$B"
+printf 'one\n' > todo.txt
+git add todo.txt && git commit -m 'C: add todo'
+
+# 1. Verify prerequisites:
+git rev-parse --is-inside-work-tree   # returns true
+git branch --show-current            # returns main
+git status --porcelain               # clean
+
+# 2. Add an ignore rule and verify:
+printf '*.log\n' > .gitignore
+printf 'sample log output\n' > debug.log
+git status --short
+# debug.log is ignored and excluded from git status
+
+# 3. Untrack an already-tracked file:
+git rm --cached todo.txt
+git status --short
+# Shows 'D  todo.txt' staged while todo.txt remains intact on disk
+```

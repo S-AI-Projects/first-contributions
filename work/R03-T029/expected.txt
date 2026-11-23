@@ -1,0 +1,13 @@
+Expected Verification Results:
+1. Target Guide:
+   - Preserves all 3 command anchors.
+   - Contains precondition checklist table and minimal setup example.
+2. Preconditions Verified:
+   - git rev-parse --is-inside-work-tree returns 'true'.
+   - git branch --show-current returns 'main'.
+   - git status --porcelain is empty prior to untracking.
+   - core.excludesfile configured in isolated environment.
+3. State Assertions:
+   - *.log rule in .gitignore prevents debug.log from tracking.
+   - git rm --cached todo.txt stages deletion ('D  todo.txt') in index while preserving file on disk.
+   - refs/heads/topic remains fixed at Commit B.
