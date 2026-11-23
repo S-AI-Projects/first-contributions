@@ -1,0 +1,19 @@
+Expected Verification Results:
+1. Target Guide:
+   - Contains all command anchors.
+   - Explains branch and remote semantics explicitly when starting on topic.
+   - Includes Reference Summary Matrix detailing affected vs unaffected refs.
+2. Step 1 (git checkout main):
+   - HEAD switches from topic to main (points to Commit C).
+   - refs/heads/topic and refs/heads/main stay fixed.
+   - todo.txt appears in the working directory.
+3. Step 2 (git merge topic main):
+   - Commit B is an ancestor of C; merge reports 'Already up to date'.
+   - main ref remains at Commit C.
+4. Step 3 (git branch -d topic):
+   - Local ref refs/heads/topic is deleted.
+   - HEAD and main stay fixed at Commit C.
+   - Commit B object persists in the Git store.
+5. Step 4 (git push origin --delete topic):
+   - Remote ref refs/remotes/origin/topic is deleted.
+   - Remote and local main refs remain unchanged.
