@@ -1,0 +1,12 @@
+Expected Verification Results:
+1. Target Guide:
+   - Preserves all 3 command anchors.
+   - Documents the test suite and execution instructions (python3 tests/guides/test_why_using_branches.py).
+2. Guide Test Execution:
+   - Normal run succeeds with exit code 0.
+   - Omitted decisive branch switch (OMIT_BRANCH_SWITCH=1) fails with non-zero exit code.
+   - Temporary directories with prefix 'why-branches-test-' are cleanly removed.
+3. State Assertions:
+   - my-new-branch points to Commit C.
+   - HEAD switches to my-new-branch.
+   - refs/heads/topic remains fixed at Commit B.
