@@ -1,0 +1,25 @@
+=== Base Fixture Initialized ===
+Commit A: a9009cd46e624d2dd082ea255af2bbe57b6a9f18
+Commit B: 74b1db262aabb279b18f6c9b9ad23838139f80c2
+Commit C: a4b3397009196dc57c0dbde86afef0e95a4f4fa4
+
+--- Testing Scenario 1: Remote upstream already exists ---
+Assertion 1 passed: 'git remote add upstream' failed with return code 3
+Assertion 2 passed: error diagnostic confirms remote 'upstream' already exists
+Assertion 3 passed: upstream remote URL remained unchanged after failed command
+Assertion 4 passed: 'git remote set-url upstream' succeeded with exit code 0
+Assertion 5 passed: upstream remote URL successfully updated to new target
+
+--- Testing Scenario 2: Checkout collision from topic to main ---
+Assertion 6 passed: successfully switched to branch 'topic'
+Assertion 7 passed: 'git checkout main' failed with return code 1
+Assertion 8 passed: error diagnostic confirms untracked file overwrite collision
+Assertion 9 passed: branch remained 'topic' after failed checkout
+Assertion 10 passed: local untracked file content was preserved untouched
+Assertion 11 passed: 'git stash push -u' succeeded
+Assertion 12 passed: 'git checkout main' succeeded after stashing
+Assertion 13 passed: active branch is now 'main'
+Assertion 14 passed: todo.txt on 'main' reflects commit C ('one\n')
+Assertion 15 passed: saved changes securely tracked in git stash
+
+All 15 assertions passed successfully!

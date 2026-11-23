@@ -1,0 +1,24 @@
+Task: R03-T037
+Student: Archita Pandey
+Repository: https://github.com/S-AI-Projects/first-contributions
+Assigned Branch: student/e26b07f0636
+Task Branch: student/e26b07f0636/R03-T037
+
+Inputs:
+- Base Repository Setup:
+  - Branch: main
+  - Author: Course Student <student@example.invalid>
+  - Committer: Course Student <student@example.invalid>
+  - Commit A: notes.txt with "alpha\n"
+  - Commit B: notes.txt appended with "beta\n"
+  - Branch topic created at Commit B
+  - Commit C: todo.txt with "one\n" on main
+  - Bare remote: upstream.git (simulating GitHub upstream)
+- Failure Precondition 1:
+  - Triggering state: Remote 'upstream' already configured in repository config
+  - Violated command: git remote add upstream <new-url>
+  - Smallest correction: git remote set-url upstream <new-url>
+- Failure Precondition 2:
+  - Triggering state: Working tree on 'topic' contains untracked file 'todo.txt' that exists in 'main'
+  - Violated command: git checkout main
+  - Smallest correction: git stash push -u -m "wip" && git checkout main
