@@ -1,0 +1,13 @@
+Task: R03-T028
+Student: Dheeraj Kumar
+Repository: https://github.com/S-AI-Projects/first-contributions
+Assigned Branch: student/e26b07f0784/R03-T028
+Target Guide: docs/additional-material/git_workflow_scenarios/why-using-branches.md
+Guide Test: tests/guides/test_why_using_branches.py
+Command Anchors:
+  - git branch my-new-branch
+  - git checkout my-new-branch
+  - git checkout -b my-new-branch
+Test Execution Modes:
+  - Normal execution: runs all commands -> passes (exit 0)
+  - Deliberate omission: OMIT_BRANCH_SWITCH=1 -> fails (exit 1)

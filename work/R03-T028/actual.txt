@@ -1,0 +1,10 @@
+Verification Summary:
+Guide Check: PASSED (Found anchors, automated test documentation, and execution command)
+Guide Test File: tests/guides/test_why_using_branches.py (EXISTS)
+
+Test Runs:
+  - Normal Execution Return Code: 0 (PASS)
+  - Normal stdout: ALL INTEGRATION TESTS PASSED.
+  - Omission Execution Return Code: 1 (FAILED AS EXPECTED)
+  - Leaked Temp Dirs Count: 0 (CLEAN)
+  - Result: ALL VERIFICATION ASSERTIONS PASSED

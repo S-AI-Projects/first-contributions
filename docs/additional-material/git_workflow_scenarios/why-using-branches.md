@@ -70,6 +70,26 @@ git branch -D my-new-branch
 ```
 Use this with caution! It deletes the branch even if it has unmerged changes.
 
+---
+
+## Automated Guide Test
+
+This guide's branch creation and switching commands are verified by an automated integration test located at `tests/guides/test_why_using_branches.py`.
+
+### How to Run the Test
+
+Execute the test suite from the repository root:
+
+```sh
+python3 tests/guides/test_why_using_branches.py
+```
+
+The test builds an isolated temporary Git repository with author `Course Student <student@example.invalid>` and three commits (A, B, C) on `main`, with branch `topic` pointing to B. It verifies:
+1. `git branch my-new-branch` creates the branch reference at Commit C without moving `HEAD`.
+2. `git checkout my-new-branch` switches `HEAD` to `my-new-branch`.
+3. `git checkout -b my-new-branch` atomically creates the branch and switches `HEAD`.
+4. Unrelated ref `refs/heads/topic` remains invariant at Commit B.
+
 ## Additional Resources
 - [Git Branching Guide (Atlassian)](https://www.atlassian.com/git/tutorials/using-branches)
 - [Removing a Branch from Your Repository](removing-branch-from-your-repository.md)
