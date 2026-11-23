@@ -1,0 +1,12 @@
+Assertion 1 passed: Per-repository config is strictly local; global config untouched.
+Base setup created: Commit A=4c5ba02, B=04a9bee (topic), C=c95269a (main)
+Assertion 2 passed: Prerequisite 1 verified - Checked out active branch 'topic' at 04a9bee.
+Assertion 3 passed: Prerequisite 2 verified - Detected staged changes before reset.
+Assertion 4 passed: Working tree and staging area successfully secured and cleaned via stash.
+Assertion 5 passed: Prerequisite 3 verified - Target branch 'main' resolves to c95269a.
+Assertion 6 passed: State Fact 1 - topic branch now points to Commit C (c95269a).
+Assertion 7 passed: State Fact 2 - Working tree file 'todo.txt' has content from Commit C ('one\n').
+Assertion 8 passed: State Fact 3 - Staging area and working directory are completely clean.
+Assertion 9 passed: State Fact 4 - Pre-reset stash backup is safely preserved in stash stack.
+
+All 9 assertions passed successfully!
