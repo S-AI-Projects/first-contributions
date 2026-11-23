@@ -1,0 +1,15 @@
+Expected Verification Results:
+Exercise 1 (git checkout main):
+  - Active branch becomes 'main'.
+  - HEAD points to Commit C.
+  - Working tree contains todo.txt with 'one\n'.
+Exercise 2 (git merge topic main):
+  - 'main' ref remains at Commit C (already up-to-date).
+  - 'topic' ref remains at Commit B.
+  - Working tree and index are clean.
+Exercise 3 (git branch -d topic):
+  - 'topic' ref no longer resolves (git rev-parse --verify returns non-zero).
+  - Commit B object still exists in object store.
+  - HEAD still at Commit C.
+  - Active branch still 'main'.
+Total: 10 assertions pass.

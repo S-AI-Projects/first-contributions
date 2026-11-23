@@ -1,0 +1,19 @@
+Task: R03-T040
+Student: Archita Pandey
+Repository: https://github.com/S-AI-Projects/first-contributions
+Task Branch: student/e26b07f0636/R03-T040
+
+Inputs:
+- Target Guide: docs/additional-material/git_workflow_scenarios/removing-branch-from-your-repository.md
+- Command Anchors: git checkout main | git merge <topic> main | git branch -d <topic>
+- Exercise type: Prediction-and-Verification
+- Base Fixture:
+  - Branch: main, Author: Course Student <student@example.invalid>
+  - Commit A: notes.txt with "alpha\n"
+  - Commit B: notes.txt appended with "beta\n"
+  - Branch topic created at Commit B
+  - Commit C: todo.txt with "one\n" on main
+- Predictions tested:
+  1. git checkout main: HEAD ref moves, working tree gains todo.txt, topic/main refs unchanged.
+  2. git merge topic main: already-up-to-date (B is ancestor of C), no new commit, no ref/index/worktree change.
+  3. git branch -d topic: topic ref deleted; Commit B still reachable; HEAD/index/worktree unaffected.
