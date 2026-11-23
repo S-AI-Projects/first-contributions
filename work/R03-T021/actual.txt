@@ -2,12 +2,12 @@ Verification Summary:
 Guide Check: PASSED (Found anchors, complete setup, exact reset command, expected status/log)
 
 Run 1:
-  - Commit A: c9c9930b4f8e8b8a3f6295d929e86a924ae8c295
-  - Commit B: 15f48d32c0f99f2fffe4b05904cb125bf1969a58
-  - Commit C: a8f0f169369368c47e6e4919987b47589e96322a
-  - HEAD after reset: 15f48d32c0f99f2fffe4b05904cb125bf1969a58 (matches Commit B)
-  - main ref after reset: 15f48d32c0f99f2fffe4b05904cb125bf1969a58 (matches Commit B)
-  - topic ref after reset: 15f48d32c0f99f2fffe4b05904cb125bf1969a58 (matches Commit B)
+  - Commit A: 486493de0019669b42e167b4922db1ac472a804d
+  - Commit B: 4692156e07a00f9004cfd7d2996af9ac61379e0e
+  - Commit C: 2e1b2f7ffd2cf35bdb52e949a18ce66aea63aa2e
+  - HEAD after reset: 4692156e07a00f9004cfd7d2996af9ac61379e0e (matches Commit B)
+  - main ref after reset: 4692156e07a00f9004cfd7d2996af9ac61379e0e (matches Commit B)
+  - topic ref after reset: 4692156e07a00f9004cfd7d2996af9ac61379e0e (matches Commit B)
   - Working tree status: ?? todo.txt
   - Log history: ['B: append notes', 'A: add notes']
   - notes.txt content: 'alpha\nbeta\n'
@@ -15,12 +15,12 @@ Run 1:
   - Result: ALL ASSERTIONS PASSED
 
 Run 2:
-  - Commit A: c9c9930b4f8e8b8a3f6295d929e86a924ae8c295
-  - Commit B: 15f48d32c0f99f2fffe4b05904cb125bf1969a58
-  - Commit C: a8f0f169369368c47e6e4919987b47589e96322a
-  - HEAD after reset: 15f48d32c0f99f2fffe4b05904cb125bf1969a58 (matches Commit B)
-  - main ref after reset: 15f48d32c0f99f2fffe4b05904cb125bf1969a58 (matches Commit B)
-  - topic ref after reset: 15f48d32c0f99f2fffe4b05904cb125bf1969a58 (matches Commit B)
+  - Commit A: 67a2fb5e5017fe31d7c48e1a57498e3e12eaa069
+  - Commit B: 97486aefe84711a1f93e80466b0667d7d8c9d913
+  - Commit C: b1089d51105cd0835f4f9b81601117af6c8dec32
+  - HEAD after reset: 97486aefe84711a1f93e80466b0667d7d8c9d913 (matches Commit B)
+  - main ref after reset: 97486aefe84711a1f93e80466b0667d7d8c9d913 (matches Commit B)
+  - topic ref after reset: 97486aefe84711a1f93e80466b0667d7d8c9d913 (matches Commit B)
   - Working tree status: ?? todo.txt
   - Log history: ['B: append notes', 'A: add notes']
   - notes.txt content: 'alpha\nbeta\n'
