@@ -81,3 +81,24 @@ $ git config --global credential.helper store
 ```
 
 When using this method, your credentials will be saved in plain text in `~/.git-credentials`. Be cautious with this approach, especially on shared or public machines.
+
+---
+
+# Automated Guide Verification
+
+To ensure that your Git installation, global user configuration (`user.name` and `user.email`), and credential helpers are functioning properly without polluting your personal host environment, this guide includes an automated integration test located at `tests/guides/test_installing_git_arch.py`.
+
+### Running the Test
+
+Run the test suite using Python's built-in `unittest` runner:
+
+```shell
+$ python3 -m unittest tests/guides/test_installing_git_arch.py
+```
+
+### What the Test Verifies
+
+1. **Git Installation & Version**: Verifies that the `git` binary is accessible on the system and reports a valid version string matching `git --version`.
+2. **User Identity Configuration**: Verifies configuring `user.name` and `user.email` globally and confirms both values appear in `git config --list`.
+3. **Commit Metadata Attribution**: Creates a test commit in an isolated repository to verify that Git embeds the configured identity into commit author headers (`git log -1 --format="%an <%ae>"`).
+4. **Credential Helper Configuration**: Verifies setting and retrieving `credential.helper` configuration.
