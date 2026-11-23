@@ -1,0 +1,18 @@
+Task: R03-T025
+Student: Dheeraj Kumar
+Repository: https://github.com/S-AI-Projects/first-contributions
+Assigned Branch: student/e26b07f0784/R03-T025
+Target Guide: docs/additional-material/git_workflow_scenarios/resolving-merge-conflicts.md
+Command Anchors:
+  - git status
+  - git add
+  - git commit -m "Resolved merge conflicts"
+Setup:
+  - Branch: main, Author: Course Student <student@example.invalid>
+  - Commits A, B, topic at B, Commit C on main
+  - Conflicted File with space: "release notes.txt"
+  - Conflicted Directory with space: "sample data"
+Demonstrated Operations:
+  - Unquoted failure: git add release notes.txt -> fatal: pathspec 'release' did not match any files
+  - Quoted resolution: git add -- 'release notes.txt' 'sample data'
+  - Merge commit: git commit -m "Resolved merge conflicts"

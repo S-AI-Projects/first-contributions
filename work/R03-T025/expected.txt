@@ -1,0 +1,13 @@
+Expected Verification Results:
+1. Target Guide:
+   - Preserves all 3 command anchors.
+   - Explains path quoting and the '--' disambiguation separator.
+2. Unquoted Path Execution:
+   - git add release notes.txt fails with exit code 128 and pathspec error.
+3. Quoted Path Resolution:
+   - git add -- 'release notes.txt' 'sample data' stages both resolved paths.
+   - git commit -m "Resolved merge conflicts" successfully completes merge.
+4. Final State:
+   - HEAD has 2 parents: Commit C and topic tip Commit D.
+   - Index and working tree are clean.
+   - File contents preserved accurately with spaces in paths.
