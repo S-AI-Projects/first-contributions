@@ -1,0 +1,21 @@
+Task: R03-T023
+Student: Dheeraj Kumar
+Repository: https://github.com/S-AI-Projects/first-contributions
+Assigned Branch: student/e26b07f0784/R03-T023
+Target Guide: docs/additional-material/git_workflow_scenarios/reverting-a-commit.md
+Command Anchors:
+  - "Reversion is made easier in git because every commit you push to your remote repository has a unique alphanumeric key known as SHA(Secure Hash Algorithm) tied to it."
+  - "You can decide to leave the commit message as the default git message which starts with the word `Revert`"
+Setup:
+  - Repository branch: main
+  - Author: Course Student <student@example.invalid>
+  - Commits:
+    - A: notes.txt ("alpha\n")
+    - B: notes.txt append ("beta\n")
+    - C: todo.txt ("one\n")
+  - Branch topic created at Commit B
+Reversible Mistake:
+  - git revert --no-edit <commit_c>
+Recovery Mechanisms:
+  - Method 1 (Safe for pushed branches): git revert --no-edit HEAD
+  - Method 2 (Safe for local branches): git reset --hard <commit_c>
