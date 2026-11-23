@@ -43,3 +43,76 @@ git pull upstream main
 ```
 
 So by now or at this point, all your repositories are up-to-date. Well done! You should do this, every time your GitHub repo tells you that you are a few commits behind.
+
+## Troubleshooting Common Sync Failures
+
+When synchronizing your fork, you may encounter command failures if certain preconditions are violated. Below are the most common failure scenarios, their underlying error categories, and the smallest corrections needed to fix them.
+
+| Step | Triggering State | Error Category & Message | Violated Precondition | Corrected Command |
+| :--- | :--- | :--- | :--- | :--- |
+| `git remote add upstream <url>` | `upstream` is already configured in `.git/config` | Remote collision (`fatal: remote upstream already exists.`, exit code non-zero) | Remote alias must not already exist | `git remote set-url upstream <url>` |
+| `git checkout main` | Current branch has untracked or modified files that exist on `main` | Checkout overwrite collision (`error: The following untracked working tree files would be overwritten by checkout...`, exit code non-zero) | Working tree files must not conflict with target branch tree | `git stash -u && git checkout main` |
+
+---
+
+### Failure 1: `fatal: remote upstream already exists.`
+
+#### Triggering State
+You previously configured the `upstream` remote (or set it up during a previous contribution), and run:
+```bash
+git remote add upstream https://github.com/firstcontributions/first-contributions.git
+```
+
+#### Git Diagnostic
+Git exits with a non-zero exit code and outputs:
+```
+fatal: remote upstream already exists.
+```
+
+#### Why It Fails
+The `git remote add` command requires that the specified remote name does not already exist in your local repository configuration.
+
+#### Smallest Correction
+Check your existing remotes first:
+```bash
+git remote -v
+```
+If `upstream` is already pointing to the correct URL, you do not need to add it again; proceed directly to `git fetch upstream`. If you need to update its URL, use `git remote set-url`:
+```bash
+git remote set-url upstream https://github.com/firstcontributions/first-contributions.git
+```
+
+---
+
+### Failure 2: Conflicting changes when checking out `main`
+
+#### Triggering State
+You are working on a topic branch (e.g., `topic`), and your working tree contains uncommitted edits or untracked files that conflict with commits on `main`. Running:
+```bash
+git checkout main
+```
+
+#### Git Diagnostic
+Git refuses to switch branches and exits with a non-zero exit code:
+```
+error: The following untracked working tree files would be overwritten by checkout:
+    <file-name>
+Please move or remove them before you switch branches.
+Aborting
+```
+
+#### Why It Fails
+Git protects your uncommitted work from being overwritten or lost when checking out a branch where that file already exists or has differing contents.
+
+#### Smallest Correction
+Safely stash your working changes (including untracked files with `-u`) before switching to `main`:
+```bash
+git stash -u
+git checkout main
+```
+After completing your sync on `main`, switch back to your topic branch and restore your stashed work:
+```bash
+git checkout topic
+git stash pop
+```
+

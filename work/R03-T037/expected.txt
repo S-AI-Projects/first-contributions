@@ -1,0 +1,21 @@
+Expected Verification Output:
+- Base Fixture Initialized with Commit A, Commit B, Commit C dynamically resolved.
+- Scenario 1 (Remote upstream already exists):
+  - 'git remote add upstream' fails with non-zero exit code.
+  - Stderr diagnostics matches 'remote upstream already exists'.
+  - Remote 'upstream' URL is unchanged.
+  - 'git remote set-url upstream <new-url>' succeeds with exit code 0.
+  - Remote 'upstream' URL is updated to new target URL.
+- Scenario 2 (Checkout collision from topic to main):
+  - Successfully switch to branch 'topic'.
+  - Conflicting untracked file 'todo.txt' created.
+  - 'git checkout main' fails with non-zero exit code.
+  - Stderr diagnostics matches 'overwritten by checkout'.
+  - Active branch remains 'topic'.
+  - Local untracked 'todo.txt' content is preserved intact.
+  - 'git stash push -u' succeeds with exit code 0.
+  - 'git checkout main' succeeds with exit code 0.
+  - Active branch is 'main'.
+  - 'todo.txt' on 'main' reflects Commit C ('one\n').
+  - Stash list records the stashed draft.
+- Result: All 15 assertions pass.
