@@ -1,0 +1,34 @@
+R03-T030 Actual Verification Results
+=====================================
+Run 1:
+  - Commit A: 202101e5764b72e9956710af9a83a42c610fd44b
+  - Commit B: ae3a2a8d43c4f1817ab79629763862469af6010b
+  - Commit C: 37ef2a1e2050792e8c7c85978c331ac97ad481d8
+  - Initial symbolic-ref HEAD: refs/heads/main
+  - Post-checkout symbolic-ref HEAD: refs/heads/topic
+  - Post-checkout HEAD commit: ae3a2a8d43c4f1817ab79629763862469af6010b
+  - Post-checkout topic commit: ae3a2a8d43c4f1817ab79629763862469af6010b
+  - Post-checkout main commit: 37ef2a1e2050792e8c7c85978c331ac97ad481d8
+  - Index contents:
+    100644 fbbee861521bd5355538b096fa3998541cd33909 0	notes.txt
+  - todo.txt exists on disk: False
+  - notes.txt content: 'alpha\nbeta\n'
+  - Commit C Author: Course Student <student@example.invalid>
+
+Run 2:
+  - Commit A: 202101e5764b72e9956710af9a83a42c610fd44b
+  - Commit B: ae3a2a8d43c4f1817ab79629763862469af6010b
+  - Commit C: 37ef2a1e2050792e8c7c85978c331ac97ad481d8
+  - Initial symbolic-ref HEAD: refs/heads/main
+  - Post-checkout symbolic-ref HEAD: refs/heads/topic
+  - Post-checkout HEAD commit: ae3a2a8d43c4f1817ab79629763862469af6010b
+  - Post-checkout topic commit: ae3a2a8d43c4f1817ab79629763862469af6010b
+  - Post-checkout main commit: 37ef2a1e2050792e8c7c85978c331ac97ad481d8
+  - Index contents:
+    100644 fbbee861521bd5355538b096fa3998541cd33909 0	notes.txt
+  - todo.txt exists on disk: False
+  - notes.txt content: 'alpha\nbeta\n'
+  - Commit C Author: Course Student <student@example.invalid>
+
+Negative Test Verification (FORCE_FAIL=1):
+  - Correctly raised AssertionError and returned non-zero exit code.

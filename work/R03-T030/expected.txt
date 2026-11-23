@@ -1,0 +1,15 @@
+R03-T030 Expected State Predictions
+====================================
+1. Reference Transitions:
+   - HEAD: updates from refs/heads/main to refs/heads/topic (resolving to Commit B)
+   - refs/heads/topic: remains at Commit B
+   - refs/heads/main: remains fixed at Commit C
+2. Staging Index (git ls-files -s):
+   - notes.txt tracked matching Commit B tree
+   - todo.txt removed from index
+3. Working Tree:
+   - notes.txt contains "alpha\nbeta\n"
+   - todo.txt removed from disk
+   - git status --porcelain is empty (clean tree)
+4. Author Identity:
+   - Recorded author and committer on all commits match "Course Student <student@example.invalid>"
