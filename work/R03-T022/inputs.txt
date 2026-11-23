@@ -1,0 +1,20 @@
+Task: R03-T022
+Student: Dheeraj Kumar
+Repository: https://github.com/S-AI-Projects/first-contributions
+Assigned Branch: student/e26b07f0784/R03-T022
+Target Guide: docs/additional-material/git_workflow_scenarios/storing-credentials.md
+Command Anchors:
+  - git config --global credential.helper cache
+  - git config credential.helper cache
+  - git config credential.helper 'cache --timeout='
+Setup:
+  - Repository branch: main
+  - Author: Course Student <student@example.invalid>
+  - Commits:
+    - A: notes.txt ("alpha\n")
+    - B: notes.txt append ("beta\n")
+    - C: todo.txt ("one\n")
+  - Branch topic created at Commit B
+Executed Operations:
+  - git config credential.helper cache
+  - git config credential.helper 'cache --timeout=3600'

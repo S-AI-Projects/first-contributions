@@ -1,0 +1,26 @@
+Verification Summary:
+Guide Check: PASSED (Found anchors, before/after diagram, and verification table)
+
+Run 1:
+  - Commit A: 4d776de447223e929c5b9aeb171bfc205c6cd844
+  - Commit B: 555be241c33a164c2911321da5c023e5bcd5cb2d
+  - Commit C: bbcd3b0d3a02fb90dd5f95de3f5fc863492b5fe9
+  - HEAD after operation: bbcd3b0d3a02fb90dd5f95de3f5fc863492b5fe9 (UNCHANGED)
+  - main ref after operation: bbcd3b0d3a02fb90dd5f95de3f5fc863492b5fe9 (UNCHANGED)
+  - topic ref after operation: 555be241c33a164c2911321da5c023e5bcd5cb2d (UNCHANGED)
+  - Tree SHA: 70d571a7a75867c09d38254b1252d5e2402adaa6 (UNCHANGED)
+  - Helper config: cache (REGISTERED)
+  - Timeout config: cache --timeout=3600 (REGISTERED)
+  - Result: ALL STATE ASSERTIONS PASSED
+
+Run 2:
+  - Commit A: 4d776de447223e929c5b9aeb171bfc205c6cd844
+  - Commit B: 555be241c33a164c2911321da5c023e5bcd5cb2d
+  - Commit C: bbcd3b0d3a02fb90dd5f95de3f5fc863492b5fe9
+  - HEAD after operation: bbcd3b0d3a02fb90dd5f95de3f5fc863492b5fe9 (UNCHANGED)
+  - main ref after operation: bbcd3b0d3a02fb90dd5f95de3f5fc863492b5fe9 (UNCHANGED)
+  - topic ref after operation: 555be241c33a164c2911321da5c023e5bcd5cb2d (UNCHANGED)
+  - Tree SHA: 70d571a7a75867c09d38254b1252d5e2402adaa6 (UNCHANGED)
+  - Helper config: cache (REGISTERED)
+  - Timeout config: cache --timeout=3600 (REGISTERED)
+  - Result: ALL STATE ASSERTIONS PASSED
