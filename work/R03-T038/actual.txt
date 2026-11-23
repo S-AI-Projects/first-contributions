@@ -1,0 +1,13 @@
+=== Running Integration Check for Guide: installing-git-arch ===
+Assertion 1 passed: git --version successfully checked (git version 2.54.0 (Apple Git-157))
+Assertion 2 passed: Commit lineage verified (topic at B=ce4d60c, main at C=426e2af)
+Assertion 3 passed: git config --list contains expected user.name and user.email
+Assertion 4 passed: Commit author attribution matches configured user.name and email
+Assertion 5 passed: credential.helper successfully configured and verified as 'cache'
+
+Integration check passed: 5 state assertions verified.
+
+--- Testing Decisive Command Omission ---
+Omission test successfully failed when decisive command was omitted (exit code != 0).
+
+All integration checks and failure propagation tests completed successfully!

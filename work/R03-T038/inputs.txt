@@ -1,0 +1,25 @@
+Task: R03-T038
+Student: Archita Pandey
+Repository: https://github.com/S-AI-Projects/first-contributions
+Assigned Branch: student/e26b07f0636
+Task Branch: student/e26b07f0636/R03-T038
+
+Inputs:
+- Target Guide: docs/additional-material/git_workflow_scenarios/installing-git-arch.md
+- Command Anchors:
+  - git version 2.34.1
+  - git config --global user.name "Your Name"
+  - git config --global user.email "youremail@domain.com"
+- Isolated Environment Configuration:
+  - Mock isolated HOME and isolated GIT_CONFIG_GLOBAL
+  - Unset host author/committer environment variables
+  - Author identity: Course Student <student@example.invalid>
+- Repository Setup:
+  - Initial branch: main
+  - Commit A: notes.txt with "alpha\n"
+  - Commit B: notes.txt appended with "beta\n"
+  - Branch topic created at Commit B
+  - Commit C: todo.txt with "one\n" on main
+- Tests Implemented:
+  - tests/guides/test_installing_git_arch.py (unittest suite)
+  - work/R03-T038/check.py (integration check & decisive omission test)

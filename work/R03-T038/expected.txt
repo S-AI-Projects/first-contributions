@@ -1,0 +1,11 @@
+Expected Verification Results:
+- Git version output matches version regex pattern (git version \d+\.\d+).
+- Repository fixture initialized with Commit A, B, C; topic at Commit B, main at Commit C.
+- Global config sets user.name and user.email, reflected in git config --list.
+- Commit author metadata directly inherits configured identity ("Course Student <student@example.invalid>").
+- Credential helper command sets and verifies helper configuration.
+- Decisive command omission test:
+  - When decisive configuration (git config --global user.name/email) is omitted, the test fails with non-zero exit code.
+  - Failure propagation verified.
+- Cleanup: Temporary test directories are completely removed after execution.
+- All state assertions pass.
