@@ -1,0 +1,17 @@
+Task: R03-T029
+Student: Dheeraj Kumar
+Repository: https://github.com/S-AI-Projects/first-contributions
+Assigned Branch: student/e26b07f0784/R03-T029
+Target Guide: docs/additional-material/git_workflow_scenarios/creating-a-gitignore-file.md
+Command Anchors:
+  - git config --global core.excludesfile ~/.gitignore_global
+  - git rm --cached filename
+  - git rm -r --cached .
+Prerequisites Verified:
+  1. Repository state: git rev-parse --is-inside-work-tree == true
+  2. Current branch: git branch --show-current == main
+  3. Worktree cleanliness: git status --porcelain == clean
+  4. Excludes configuration: git config --get core.excludesfile
+Base Fixture:
+  - Branch: main, Author: Course Student <student@example.invalid>
+  - Commits A, B, topic at B, Commit C on main
