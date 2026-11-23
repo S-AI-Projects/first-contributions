@@ -1,0 +1,17 @@
+Task: R03-T026
+Student: Dheeraj Kumar
+Repository: https://github.com/S-AI-Projects/first-contributions
+Assigned Branch: student/e26b07f0784/R03-T026
+Target Guide: docs/additional-material/git_workflow_scenarios/gitflow.md
+Command Anchors:
+  - git branch develop
+  - git push -u origin develop
+  - git flow init
+Compared Operations:
+  - Method A: git branch develop (creates ref, leaves HEAD on main)
+  - Method B: git checkout -b develop (creates ref, switches HEAD to develop)
+Remote Operation:
+  - git push -u origin develop (publishes to origin and establishes upstream tracking)
+Base Fixture:
+  - Branch: main, Author: Course Student <student@example.invalid>
+  - Commits A, B, topic at B, Commit C on main

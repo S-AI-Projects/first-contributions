@@ -89,6 +89,56 @@ Using a dedicated branch to prepare releases makes it possible for one team to p
     git flow hotfix finish hotfix_branch
     ```
 
+---
+
+## Comparison: Initializing the Develop Branch
+
+In Gitflow, the `develop` branch serves as the foundation for all feature development. There are two primary Git approaches to establish the `develop` branch from `main`:
+
+1. **Method A (Guide's Two-Step Approach):**
+   ```sh
+   git branch develop
+   ```
+2. **Method B (Atomic Branch & Switch):**
+   ```sh
+   git checkout -b develop
+   ```
+
+### Comparison Matrix
+
+| Property | Method A: `git branch develop` | Method B: `git checkout -b develop` |
+|---|---|---|
+| **Precondition** | Repository on branch `main` at Commit C | Repository on branch `main` at Commit C |
+| **Ref Created** | `refs/heads/develop` points to Commit C | `refs/heads/develop` points to Commit C |
+| **HEAD / Active Branch** | **Stays on `main`** (`refs/heads/main`) | **Switches to `develop`** (`refs/heads/develop`) |
+| **Index (Staging Area)** | Clean (matches Commit C) | Clean (matches Commit C) |
+| **Working Tree** | Clean (matches Commit C) | Clean (matches Commit C) |
+| **Next Commit Effect** | Advances `main` (production branch) | Advances `develop` (feature integration) |
+
+### Observable Difference Explained
+
+The primary observable difference is the position of `HEAD`:
+- `git branch develop` creates the branch reference pointing to Commit C, but leaves `HEAD` on `main`. Any immediate commits inadvertently land on the production branch.
+- `git checkout -b develop` (or `git switch -c develop`) creates the branch reference and immediately updates `HEAD` to point to `refs/heads/develop`, ensuring subsequent feature development never pollutes `main`.
+
+### Reproducible Walkthrough
+
+```sh
+# Method A: Creates develop ref without switching
+git branch develop
+git symbolic-ref --short HEAD
+# Output: main (HEAD remains on main)
+
+# Method B: Creates develop ref and switches HEAD
+git checkout -b develop
+git symbolic-ref --short HEAD
+# Output: develop (HEAD switched to develop)
+
+# Publishing develop with upstream tracking:
+git push -u origin develop
+```
+
+---
 
 ## Advantages
 

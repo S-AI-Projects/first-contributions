@@ -1,0 +1,16 @@
+Expected Verification Results:
+1. Target Guide:
+   - Preserves all 3 command anchors.
+   - Includes comparison matrix between git branch develop and git checkout -b develop.
+   - Explains the observable difference in HEAD reference.
+2. Initial State:
+   - main points to Commit C.
+   - topic points to Commit B.
+3. Method A (git branch develop):
+   - refs/heads/develop is created pointing to Commit C.
+   - HEAD remains on 'main'.
+4. Method B (git checkout -b develop):
+   - refs/heads/develop is created pointing to Commit C.
+   - HEAD switches to 'develop'.
+5. Upstream Tracking:
+   - git push -u origin develop creates refs/remotes/origin/develop at Commit C and configures branch.develop.remote.
