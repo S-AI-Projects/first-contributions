@@ -1,0 +1,16 @@
+Expected Verification Results:
+1. Target Guide:
+   - Contains both command anchors.
+   - Documents mistake scenario and recovery point, commands, and verification.
+   - Explicitly identifies what cannot be recovered by each method.
+2. Pre-mistake State:
+   - Commit C tree contains notes.txt and todo.txt.
+   - topic branch at Commit B.
+3. Mistake State:
+   - git revert <commit_c> creates a revert commit starting with 'Revert'.
+   - todo.txt is deleted from the tree.
+4. Recovered State (git revert HEAD or git reset --hard <commit_c>):
+   - Recovered tree hash matches saved Commit C tree hash.
+   - todo.txt content is 'one\n'.
+   - Working tree and index are clean.
+   - topic ref remains at Commit B.

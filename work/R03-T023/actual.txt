@@ -1,0 +1,24 @@
+Verification Summary:
+Guide Check: PASSED (Found anchors, recovery section, and unrecoverable notes)
+
+Run 1:
+  - Commit A: 6d827b32ad33edcac4bb920b93082fe0dec32512
+  - Commit B: 20558109d77801be489ff4ff8581cedf117db87f
+  - Commit C: d124a96fdfc18678c98003fef6e5694927dde2aa
+  - Initial Tree (Commit C): 70d571a7a75867c09d38254b1252d5e2402adaa6
+  - Accidental Revert Commit: 632aa68f5bb63daa135cfe32d8b534e45ccbd0e0
+  - Recovered Tree Hash: 70d571a7a75867c09d38254b1252d5e2402adaa6 (MATCHES INITIAL TREE)
+  - todo.txt Content: 'one\n' (MATCHES ORIGINAL)
+  - topic Ref: 20558109d77801be489ff4ff8581cedf117db87f (UNCHANGED)
+  - Result: ALL STATE ASSERTIONS PASSED
+
+Run 2:
+  - Commit A: 5dfb5864f525733f903a4822cb242388513cef34
+  - Commit B: b23bf7264eea6758e9f17e74b54a7fb13687e0a9
+  - Commit C: 723c48ba850556bba323080a44cb4ad42cb79bda
+  - Initial Tree (Commit C): 70d571a7a75867c09d38254b1252d5e2402adaa6
+  - Accidental Revert Commit: f9bb1b7cb0a14359d2398f81112bb78bc6cd8c3a
+  - Recovered Tree Hash: 70d571a7a75867c09d38254b1252d5e2402adaa6 (MATCHES INITIAL TREE)
+  - todo.txt Content: 'one\n' (MATCHES ORIGINAL)
+  - topic Ref: b23bf7264eea6758e9f17e74b54a7fb13687e0a9 (UNCHANGED)
+  - Result: ALL STATE ASSERTIONS PASSED
