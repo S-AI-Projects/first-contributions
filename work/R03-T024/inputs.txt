@@ -1,0 +1,18 @@
+Task: R03-T024
+Student: Dheeraj Kumar
+Repository: https://github.com/S-AI-Projects/first-contributions
+Assigned Branch: student/e26b07f0784/R03-T024
+Target Guide: docs/additional-material/git_workflow_scenarios/removing-branch-from-your-repository.md
+Command Anchors:
+  - git checkout main
+  - git merge main (or git merge <topic> main)
+  - git branch -d
+Setup:
+  - Local repository with local bare remote (file:// URL)
+  - Author: Course Student <student@example.invalid>
+  - Commits:
+    - A: notes.txt ("alpha\n")
+    - B: notes.txt append ("beta\n")
+    - C: todo.txt ("one\n") on main
+  - Branch topic created at Commit B
+  - Initial state: on branch topic

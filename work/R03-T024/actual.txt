@@ -1,0 +1,18 @@
+Verification Summary:
+Guide Check: PASSED (Found anchors, worked example, and reference summary matrix)
+
+Run 1:
+  - Commit A: fa8fbbe4396fa6656062780b27d0beb33e5914ae
+  - Commit B: 2ad7983f825f1fb3de7fb26ca2870c706ca4e6af
+  - Commit C: 988fd58c461511f7320a967f53ecb677e45e06d9
+  - Merge Output: Already up to date.
+  - Commit B in Object Store: True
+  - Result: ALL STATE ASSERTIONS PASSED
+
+Run 2:
+  - Commit A: fa8fbbe4396fa6656062780b27d0beb33e5914ae
+  - Commit B: 2ad7983f825f1fb3de7fb26ca2870c706ca4e6af
+  - Commit C: 988fd58c461511f7320a967f53ecb677e45e06d9
+  - Merge Output: Already up to date.
+  - Commit B in Object Store: True
+  - Result: ALL STATE ASSERTIONS PASSED
