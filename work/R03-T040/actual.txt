@@ -1,0 +1,27 @@
+Fixture: A=26da15c  B=aba45b5 [topic]  C=538383a [main]
+
+=== Exercise 1: git checkout main ===
+PREDICT: HEAD moves from topic to main. Working tree gains todo.txt.
+         Branch ref 'main' unchanged. 'topic' ref unchanged.
+Assertion 1 passed: HEAD is now on 'main' (ref changed from topic → main).
+Assertion 2 passed: HEAD points to Commit C (538383a) — no commit created.
+Assertion 3 passed: Working tree now contains todo.txt with 'one\n' (from Commit C).
+
+=== Exercise 2: git merge topic main ===
+PREDICT: 'topic' (B) is an ancestor of 'main' (C).
+         Merge is already up-to-date; no new commit, no index change, no worktree change.
+         'topic' ref still points to Commit B.
+Assertion 4 passed: 'main' ref still at Commit C (538383a) — already up-to-date, no new commit.
+Assertion 5 passed: 'topic' ref unchanged at Commit B (aba45b5) — merge never touches the source branch ref.
+Assertion 6 passed: Working tree and index are clean — no changes from already-merged branch.
+
+=== Exercise 3: git branch -d topic ===
+PREDICT: 'topic' ref is deleted from .git/refs/heads/ (or packed-refs).
+         No commit objects are removed (Commit B is still reachable via main's history).
+         HEAD, working tree, and index are unaffected.
+Assertion 7 passed: 'topic' ref deleted — git rev-parse --verify topic returns non-zero.
+Assertion 8 passed: Commit B (aba45b5) still exists in object store — deleting a branch never removes commit objects.
+Assertion 9 passed: HEAD still at Commit C (538383a) — delete did not affect HEAD or working tree.
+Assertion 10 passed: Active branch is still 'main' — branch deletion is ref-only.
+
+All 10 assertions passed successfully!
