@@ -1,0 +1,17 @@
+Expected Verification Results:
+1. Target Guide:
+   - Contains command anchors: 'The main difference between resetting and reverting a commit is that git reset' and 'and git revert'.
+   - Documents start-to-finish reproducible example with explicit setup, command, and expected status/log.
+2. Pre-reset State:
+   - main points to Commit C.
+   - topic points to Commit B.
+   - Working tree and index clean.
+3. Post-reset State (git reset <commit_b>):
+   - HEAD and refs/heads/main point to Commit B.
+   - refs/heads/topic remains at Commit B.
+   - Commit C is removed from the branch log (log shows B then A).
+   - Index is clean (no staged changes).
+   - todo.txt remains in the working directory as untracked (?? todo.txt).
+   - notes.txt contains "alpha\nbeta\n".
+4. Reproducibility:
+   - Identical assertions hold across multiple independent temporary directory runs.

@@ -1,0 +1,28 @@
+Verification Summary:
+Guide Check: PASSED (Found anchors, complete setup, exact reset command, expected status/log)
+
+Run 1:
+  - Commit A: c9c9930b4f8e8b8a3f6295d929e86a924ae8c295
+  - Commit B: 15f48d32c0f99f2fffe4b05904cb125bf1969a58
+  - Commit C: a8f0f169369368c47e6e4919987b47589e96322a
+  - HEAD after reset: 15f48d32c0f99f2fffe4b05904cb125bf1969a58 (matches Commit B)
+  - main ref after reset: 15f48d32c0f99f2fffe4b05904cb125bf1969a58 (matches Commit B)
+  - topic ref after reset: 15f48d32c0f99f2fffe4b05904cb125bf1969a58 (matches Commit B)
+  - Working tree status: ?? todo.txt
+  - Log history: ['B: append notes', 'A: add notes']
+  - notes.txt content: 'alpha\nbeta\n'
+  - todo.txt exists: True
+  - Result: ALL ASSERTIONS PASSED
+
+Run 2:
+  - Commit A: c9c9930b4f8e8b8a3f6295d929e86a924ae8c295
+  - Commit B: 15f48d32c0f99f2fffe4b05904cb125bf1969a58
+  - Commit C: a8f0f169369368c47e6e4919987b47589e96322a
+  - HEAD after reset: 15f48d32c0f99f2fffe4b05904cb125bf1969a58 (matches Commit B)
+  - main ref after reset: 15f48d32c0f99f2fffe4b05904cb125bf1969a58 (matches Commit B)
+  - topic ref after reset: 15f48d32c0f99f2fffe4b05904cb125bf1969a58 (matches Commit B)
+  - Working tree status: ?? todo.txt
+  - Log history: ['B: append notes', 'A: add notes']
+  - notes.txt content: 'alpha\nbeta\n'
+  - todo.txt exists: True
+  - Result: ALL ASSERTIONS PASSED
