@@ -1,0 +1,12 @@
+Expected Verification Results:
+- Global Git config remains untouched; local user.name and user.email configured per-repo.
+- Commit A, B, C created dynamically; branch topic created at B, branch main at C.
+- Prerequisite 1: Active branch confirmed as 'topic'.
+- Prerequisite 2: Staged changes detected, and working tree cleaned safely via 'git stash push -u'.
+- Prerequisite 3: Target branch 'main' verified at Commit C.
+- Reset execution: 'git reset --hard main' succeeds on 'topic'.
+- State Fact 1: 'topic' points to Commit C.
+- State Fact 2: 'todo.txt' with content 'one\n' is present in working tree.
+- State Fact 3: Working tree and staging area are clean.
+- State Fact 4: Stashed backup is preserved in git stash stack.
+- All assertions pass and temporary directory is cleaned up.

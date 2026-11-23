@@ -1,0 +1,20 @@
+Task: R03-T039
+Student: Archita Pandey
+Repository: https://github.com/S-AI-Projects/first-contributions
+Assigned Branch: student/e26b07f0636
+Task Branch: student/e26b07f0636/R03-T039
+
+Inputs:
+- Target Guide: docs/additional-material/git_workflow_scenarios/resetting-a-branch.md
+- Prerequisites Tested:
+  1. Active Branch: git reset targets HEAD; user must checkout base branch first (git checkout topic).
+  2. Staged/Unstaged Changes: Staged modifications detected and secured with git stash before reset --hard.
+  3. Target Branch Availability: Origin/target branch exists and points to Commit C (git rev-parse --verify main).
+  4. Local Config Isolation: Config set strictly via git config --local; host global config untouched.
+- Base Fixture:
+  - Branch: main
+  - Author: Course Student <student@example.invalid>
+  - Commit A: notes.txt with "alpha\n"
+  - Commit B: notes.txt appended with "beta\n"
+  - Branch topic created at Commit B
+  - Commit C: todo.txt with "one\n" on main
