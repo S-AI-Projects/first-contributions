@@ -1,0 +1,20 @@
+Expected State Transition Verification:
+1. Target Guide:
+   - Contains all command anchors for global/local cache and cache --timeout.
+   - Contains clear before/after ASCII diagram distinguishing HEAD, refs, index, worktree, and config.
+2. Pre-Operation State:
+   - HEAD -> refs/heads/main (Commit C).
+   - refs/heads/topic -> Commit B.
+   - Tree at HEAD matches Commit C.
+   - Index and working tree clean.
+   - credential.helper unset in repository config.
+3. Post-Operation State (git config credential.helper cache):
+   - HEAD unchanged (Commit C).
+   - refs/heads/main unchanged (Commit C).
+   - refs/heads/topic unchanged (Commit B).
+   - Commit history unchanged ([C, B, A]).
+   - Tree hash at HEAD unchanged.
+   - Index and working tree unchanged (clean).
+   - Local configuration contains credential.helper = cache (and cache --timeout=3600).
+4. Reproducibility:
+   - Identical assertions verified in multiple independent temporary runs.
