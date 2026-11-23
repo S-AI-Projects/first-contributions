@@ -1,0 +1,15 @@
+Task: R03-T027
+Student: Dheeraj Kumar
+Repository: https://github.com/S-AI-Projects/first-contributions
+Assigned Branch: student/e26b07f0784/R03-T027
+Target Guide: docs/additional-material/git_workflow_scenarios/removing-a-file.md
+Command Anchors:
+  - ``git rm --cached``
+  - If you commit the change with `git commit -m "Remove file1.js"` and push it to the remote repository using `git push origin main` (or whichever branch you're working on), the remote repository will remove the file.
+  - `git rm file1.js file2.js file3.js --cached`
+Triggering State:
+  - Tracked file notes.txt has staged edits differing from HEAD and further uncommitted edits in the worktree
+Bad Operation:
+  - git rm --cached notes.txt (exits non-zero: 1)
+Repaired Operation:
+  - git rm --cached -f notes.txt (exits 0, stages deletion while keeping file on disk)

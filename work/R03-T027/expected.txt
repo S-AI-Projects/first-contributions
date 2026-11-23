@@ -1,0 +1,13 @@
+Expected Verification Results:
+1. Target Guide:
+   - Preserves all source command anchors.
+   - Explains the violated precondition and data-loss protection refusal.
+   - Details the smallest correction (-f flag) to make the command succeed.
+2. Bad Case (git rm --cached notes.txt):
+   - Fails with exit code 1.
+   - Rejection diagnostic prompts for -f to force removal.
+3. Repaired Case (git rm --cached -f notes.txt):
+   - Succeeds with exit code 0.
+   - notes.txt is staged as deleted in the index.
+   - notes.txt remains present in the filesystem with uncommitted edits.
+   - Unrelated ref topic remains fixed at Commit B.
